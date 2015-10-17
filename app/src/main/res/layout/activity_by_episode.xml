@@ -43,7 +43,7 @@
                 android:layout_alignWithParentIfMissing="true"
                 android:layout_toRightOf="@id/icon"
                 android:gravity="center_vertical"
-                android:text="@string/NCISLA"
+                android:text="Un mal nécessaire"
                 android:textSize="23sp" />
 
             <TextView
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 
         </LinearLayout>
