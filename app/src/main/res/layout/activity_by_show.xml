@@ -32,14 +32,14 @@
                 android:id="@+id/firstLine"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignWithParentIfMissing="true"
                 android:layout_toRightOf="@id/icon"
                 android:gravity="center_vertical"
                 android:text="@string/NCISLA"
-                android:textSize="23sp" />
+                android:textSize="23sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/secondLine"
@@ -218,9 +218,9 @@
             android:layout_weight="1">
 
             <ListView
+                android:id="@+id/listOfSeries"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/listOfSeries"
                 android:headerDividersEnabled="true">
 
             </ListView>
@@ -228,7 +228,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>
 
