@@ -7,7 +7,6 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/imageSerie"
-        android:src="@drawable/ncis_la"
         android:layout_margin="5dp"
         android:layout_row="0"
         android:layout_column="0"

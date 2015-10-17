@@ -5,6 +5,8 @@ package devmobile.tvshow;
  */
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +14,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomAdapter extends ArrayAdapter<String>{
+import java.util.ArrayList;
+import java.util.List;
 
-    public CustomAdapter(Context context, String[] serie) {
-        super(context, R.layout.custom_row, serie);
+public class CustomAdapter extends ArrayAdapter<Serie>{
+
+    private Serie serie;
+
+    public CustomAdapter(Context context, ArrayList<Serie> serie) {
+        super(context, R.layout.custom_row, (ArrayList) serie);
+
 
     }
 
@@ -26,12 +34,16 @@ public class CustomAdapter extends ArrayAdapter<String>{
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View customView = inflater.inflate(R.layout.custom_row, parent, false);
 
-        String serieToShow = getItem(position);
+        Serie serieToShow = getItem(position);
         TextView textView = (TextView) customView.findViewById(R.id.serieTitle);
         ImageView imageView = (ImageView) customView.findViewById(R.id.imageSerie);
 
-        textView.setText(serieToShow);
-        imageView.setImageResource(R.drawable.ncis_la);
+        textView.setText(serieToShow.getTitle());
+        imageView.setImageResource(serieToShow.getImg());
+
+        // SRC POUR AJOUTER L'IMAGE : http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
+        // https://youtu.be/U_Jvk4G28YE New Boston
+
         return customView;
     }
 }
