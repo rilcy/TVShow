@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">TVShow</string>
+    <string name="app_name">TiViShowZ</string>
     <string name="NCISLA">NCIS : Los Angeles</string>
     <string name="NCISLA_desc">Saison 2 Episode 3</string>
+    <string name="NCISLA_beginYear">2009</string>
+    <string name="NCISLA_endYear">En production</string>
+    <string name="NCISlA_episodesToWatch">16</string>
+    <string name="edit_show">Editer la série</string>
+    <string name="delete_show">Supprimer la série</string>
 </resources>
