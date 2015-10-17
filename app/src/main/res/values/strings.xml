@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TVShow</string>
+    <string name="NCISLA">NCIS : Los Angeles</string>
+    <string name="NCISLA_desc">Saison 2 Episode 3</string>
 </resources>
