@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         list.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
-                    @Override
+                    @Override 
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Serie serie = listOfSeries.get(position);
                         Toast.makeText(MainActivity.this, serie.getTitle(), LENGTH_LONG).show();
