@@ -8,4 +8,5 @@
     <string name="edit_show">Editer la série</string>
     <string name="delete_show">Supprimer la série</string>
     <string name="add_show">Ajouter une saison</string>
+    <string name="title_activity_by_episode">ByEpisode</string>
 </resources>

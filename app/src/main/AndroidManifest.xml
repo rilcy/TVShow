@@ -17,6 +17,8 @@
         </activity>
         <activity android:name=".ByShow" >
         </activity>
+        <activity android:name=".BySeason" >
+        </activity>
     </application>
 
 </manifest>

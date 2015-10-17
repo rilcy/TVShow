@@ -1,5 +1,6 @@
 package devmobile.tvshow;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,10 +48,16 @@ public class MainActivity extends AppCompatActivity {
 
         list.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
-                    @Override 
+
+                    @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Intent appInfo = new Intent(MainActivity.this, ByShow.class);
+                        startActivity(appInfo);
+                        /*
                         Serie serie = listOfSeries.get(position);
                         Toast.makeText(MainActivity.this, serie.getTitle(), LENGTH_LONG).show();
+                        */
                     }
                 }
         );
