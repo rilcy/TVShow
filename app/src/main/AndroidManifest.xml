@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".BySeason" >
         </activity>
+        <activity android:name=".ByEpisode" >
+        </activity>
     </application>
 
 </manifest>
