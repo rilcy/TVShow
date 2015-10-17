@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         ListAdapter adapter = new CustomAdapter(this, serieName);
         final ListView listOfSeries = (ListView) findViewById(R.id.listOfSeries);
         listOfSeries.setAdapter(adapter);
-
+ 
         listOfSeries.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
