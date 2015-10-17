@@ -18,12 +18,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] serieName = {"NCIS : Los Angeles", "Game of Thrones", "Impastor", "Les Revenants", "Dora, the explorer",
-                                    "The Americans", "Lost : les dispaprus"};
+        String[] serieName = {"NCIS : Los Angeles", "Game of Thrones", "Impastor", "Person of Interest", "Dexter",
+                                    "The Americans", "Dardevil"};
+
+        String[] serieRepositoryImg = {"","","","","","",""};
+
         ListAdapter adapter = new CustomAdapter(this, serieName);
         final ListView listOfSeries = (ListView) findViewById(R.id.listOfSeries);
         listOfSeries.setAdapter(adapter);
- 
+
         listOfSeries.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
