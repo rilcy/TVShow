@@ -19,7 +19,6 @@ public class BySeason extends AppCompatActivity {
 
         final ArrayList<Episode> listOfEpisodes = new ArrayList<Episode>();
 
-
         Episode episode1 = new Episode("1", "Avis de recherche");
         listOfEpisodes.add(episode1);
         Episode episode2 = new Episode("2", "Le Syndrome de Cendrillon");
