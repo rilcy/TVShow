@@ -35,7 +35,7 @@
             android:layout_toRightOf="@id/icon"
             android:gravity="center_vertical"
             android:text="@string/NCISLA"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/secondLine"
@@ -129,7 +129,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/listOfSeries"
+            android:id="@+id/listOfEpisodes"
             android:headerDividersEnabled="true">
 
         </ListView>

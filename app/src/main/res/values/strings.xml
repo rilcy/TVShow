@@ -12,7 +12,7 @@
     <string name="edit_episode">Editer l\'épisode</string>
     <string name="delete_episode">Supprimer l\'épisode</string>
     <string name="add_actor">Associer un acteur</string>
-    <string name="NCISLA_season">Saison 4</string>
+    <string name="NCISLA_season">Saison 2</string>
     <string name="delete_season">Supprimer la saison</string>
     <string name="add_episode">Ajouter un épisode</string>
 </resources>
