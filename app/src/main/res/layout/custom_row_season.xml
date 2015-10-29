@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/seasonCheckBox"
+        android:layout_margin="5dp"
+        android:layout_row="0"
+        android:layout_column="0" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -12,16 +23,6 @@
         android:layout_columnWeight="1"
         android:layout_margin="5dp"
         android:layout_row="0"
-        android:layout_column="0" />
-<!-- TODO la fonction onclick ne fonctionne pas lorsqu'on ajoute la checkbox, à corriger
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/seasonCheckBox"
-        android:layout_margin="5dp"
-        android:layout_row="0"
         android:layout_column="1" />
--->
+
 </GridLayout>
