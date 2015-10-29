@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
 
+
+    <CheckBox
+        android:id="@+id/episodeCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/episodeCheckBox"
+        android:id="@+id/episodeTitle"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="italic"
+        android:layout_margin="2dp"
+        android:text="Large Text"
+        />
+
+
+    <!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -13,15 +35,5 @@
         android:layout_margin="5dp"
         android:layout_row="0"
         android:layout_column="0" />
-<!-- TODO la fonction onclick ne fonctionne pas lorsqu'on ajoute la checkbox, à corriger
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/episodeCheckBox"
-        android:layout_margin="5dp"
-        android:layout_row="0"
-        android:layout_column="1" />
--->
-</GridLayout>
+        -->
+</RelativeLayout>
