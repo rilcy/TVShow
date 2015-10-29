@@ -20,6 +20,21 @@ public class ByShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show);
 
+        //PARTIE SUPERIEURE "A VOIR PROCHAINEMENT"
+
+        final ArrayList<Serie> listOfSeries = new ArrayList<Serie>();
+
+
+        Serie ncis = new Serie("NCIS : Los Angeles", R.drawable.ncis_la);
+        listOfSeries.add(ncis);
+
+        ListAdapter adapterNextoWatch = new CustomAdapter(this, listOfSeries);
+
+        ListView listNextToWatch = (ListView) findViewById(R.id.listeNextToWatch);
+        listNextToWatch.setAdapter(adapterNextoWatch);
+
+
+        // PARTIE INFERIEURE "LISTE DES SAISONS"
         final ArrayList<Season> listOfSeasons = new ArrayList<Season>();
 
 

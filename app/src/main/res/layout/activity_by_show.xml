@@ -9,50 +9,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@android:color/darker_gray">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="?android:attr/listPreferredItemHeight"
-            android:layout_margin="6dp">
-
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="6dp"
-                android:contentDescription="imageShow"
-                android:src="@drawable/ncis_la" />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            android:hint="@string/nextToWatch" />
 
 
-            <TextView
-                android:id="@+id/firstLine"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignWithParentIfMissing="true"
-                android:layout_toRightOf="@id/icon"
-                android:gravity="center_vertical"
-                android:text="@string/NCISLA"
-                android:textSize="23sp"
-                android:textStyle="bold" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:id="@+id/listeNextToWatch"
+            android:layout_gravity="center_horizontal" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/secondLine"
-                android:layout_width="fill_parent"
-                android:layout_height="26dip"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_toRightOf="@id/icon"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:text="@string/NCISLA_desc"
-                android:textSize="20sp" />
-        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:orientation="vertical">
 
         <View
             android:layout_width="fill_parent"
