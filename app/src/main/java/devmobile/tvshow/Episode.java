@@ -6,10 +6,19 @@ package devmobile.tvshow;
 public class Episode {
     private String episodeNumber;
     private String episodeTitle;
+    private String episodeInfo;
+    private Integer img;
 
     public Episode(String episodeNumber, String episodeTitle){
         this.episodeNumber = episodeNumber;
         this.episodeTitle = episodeTitle;
+    }
+
+    public Episode(String episodeNumber, String episodeTitle, String episodeInfo, Integer img){
+        this.episodeNumber = episodeNumber;
+        this.episodeTitle = episodeTitle;
+        this.episodeInfo = episodeInfo;
+        this.img = img;
     }
 
     public String getEpisodeNumber() {
@@ -26,4 +35,19 @@ public class Episode {
         this.episodeTitle = episodeTitle;
     }
 
+    public String getEpisodeInfo() {
+        return episodeInfo;
+    }
+
+    public void setEpisodeInfo(String episodeInfo) {
+        this.episodeInfo = episodeInfo;
+    }
+
+    public Integer getImg() {
+        return img;
+    }
+
+    public void setImg(Integer img) {
+        this.img = img;
+    }
 }

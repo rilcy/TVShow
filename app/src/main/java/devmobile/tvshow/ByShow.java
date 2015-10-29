@@ -22,13 +22,13 @@ public class ByShow extends AppCompatActivity {
 
         //PARTIE SUPERIEURE "A VOIR PROCHAINEMENT"
 
-        final ArrayList<Serie> listOfSeries = new ArrayList<Serie>();
+        final ArrayList<Episode> ep = new ArrayList<Episode>();
 
 
-        Serie ncis = new Serie("NCIS : Los Angeles", R.drawable.ncis_la);
-        listOfSeries.add(ncis);
+        Episode ncis = new Episode("2", "Un mal nécessaire", "Saison 2 Episode 3", R.drawable.ncis_la);
+        ep.add(ncis);
 
-        ListAdapter adapterNextoWatch = new CustomAdapter(this, listOfSeries);
+        ListAdapter adapterNextoWatch = new CustomAdapterNextToWatch(this, ep);
 
         ListView listNextToWatch = (ListView) findViewById(R.id.listeNextToWatch);
         listNextToWatch.setAdapter(adapterNextoWatch);
