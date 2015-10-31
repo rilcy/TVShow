@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".ByEpisode" >
         </activity>
+        <activity android:name=".ByActor" >
+        </activity>
     </application>
 
 </manifest>

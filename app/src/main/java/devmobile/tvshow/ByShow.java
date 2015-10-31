@@ -65,7 +65,7 @@ public class ByShow extends AppCompatActivity {
                 }
         );
 
-        LinearLayout llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editShow);;
+        LinearLayout llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editShow);
         llayout_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

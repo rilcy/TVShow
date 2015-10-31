@@ -1,14 +1,18 @@
 package devmobile.tvshow;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import devmobile.tvshow.alert.EditShowDialogAlert;
 
 public class ByActor extends AppCompatActivity {
 
@@ -33,6 +37,11 @@ public class ByActor extends AppCompatActivity {
         listOfActors.add(actor6);
         Actor actor7 = new Actor("Kaley", "Kuoco");
         listOfActors.add(actor7);
+
+        ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
+
+        ListView list = (ListView) findViewById(R.id.listOfActors);
+        list.setAdapter(adapter);
 
     }
 }
