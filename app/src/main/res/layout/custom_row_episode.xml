@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants">
 
 
@@ -23,17 +23,4 @@
         android:text="Large Text"
         />
 
-
-    <!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/episodeTitle"
-        android:layout_columnWeight="1"
-        android:layout_margin="5dp"
-        android:layout_row="0"
-        android:layout_column="0" />
-        -->
 </RelativeLayout>
