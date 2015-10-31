@@ -16,4 +16,8 @@
     <string name="delete_season">Supprimer la saison</string>
     <string name="add_episode">Ajouter un épisode</string>
     <string name="nextToWatch">A voir prochainement</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="message_alert_delete"></string>
 </resources>

@@ -32,6 +32,7 @@ public class BySeason extends AppCompatActivity {
 
         ListView list = (ListView) findViewById(R.id.listOfEpisodes);
         list.setAdapter(adapter);
+        list.setScrollContainer(false);
 
         list.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {

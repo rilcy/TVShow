@@ -1,17 +1,18 @@
 package devmobile.tvshow;
 
+import android.app.DialogFragment;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import devmobile.tvshow.alert.EditShowDialogAlert;
 
 public class ByShow extends AppCompatActivity {
 
@@ -58,12 +59,21 @@ public class ByShow extends AppCompatActivity {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                         Intent appInfo = new Intent(ByShow.this, BySeason.class);
                         startActivity(appInfo);
                     }
                 }
         );
 
+        LinearLayout llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editShow);;
+        llayout_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new EditShowDialogAlert();
+                newFragment.show(getFragmentManager(), "Edit");
+            }
+        });
+
+        };
+
     }
-}
