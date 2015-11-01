@@ -74,6 +74,6 @@ public class ByShow extends AppCompatActivity {
             }
         });
 
-        };
-
     }
+
+}

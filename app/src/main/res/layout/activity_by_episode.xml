@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="6dp">
+    tools:context=".ByEpisode">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,53 +27,53 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="?android:attr/listPreferredItemHeight"
-            android:layout_margin="6dp">
-
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="6dp"
-                android:contentDescription="imageShow"
-                android:src="@drawable/ncis_la" />
-
-
-            <TextView
-                android:id="@+id/firstLine"
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignWithParentIfMissing="true"
-                android:layout_toRightOf="@id/icon"
-                android:gravity="center_vertical"
-                android:text="Un mal nécessaire"
-                android:textSize="23sp" />
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:layout_margin="6dp">
 
-            <TextView
-                android:id="@+id/secondLine"
-                android:layout_width="fill_parent"
-                android:layout_height="26dip"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_toRightOf="@id/icon"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:text="@string/NCISLA_desc"
-                android:textSize="20sp" />
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"/>
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="6dp"
+                    android:contentDescription="imageShow"
+                    android:src="@drawable/ncis_la" />
+
+
+                <TextView
+                    android:id="@+id/firstLine"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:layout_toRightOf="@id/icon"
+                    android:gravity="center_vertical"
+                    android:text="Un mal nécessaire"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:id="@+id/secondLine"
+                    android:layout_width="fill_parent"
+                    android:layout_height="26dip"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/icon"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@string/NCISLA_desc"
+                    android:textSize="20sp" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
 
         </LinearLayout>
 
