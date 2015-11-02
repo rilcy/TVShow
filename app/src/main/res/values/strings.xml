@@ -22,4 +22,9 @@
     <string name="message_alert_delete"></string>
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
+    <string name="byShow_pageTitle">Série</string>
+    <string name="bySeason_pageTitle">Saison</string>
+    <string name="byEpisode_pageTitle">Episode</string>
+    <string name="byActor_pageTitle">Acteurs</string>
+    <string name="main_pageTitle">Mes séries</string>
 </resources>

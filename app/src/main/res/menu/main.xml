@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/action_mainActivity"
+        android:icon="@drawable/ic_action_video"
+        app:showAsAction="ifRoom|withText"
+        android:title="@string/main_pageTitle"/>
+    <item
+        android:id="@+id/action_byActor"
+        android:icon="@drawable/ic_action_emo_cool"
+        app:showAsAction="ifRoom|withText"
+        android:title="@string/byActor_pageTitle"/>
+
+    <!--TODO: Modifier le titre lorsque la page Ajouter série sera faite -->
+    <item
+        android:id="@+id/action_addShow"
+        android:icon="@drawable/ic_action_add"
+        app:showAsAction="ifRoom|withText"
+        android:title="A modifier"/>
+
+</menu>
