@@ -1,4 +1,4 @@
-package devmobile.tvshow;
+package devmobile.tvshow.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,9 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+
+import devmobile.tvshow.Episode;
+import devmobile.tvshow.R;
 
 /**
  * Created by rilcy on 29.10.15.
@@ -20,7 +21,7 @@ public class CustomAdapterNextToWatch extends ArrayAdapter<Episode>{
     private Episode episode;
 
     public CustomAdapterNextToWatch(Context context, ArrayList<Episode> episode) {
-        super(context, R.layout.custom_row, (ArrayList) episode);
+        super(context, R.layout.custom_row_main, (ArrayList) episode);
 
 
     }
@@ -28,7 +29,7 @@ public class CustomAdapterNextToWatch extends ArrayAdapter<Episode>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View customView = inflater.inflate(R.layout.custom_row, parent, false);
+        View customView = inflater.inflate(R.layout.custom_row_main, parent, false);
 
         Episode episode = getItem(position);
         TextView textViewTitle = (TextView) customView.findViewById(R.id.serieTitle);

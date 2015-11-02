@@ -1,4 +1,4 @@
-package devmobile.tvshow;
+package devmobile.tvshow.adapters;
 
 /**
  * Created by rilcy on 17.10.15.
@@ -14,12 +14,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends ArrayAdapter<Serie>{
+import devmobile.tvshow.R;
+import devmobile.tvshow.Show;
 
-    private Serie serie;
+public class CustomAdapter extends ArrayAdapter<Show>{
 
-    public CustomAdapter(Context context, ArrayList<Serie> serie) {
-        super(context, R.layout.custom_row, (ArrayList) serie);
+    private Show show;
+
+    public CustomAdapter(Context context, ArrayList<Show> show) {
+        super(context, R.layout.custom_row_main, (ArrayList) show);
 
 
     }
@@ -29,14 +32,14 @@ public class CustomAdapter extends ArrayAdapter<Serie>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View customView = inflater.inflate(R.layout.custom_row, parent, false);
+        View customView = inflater.inflate(R.layout.custom_row_main, parent, false);
 
-        Serie serieToShow = getItem(position);
+        Show showToShow = getItem(position);
         TextView textView = (TextView) customView.findViewById(R.id.serieTitle);
         ImageView imageView = (ImageView) customView.findViewById(R.id.imageSerie);
 
-        textView.setText(serieToShow.getTitle());
-        imageView.setImageResource(serieToShow.getImg());
+        textView.setText(showToShow.getTitle());
+        imageView.setImageResource(showToShow.getImg());
 
         // SRC POUR AJOUTER L'IMAGE : http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
         // https://youtu.be/U_Jvk4G28YE New Boston

@@ -1,9 +1,8 @@
-package devmobile.tvshow;
+package devmobile.tvshow.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
+
+import devmobile.tvshow.Show;
+import devmobile.tvshow.adapters.CustomAdapter;
+import devmobile.tvshow.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,22 +24,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        final ArrayList<Serie> listOfSeries = new ArrayList<Serie>();
+        final ArrayList<Show> listOfSeries = new ArrayList<Show>();
 
 
-        Serie ncis = new Serie("NCIS : Los Angeles", R.drawable.ncis_la);
+        Show ncis = new Show("NCIS : Los Angeles", R.drawable.ncis_la);
         listOfSeries.add(ncis);
-        Serie got = new Serie("Game of Thrones", R.drawable.got);
+        Show got = new Show("Game of Thrones", R.drawable.got);
         listOfSeries.add(got);
-        Serie impastor = new Serie("Impastor", R.drawable.impastor);
+        Show impastor = new Show("Impastor", R.drawable.impastor);
         listOfSeries.add(impastor);
-        Serie poi = new Serie("Person of Interest", R.drawable.person_of_interest);
+        Show poi = new Show("Person of Interest", R.drawable.person_of_interest);
         listOfSeries.add(poi);
-        Serie dexter = new Serie("Dexter", R.drawable.dexter);
+        Show dexter = new Show("Dexter", R.drawable.dexter);
         listOfSeries.add(dexter);
-        Serie americans = new Serie("The Americans", R.drawable.the_americans);
+        Show americans = new Show("The Americans", R.drawable.the_americans);
         listOfSeries.add(americans);
-        Serie daredevil = new Serie("Daredevil", R.drawable.daredevil);
+        Show daredevil = new Show("Daredevil", R.drawable.daredevil);
         listOfSeries.add(daredevil);
 
 
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent appInfo = new Intent(MainActivity.this, ByShow.class);
                         startActivity(appInfo);
                         /*
-                        Serie serie = listOfSeries.get(position);
+                        Show serie = listOfSeries.get(position);
                         Toast.makeText(MainActivity.this, serie.getTitle(), LENGTH_LONG).show();
                         */
                     }
@@ -78,10 +81,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         switch(item.getItemId()){
-            case R.id.action_mainActivity:
-                intent = new Intent(MainActivity.this, MainActivity.class);
-                MainActivity.this.startActivity(intent);
-                break;
+
+            //TODO : Ajouter ici l'action pour la page d'ajout de séries lorsque la page sera créée
 
             case R.id.action_byActor:
 

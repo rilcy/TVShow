@@ -4,8 +4,12 @@ package devmobile.tvshow;
  * Created by Elsio on 28.10.2015.
  */
 public class Episode {
-    private String episodeNumber;
+
+    private int episodeId;
     private String episodeTitle;
+    private String episodeNumber;
+    private int seasonId;
+    private boolean episodeCompleted;
     private String episodeInfo;
     private Integer img;
 

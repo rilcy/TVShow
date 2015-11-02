@@ -1,4 +1,4 @@
-package devmobile.tvshow;
+package devmobile.tvshow.adapters;
 
 /**
  * Created by Elsio on 28.10.15.
@@ -12,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import devmobile.tvshow.R;
+import devmobile.tvshow.Season;
 
 public class CustomAdapterShow extends ArrayAdapter<Season>{
 

@@ -1,18 +1,18 @@
-package devmobile.tvshow;
+package devmobile.tvshow.activities;
 
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.LinearLayout;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import devmobile.tvshow.alert.EditShowDialogAlert;
+import devmobile.tvshow.Actor;
+import devmobile.tvshow.adapters.CustomAdapterActor;
+import devmobile.tvshow.R;
 
 public class ByActor extends AppCompatActivity {
 
@@ -43,5 +43,30 @@ public class ByActor extends AppCompatActivity {
         ListView list = (ListView) findViewById(R.id.listOfActors);
         list.setAdapter(adapter);
 
+    }
+
+    private void setupActionBar() {
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+                Intent intent = new Intent(ByActor.this, MainActivity.class);
+                ByActor.this.startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

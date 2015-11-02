@@ -5,7 +5,10 @@ package devmobile.tvshow;
  */
 public class Season {
 
+    private int seasonId;
     private String seasonNumber;
+    private boolean seasonCompleted;
+    private int showId;
 
     public Season(String seasonNumber){
         this.seasonNumber = seasonNumber;

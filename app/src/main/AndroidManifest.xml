@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".MainActivity" >
+        <activity android:name=".activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,36 +20,36 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ByShow"
+        <activity android:name=".activities.ByShow"
             android:label="@string/byShow_pageTitle"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".activities.MainActivity"/>
         </activity>
 
-        <activity android:name=".BySeason"
+        <activity android:name=".activities.BySeason"
             android:label="@string/bySeason_pageTitle"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".activities.MainActivity"/>
         </activity>
 
-        <activity android:name=".ByEpisode"
+        <activity android:name=".activities.ByEpisode"
             android:label="@string/byEpisode_pageTitle"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".activities.MainActivity"/>
         </activity>
 
-        <activity android:name=".ByActor"
+        <activity android:name=".activities.ByActor"
             android:label="@string/byActor_pageTitle"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".activities.MainActivity"/>
         </activity>
 
     </application>
