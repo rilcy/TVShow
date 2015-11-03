@@ -9,7 +9,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFBB33">
+        android:background="#01DF3A">
 
         <TextView
             android:layout_width="fill_parent"
@@ -17,7 +17,7 @@
             android:layout_gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:padding="10dp"
-            android:text="DELETE" />
+            android:hint="@string/alert_deletetitle"/>
     </LinearLayout>
 
     <TextView

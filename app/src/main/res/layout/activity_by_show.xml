@@ -1,202 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="@string/nextToWatch"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
-
-
-        <ListView
-            android:id="@+id/listeNextToWatch"
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#FF909090" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textViewBeginYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/NCISLA_beginYear"
-            android:textSize="23sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" - "
-            android:textSize="23sp" />
-
-        <TextView
-            android:id="@+id/textViewEndYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/NCISLA_endYear"
-            android:textSize="23sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="5dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:checked="false" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/NCISlA_episodesToWatch"
-            android:textSize="23sp" />
-
-        <TextView
-            android:id="@+id/textViewEpisodesToView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" épisode(s) à regarder"
-            android:textSize="23sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@android:color/darker_gray"
-        android:id="@id/linearlayout_editShow">
-
-        <ImageView
-            android:id="@+id/editIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="10dp"
-            android:contentDescription="editIcon"
-            android:src="@drawable/edit45" />
-
-        <TextView
-            android:id="@+id/editShowText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/edit_show"
-            android:textSize="23sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@android:color/holo_red_light">
-
-        <ImageView
-            android:id="@+id/deleteIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="10dp"
-            android:contentDescription="deleteIcon"
-            android:src="@drawable/delete96" />
-
-        <TextView
-            android:id="@+id/deleteShowText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/delete_show"
-            android:textSize="23sp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5px"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
-        android:background="#FF909090" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
         android:background="@android:color/darker_gray">
 
-        <ImageView
-            android:id="@+id/addIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="10dp"
-            android:contentDescription="addIcon"
-            android:src="@drawable/add182" />
-
         <TextView
-            android:id="@+id/addShowText"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_show"
-            android:textSize="23sp" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            android:hint="@string/nextToWatch" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <ListView
-            android:id="@+id/listOfSeasons"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:id="@+id/listeNextToWatch"
+            android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:headerDividersEnabled="true">
+            android:layout_weight="10"
+            android:orientation="vertical">
 
-        </ListView>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#FF909090" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewBeginYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/NCISLA_beginYear"
+                android:textSize="23sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - "
+                android:textSize="23sp" />
+
+            <TextView
+                android:id="@+id/textViewEndYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/NCISLA_endYear"
+                android:textSize="23sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="6dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:checked="false" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/NCISlA_episodesToWatch"
+                android:textSize="23sp" />
+
+            <TextView
+                android:id="@+id/textViewEpisodesToView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" épisode(s) à regarder"
+                android:textSize="23sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#FF909090" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+
+
+            <ImageView
+                android:id="@+id/editIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:contentDescription="editIcon"
+                android:src="@drawable/edit45" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/buttonEdit" />
+
+            <TextView
+                android:id="@+id/editShowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_show"
+                android:textSize="23sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#FF909090" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:id="@id/linearlayout_deleteShow">
+
+            <ImageView
+                android:id="@+id/deleteIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:contentDescription="deleteIcon"
+                android:src="@drawable/delete96" />
+
+            <TextView
+                android:id="@+id/deleteShowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_show"
+                android:textSize="23sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#FF909090" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:id="@+id/addIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:contentDescription="addIcon"
+                android:src="@drawable/add182" />
+
+            <TextView
+                android:id="@+id/addShowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_show"
+                android:textSize="23sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#FF909090" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1">
+
+            <ListView
+                android:id="@+id/listOfSeasons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:headerDividersEnabled="true"
+                android:isScrollContainer="false">
+
+            </ListView>
+
+        </LinearLayout>
 
     </LinearLayout>
 
+
 </LinearLayout>
+
+</ScrollView>

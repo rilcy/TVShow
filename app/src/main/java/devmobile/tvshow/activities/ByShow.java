@@ -1,28 +1,23 @@
-package devmobile.tvshow.activities;
+package devmobile.tvshow;
 
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import devmobile.tvshow.adapters.CustomAdapterNextToWatch;
-import devmobile.tvshow.adapters.CustomAdapterShow;
-import devmobile.tvshow.Episode;
-import devmobile.tvshow.R;
-import devmobile.tvshow.Season;
-import devmobile.tvshow.alert.EditShowDialogAlert;
+import devmobile.tvshow.alert.DeleteShowDialogAlert;
 
 public class ByShow extends AppCompatActivity {
+
+    LinearLayout llayout_edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,45 +68,30 @@ public class ByShow extends AppCompatActivity {
                 }
         );
 
-        LinearLayout llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editShow);
-        llayout_edit.setOnClickListener(new View.OnClickListener() {
+        Button button = (Button) findViewById(R.id.buttonEdit);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment newFragment = new EditShowDialogAlert();
-                newFragment.show(getFragmentManager(), "Edit");
+                Intent appInfo = new Intent(ByShow.this, ByShow_Edition.class);
+                startActivity(appInfo);
             }
         });
 
-    }
+        /*
+        * Alert dialog
+        */
+        llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editShow);;
 
-    private void setupActionBar() {
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        LinearLayout llayout_delete = (LinearLayout) findViewById (R.id.linearlayout_deleteShow);;
+        llayout_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DeleteShowDialogAlert();
+                newFragment.show(getFragmentManager(), "Delete");
+            }
+        });
+    };
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-
-                Intent intent = new Intent(ByShow.this, MainActivity.class);
-                ByShow.this.startActivity(intent);
-                break;
-
-            case R.id.action_byActor:
-
-                intent = new Intent(ByShow.this, ByActor.class);
-                ByShow.this.startActivity(intent);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 }

@@ -2,4 +2,9 @@
 <resources>
     <item name="editShow" type="id" />
     <item name="linearlayout_editShow" type="id" />
+    <item name="linearlayout_deleteShow" type="id" />
+    <item name="addShowPicture" type="id" />
+    <item name="uploadShowPicture" type="id" />
+    <item name="etUploadShowPicture" type="id" />
+    <item name="bpUploadShowPicture" type="id" />
 </resources>
