@@ -42,7 +42,6 @@ public class ByActor extends AppCompatActivity {
 
         ListView list = (ListView) findViewById(R.id.listOfActors);
         list.setAdapter(adapter);
-
     }
 
     private void setupActionBar() {
