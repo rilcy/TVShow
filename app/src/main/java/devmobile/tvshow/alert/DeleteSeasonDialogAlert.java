@@ -3,12 +3,15 @@ package devmobile.tvshow.alert;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
 import devmobile.tvshow.R;
+import devmobile.tvshow.activities.ByShow;
+import devmobile.tvshow.activities.MainActivity;
 
 public class DeleteSeasonDialogAlert extends DialogFragment {
 
@@ -26,8 +29,11 @@ public class DeleteSeasonDialogAlert extends DialogFragment {
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        // sign in the user ...
-                    }
+
+                        //End activity and get back to the previous activity
+                        Intent intent = new Intent(getActivity(), ByShow.class);
+                        startActivity(intent);
+                        getActivity().finish();                    }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
