@@ -179,7 +179,8 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@android:color/darker_gray">
+            android:background="@android:color/darker_gray"
+            android:id="@id/linearlayout_createSeason">
 
             <ImageView
                 android:id="@+id/addIcon"

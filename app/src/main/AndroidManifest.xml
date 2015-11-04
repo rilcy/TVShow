@@ -56,7 +56,13 @@
         </activity>
         <activity android:name=".activities.ByShow_Edition" >
         </activity>
+
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+        <activity android:name=".activities.ByShow_Creation" >
+        </activity>
+        <activity android:name=".alert.CreateSeasonDialogAlert" >
+        </activity>
     </application>
 
 </manifest>

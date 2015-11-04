@@ -17,7 +17,7 @@ import java.util.Calendar;
 
 import devmobile.tvshow.R;
 
-public class ByShow_Edition extends AppCompatActivity {
+public class ByShow_Creation extends AppCompatActivity {
 
     private ImageView imgView;
 
@@ -30,7 +30,7 @@ public class ByShow_Edition extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_by_show_edition);
+        setContentView(R.layout.activity_by_show_creation);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -69,7 +69,7 @@ public class ByShow_Edition extends AppCompatActivity {
 
 
 
-            public void onClickSelectImg(View view) {
+    public void onClickSelectImg(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -95,27 +95,27 @@ public class ByShow_Edition extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                Intent intent = new Intent(ByShow_Edition.this, BySeason.class);
-                ByShow_Edition.this.startActivity(intent);
+                Intent intent = new Intent(ByShow_Creation.this, BySeason.class);
+                ByShow_Creation.this.startActivity(intent);
                 break;
 
             case R.id.action_byActor:
 
-                intent = new Intent(ByShow_Edition.this, ByActor.class);
-                ByShow_Edition.this.startActivity(intent);
+                intent = new Intent(ByShow_Creation.this, ByActor.class);
+                ByShow_Creation.this.startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void onClickCancel(View view) {
-        Intent intent = new Intent(ByShow_Edition.this, ByShow.class);
-        ByShow_Edition.this.startActivity(intent);
+        Intent intent = new Intent(ByShow_Creation.this, MainActivity.class);
+        ByShow_Creation.this.startActivity(intent);
     }
 
     public void onClickOk(View view) {
         // Enregistrer l'image et les modifications
-        Intent intent = new Intent(ByShow_Edition.this, ByShow.class);
-        ByShow_Edition.this.startActivity(intent);
+        Intent intent = new Intent(ByShow_Creation.this, MainActivity.class);
+        ByShow_Creation.this.startActivity(intent);
     }
 }

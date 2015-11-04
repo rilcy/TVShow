@@ -27,13 +27,14 @@
     <string name="byEpisode_pageTitle">Episode</string>
     <string name="byActor_pageTitle">Acteurs</string>
     <string name="main_pageTitle">Mes séries</string>
-    <string name="alert_deletetitle" />
-    <string name="alert_edittitle" />
-    <string name="alert_editShowTitle" />
+    <string name="alert_deletetitle">DELETE</string>
     <string name="ShowStart">Show starts in (YEAR)</string>
     <string name="ShowEnd">Show ends in (YEAR)</string>
     <string name="ShowName">Name of the show</string>
     <string name="buttonOk">OK !</string>
     <string name="buttonCancel">CANCEL</string>
     <string name="buttonLoadPicture">LOAD A PICTURE !</string>
+    <string name="alert_createSeason">CREATE A NEW SEASON</string>
+    <string name="alert_newSeasonQuestion">Are you sure, you want to create a new season ?</string>
+    <string name="create">CREATE</string>
 </resources>

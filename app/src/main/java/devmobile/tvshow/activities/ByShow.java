@@ -20,6 +20,7 @@ import devmobile.tvshow.adapters.CustomAdapterShow;
 import devmobile.tvshow.Episode;
 import devmobile.tvshow.R;
 import devmobile.tvshow.Season;
+import devmobile.tvshow.alert.CreateSeasonDialogAlert;
 import devmobile.tvshow.alert.DeleteShowDialogAlert;
 
 public class ByShow extends AppCompatActivity {
@@ -93,6 +94,17 @@ public class ByShow extends AppCompatActivity {
             public void onClick(View v) {
                 DialogFragment newFragment = new DeleteShowDialogAlert();
                 newFragment.show(getFragmentManager(), "delete");
+
+            }
+        });
+
+
+        LinearLayout llayout_create = (LinearLayout) findViewById (R.id.linearlayout_createSeason);
+        llayout_create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new CreateSeasonDialogAlert();
+                newFragment.show(getFragmentManager(), "create");
 
             }
         });
