@@ -1,5 +1,6 @@
 package devmobile.tvshow.activities;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -16,6 +18,9 @@ import java.util.ArrayList;
 import devmobile.tvshow.adapters.CustomAdapterSeason;
 import devmobile.tvshow.Episode;
 import devmobile.tvshow.R;
+import devmobile.tvshow.alert.CreateEpisodeDialogAlert;
+import devmobile.tvshow.alert.CreateSeasonDialogAlert;
+import devmobile.tvshow.alert.DeleteSeasonDialogAlert;
 
 public class BySeason extends AppCompatActivity {
 
@@ -48,10 +53,32 @@ public class BySeason extends AppCompatActivity {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                        Intent appInfo = new Intent(BySeason.this, ByEpisode.class);
+                        startActivity(appInfo);
                     }
                 }
         );
+
+
+        LinearLayout llayout_delete = (LinearLayout) findViewById (R.id.linearlayout_deleteSeason);
+        llayout_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DeleteSeasonDialogAlert();
+                newFragment.show(getFragmentManager(), "delete");
+
+            }
+        });
+
+        LinearLayout llayout_create = (LinearLayout) findViewById (R.id.linearlayout_createEpisode);
+        llayout_create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new CreateEpisodeDialogAlert();
+                newFragment.show(getFragmentManager(), "delete");
+
+            }
+        });
 
     }
 

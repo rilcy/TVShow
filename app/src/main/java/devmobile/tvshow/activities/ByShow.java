@@ -84,7 +84,7 @@ public class ByShow extends AppCompatActivity {
 
                 Intent appInfo = new Intent(ByShow.this, ByShow_Edition.class);
                 startActivity(appInfo);
-
+                finish();
             }
         });
 

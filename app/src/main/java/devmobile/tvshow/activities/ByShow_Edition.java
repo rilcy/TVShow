@@ -111,11 +111,13 @@ public class ByShow_Edition extends AppCompatActivity {
     public void onClickCancel(View view) {
         Intent intent = new Intent(ByShow_Edition.this, ByShow.class);
         ByShow_Edition.this.startActivity(intent);
+        finish();
     }
 
     public void onClickOk(View view) {
         // Enregistrer l'image et les modifications
         Intent intent = new Intent(ByShow_Edition.this, ByShow.class);
         ByShow_Edition.this.startActivity(intent);
+        finish();
     }
 }

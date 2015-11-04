@@ -24,9 +24,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:textSize="20dp"
-        android:hint="@string/alert_newSeasonQuestion"
+        android:hint="@string/alert_newEpisodeQuestion"
         android:id="@+id/textView3" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNewEpisode" />
+
 
 </LinearLayout>

@@ -111,11 +111,13 @@ public class ByShow_Creation extends AppCompatActivity {
     public void onClickCancel(View view) {
         Intent intent = new Intent(ByShow_Creation.this, MainActivity.class);
         ByShow_Creation.this.startActivity(intent);
+        finish();
     }
 
     public void onClickOk(View view) {
         // Enregistrer l'image et les modifications
         Intent intent = new Intent(ByShow_Creation.this, MainActivity.class);
         ByShow_Creation.this.startActivity(intent);
+        finish();
     }
 }

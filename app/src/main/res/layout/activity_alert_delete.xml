@@ -9,7 +9,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#01DF3A">
+        android:background="@android:color/holo_red_light">
 
         <TextView
             android:layout_width="fill_parent"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:hint="@string/message_alert_delete"
+        android:hint="@string/message_alert_delete_show"
         android:padding="9dp"
         android:id="@+id/textView2" />
 

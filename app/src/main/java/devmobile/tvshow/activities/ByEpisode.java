@@ -1,5 +1,6 @@
 package devmobile.tvshow.activities;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,9 @@ import devmobile.tvshow.Actor;
 import devmobile.tvshow.R;
 import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.adapters.CustomAdapterSeason;
+import devmobile.tvshow.alert.CreateEpisodeDialogAlert;
+import devmobile.tvshow.alert.DeleteEpisodeDialogAlert;
+import devmobile.tvshow.alert.EditEpisodeDialogAlert;
 
 public class ByEpisode extends AppCompatActivity {
 
@@ -55,6 +59,24 @@ public class ByEpisode extends AppCompatActivity {
         setListViewHeightBasedOnChildren(list);
         // Retire le focus sur la liste afin que l'activité démarre en haut de la page
         list.setFocusable(false);
+
+        LinearLayout llayout_delete = (LinearLayout) findViewById (R.id.linearlayout_deleteEpisode);
+        llayout_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DeleteEpisodeDialogAlert();
+                newFragment.show(getFragmentManager(), "delete");
+            }
+        });
+
+        LinearLayout llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editEpisode);
+        llayout_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new EditEpisodeDialogAlert();
+                newFragment.show(getFragmentManager(), "delete");
+            }
+        });
 
         LinearLayout llayout_addActor = (LinearLayout) findViewById (R.id.linearLayout_addActor);
         llayout_addActor.setOnClickListener(new View.OnClickListener() {

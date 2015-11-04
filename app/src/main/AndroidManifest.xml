@@ -63,6 +63,14 @@
         </activity>
         <activity android:name=".alert.CreateSeasonDialogAlert" >
         </activity>
+        <activity android:name=".alert.DeleteSeasonDialogAlert" >
+        </activity>
+        <activity android:name=".alert.CreateEpisodeDialogAlert" >
+        </activity>
+        <activity android:name=".alert.DeleteEpisodeDialogAlert" >
+        </activity>
+        <activity android:name=".alert.EditEpisodeDialogAlert" >
+        </activity>
     </application>
 
 </manifest>
