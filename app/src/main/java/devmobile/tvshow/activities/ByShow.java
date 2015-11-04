@@ -4,7 +4,6 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +20,7 @@ import devmobile.tvshow.adapters.CustomAdapterShow;
 import devmobile.tvshow.Episode;
 import devmobile.tvshow.R;
 import devmobile.tvshow.Season;
-import devmobile.tvshow.alert.EditShowDialogAlert;
+import devmobile.tvshow.alert.DeleteShowDialogAlert;
 
 public class ByShow extends AppCompatActivity {
 
@@ -88,6 +87,15 @@ public class ByShow extends AppCompatActivity {
             }
         });
 
+        LinearLayout llayout_delete = (LinearLayout) findViewById (R.id.linearlayout_deleteShow);
+        llayout_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DeleteShowDialogAlert();
+                newFragment.show(getFragmentManager(), "delete");
+
+            }
+        });
     }
 
 

@@ -49,8 +49,6 @@ public class BySeason extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                        Intent appInfo = new Intent(BySeason.this, ByEpisode.class);
-                        startActivity(appInfo);
                     }
                 }
         );

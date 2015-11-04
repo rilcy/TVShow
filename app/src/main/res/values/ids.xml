@@ -7,4 +7,6 @@
     <item name="uploadShowPicture" type="id" />
     <item name="etUploadShowPicture" type="id" />
     <item name="bpUploadShowPicture" type="id" />
+    <item name="toolbar" type="id" />
+    <item name="fab" type="id" />
 </resources>

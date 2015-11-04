@@ -2,35 +2,61 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="devmobile.tvshow" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_action_tv"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        <activity android:name=".activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ByShow" >
-        </activity>
-        <activity android:name=".BySeason" >
-        </activity>
-        <activity android:name=".ByEpisode" >
-        </activity>
-        <activity android:name=".ByShowEdition" >
+        <activity
+            android:name=".activities.ByShow"
+            android:label="@string/byShow_pageTitle"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".ByShow_Edition"
-            android:label="@string/title_activity_by_show__edition"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:name=".activities.BySeason"
+            android:label="@string/bySeason_pageTitle"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.ByEpisode"
+            android:label="@string/byEpisode_pageTitle"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ByActor"
+            android:label="@string/byActor_pageTitle"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity android:name=".activities.ByShow_Edition" >
+        </activity>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </application>
 
 </manifest>
