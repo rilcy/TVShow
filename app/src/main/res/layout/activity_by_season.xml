@@ -11,53 +11,57 @@
     android:orientation="vertical"
     tools:context="devmobile.tvshow.activities.BySeason">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/listPreferredItemHeight"
-        android:layout_margin="6dp">
+    <GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:background="@android:color/holo_blue_dark">
+
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="6dp"
             android:contentDescription="imageShow"
-            android:src="@drawable/ncis_la" />
+            android:src="@drawable/ncis_la"
+            android:layout_rowSpan="2" />
 
 
         <TextView
             android:id="@+id/firstLine"
-            android:layout_width="match_parent"
+            android:layout_width="288dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignWithParentIfMissing="true"
-            android:layout_toRightOf="@id/icon"
-            android:gravity="center_vertical"
-            android:text="@string/NCISLA"
-            android:textSize="20sp" />
+            android:textStyle="bold"
+            android:hint="@string/NCISLA"
+            android:textSize="23sp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnSpan="2" />
 
         <TextView
             android:id="@+id/secondLine"
-            android:layout_width="match_parent"
-            android:layout_height="26dip"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@id/icon"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:text="@string/NCISLA_season"
-            android:textSize="20sp" />
-
-        <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"/>
-    </RelativeLayout>
+            android:hint="@string/NCISLA_season"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp"
+            android:layout_row="1"
+            android:layout_column="1" />
+
+        <CheckBox
+            android:button="@drawable/customwatchedcheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:paddingRight="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_row="1"
+            android:layout_column="2" />
+    </GridLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +71,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@android:color/holo_red_light"
+        android:background="@android:color/darker_gray"
         android:id="@+id/linearlayout_deleteSeason">
 
         <ImageView
@@ -86,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete_season"
+            android:textColor="@android:color/background_light"
             android:textSize="23sp" />
     </LinearLayout>
 

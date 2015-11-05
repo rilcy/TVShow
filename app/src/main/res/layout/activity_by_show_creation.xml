@@ -16,13 +16,28 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
 
-        <ImageView
-            android:id="@+id/imgView"
-            android:layout_gravity="center_horizontal"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="240dp"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="1dp"
+            android:background="@color/colorPrimaryDark">
+
+
+            <ImageView
+                android:id="@+id/imgView"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxHeight="200dp"
+                android:maxWidth="200dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/e250250"
+                android:onClick="onClickSelectImg"
+                android:adjustViewBounds="true"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/buttonLoadPicture"
@@ -91,7 +106,7 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/buttonOk"
+                android:hint="@string/buttonSave"
                 android:id="@+id/buttonOk"
                 android:layout_row="0"
                 android:layout_column="0"
@@ -106,6 +121,8 @@
                 android:layout_row="0"
                 android:layout_column="2"
                 android:onClick="onClickCancel"/>
+
+
 
 
         </GridLayout>
