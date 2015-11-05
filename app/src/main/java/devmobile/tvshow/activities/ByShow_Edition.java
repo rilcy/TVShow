@@ -1,5 +1,6 @@
 package devmobile.tvshow.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
@@ -9,11 +10,18 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatMultiAutoCompleteTextView;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -30,10 +38,26 @@ public class ByShow_Edition extends AppCompatActivity {
 
     private static final int RESULT_LOAD_IMG = 1;
 
+    private EditText etShowEnd ;
+    private CheckBox cbIsFinished ;
+    private TextView tvShowEnd;
+    private GridLayout glShowEditCreat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show_edition);
+
+        cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
+        etShowEnd = (EditText) findViewById(R.id.etShowEnd);
+        tvShowEnd = (TextView) findViewById(R.id.showEnd);
+        glShowEditCreat = (GridLayout) findViewById(R.id.glShowEditCreat);
+
+        etShowEnd.setVisibility(View.GONE);
+        tvShowEnd.setVisibility(View.GONE);
+
+        //etShowEnd.setFocusable(false);
+
     }
 
 
@@ -124,4 +148,21 @@ public class ByShow_Edition extends AppCompatActivity {
         ByShow_Edition.this.startActivity(intent);
         finish();
     }
+
+    public void onClickCheckbox(View view) {
+
+        if (cbIsFinished.isChecked()) {
+            //
+            etShowEnd.setVisibility(View.VISIBLE);
+            tvShowEnd.setVisibility(View.VISIBLE);
+        } else {
+            //
+            etShowEnd.setVisibility(View.GONE);
+            tvShowEnd.setVisibility(View.GONE);
+            etShowEnd.setText("");
+        }
+
+    }
+
+
 }

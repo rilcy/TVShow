@@ -73,9 +73,15 @@
             android:layout_height="wrap_content"
             android:inputType="date"
             android:digits="0123456789"
-
             android:maxLength="4"
             android:id="@+id/etShowStart" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/cbisFinished"
+            android:id="@+id/cbiSFinished"
+            android:onClick="onClickCheckbox" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,15 +96,18 @@
             android:inputType="date"
             android:digits="0123456789"
             android:maxLength="4"
-            android:id="@+id/etShowEnd" />
+            android:id="@+id/etShowEnd"/>
+
 
         <GridLayout
+            android:id="@+id/glShowEditCreat"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:rowCount="1"
             android:columnCount="3">
 
