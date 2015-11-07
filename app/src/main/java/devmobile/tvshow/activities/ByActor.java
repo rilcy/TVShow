@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import devmobile.tvshow.*;
 import devmobile.tvshow.adapters.CustomAdapter;
 import devmobile.tvshow.adapters.CustomAdapterActor;
-import devmobile.tvshow.object.Actor;
-import devmobile.tvshow.object.Show;
+import devmobile.tvshow.db.object.Actor;
+import devmobile.tvshow.db.object.Show;
 
 public class ByActor extends AppCompatActivity {
 

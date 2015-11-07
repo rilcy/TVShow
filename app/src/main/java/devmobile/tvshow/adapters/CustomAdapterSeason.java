@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import devmobile.tvshow.object.Episode;
+import devmobile.tvshow.db.object.Episode;
 import devmobile.tvshow.R;
 
 public class CustomAdapterSeason extends ArrayAdapter<Episode>{

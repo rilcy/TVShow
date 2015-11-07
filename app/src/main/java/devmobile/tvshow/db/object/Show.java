@@ -1,4 +1,4 @@
-package devmobile.tvshow.object;
+package devmobile.tvshow.db.object;
 
 /**
  * Created by rilcy on 17.10.15.

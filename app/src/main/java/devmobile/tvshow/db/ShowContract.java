@@ -2,8 +2,8 @@ package devmobile.tvshow.db;
 
 import android.provider.BaseColumns;
 
-import devmobile.tvshow.object.Episode;
-import devmobile.tvshow.object.Season;
+import devmobile.tvshow.db.object.Episode;
+import devmobile.tvshow.db.object.Season;
 
 /**
  * Created by Elsio on 07.11.2015.
