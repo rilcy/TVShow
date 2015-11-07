@@ -1,6 +1,5 @@
 package devmobile.tvshow.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
