@@ -38,7 +38,7 @@ public class ByShow extends AppCompatActivity {
         final ArrayList<Episode> ep = new ArrayList<Episode>();
 
 
-        Episode ncis = new Episode("2", "Un mal nécessaire", "Saison 2 Episode 3", R.drawable.ncis_la);
+        Episode ncis = new Episode(2, "Un mal nécessaire", "Saison 2 Episode 3", R.drawable.ncis_la);
         ep.add(ncis);
 
         ListAdapter adapterNextoWatch = new CustomAdapterNextToWatch(this, ep);

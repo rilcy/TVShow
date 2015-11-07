@@ -10,6 +10,12 @@ public class Season {
     private boolean seasonCompleted;
     private int showId;
 
+    private String type;
+
+    public Season(String type){
+        this.type = type;
+    }
+
     //Constructeur de l'objet Season lors de la création initiale.
     //Le boolean n'est pas ajouté car il doit être "FALSE" de base et ceci n'est pas maitrisé par le user
     public Season(int seasonId, String seasonNumber, int showId){
