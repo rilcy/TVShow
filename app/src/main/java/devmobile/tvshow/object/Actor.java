@@ -7,6 +7,7 @@ public class Actor {
     private String firstName;
     private String lastName;
 
+    // CONSTRUCTEUR A SUPPRIMER PAR LA SUITE
     public Actor(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;

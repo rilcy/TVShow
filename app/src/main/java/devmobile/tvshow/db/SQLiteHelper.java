@@ -8,28 +8,42 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Elsio on 07.11.2015.
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
+    private SQLiteDatabase db;
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "TVShow.db";
-    public static final String TABLE_NAME = "show_table";
-    public static final String COL_1 = "SHOW_ID";
-    public static final String COL_2 = "SHOW_TITLE";
-    public static final String COL_3 = "SHOW_START";
-    public static final String COL_4 = "SHOW_END";
-    public static final String COL_5 = "SHOW_COMPLETED";
-    public static final String COL_6 = "SHOW_IMAGE";
 
-    public SQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    private static SQLiteHelper instance;
+
+
+    //Singelton
+    private SQLiteHelper(Context context){
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        db = this.getWritableDatabase();
+    }
+
+    public static SQLiteHelper getInstance(Context context){
+        if(instance == null){
+            instance = new SQLiteHelper(context.getApplicationContext());
+        }
+        return instance;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL(PersonEntry.CREATE_TABLE_PERSON);
+        db.execSQL(RecordEntry.CREATE_TABLE_RECORD);
+        db.execSQL(PersonRecordEntry.CREATE_TABLE_PERSON_RECORD);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //drop old tables
+        db.execSQL("DROP TABLE IF EXISTS " + PersonEntry.TABLE_PERSON);
+        db.execSQL("DROP TABLE IF EXISTS " + RecordEntry.TABLE_RECORD);
+        db.execSQL("DROP TABLE IF EXISTS " + PersonRecordEntry.TABLE_PERSON_RECORD);
 
+        //create new tables
+        onCreate(db);
     }
 }

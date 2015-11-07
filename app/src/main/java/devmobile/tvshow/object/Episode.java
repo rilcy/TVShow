@@ -13,17 +13,26 @@ public class Episode {
     private String episodeInfo;
     private Integer img;
 
+    // CONSTRUCTEUR A SUPPRIMER
     public Episode(String episodeNumber, String episodeTitle){
         this.episodeNumber = episodeNumber;
         this.episodeTitle = episodeTitle;
     }
 
+    // CONSTRUCTEUR A SUPPRIMER
     public Episode(String episodeNumber, String episodeTitle, String episodeInfo, Integer img){
         this.episodeNumber = episodeNumber;
         this.episodeTitle = episodeTitle;
         this.episodeInfo = episodeInfo;
         this.img = img;
     }
+
+    // Constructeur de l'objet Episode
+    public Episode(){
+
+    }
+
+
 
     public String getEpisodeNumber() {
         return episodeNumber;
