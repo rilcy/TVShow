@@ -11,7 +11,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
 
-import devmobile.tvshow.Show;
+import devmobile.tvshow.object.Show;
 import devmobile.tvshow.adapters.CustomAdapter;
 import devmobile.tvshow.R;
 

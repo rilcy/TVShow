@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import devmobile.tvshow.Episode;
+import devmobile.tvshow.object.Episode;
 import devmobile.tvshow.R;
 
 /**

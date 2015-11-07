@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 import devmobile.tvshow.adapters.CustomAdapterNextToWatch;
 import devmobile.tvshow.adapters.CustomAdapterShow;
-import devmobile.tvshow.Episode;
+import devmobile.tvshow.object.Episode;
 import devmobile.tvshow.R;
-import devmobile.tvshow.Season;
+import devmobile.tvshow.object.Season;
 import devmobile.tvshow.alert.CreateSeasonDialogAlert;
 import devmobile.tvshow.alert.DeleteShowDialogAlert;
 

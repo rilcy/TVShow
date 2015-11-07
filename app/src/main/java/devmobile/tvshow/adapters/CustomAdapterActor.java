@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import devmobile.tvshow.Actor;
+import devmobile.tvshow.object.Actor;
 import devmobile.tvshow.R;
 
 public class CustomAdapterActor extends ArrayAdapter<Actor>{

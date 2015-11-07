@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import devmobile.tvshow.R;
-import devmobile.tvshow.Show;
+import devmobile.tvshow.object.Show;
 
 public class CustomAdapter extends ArrayAdapter<Show>{
 

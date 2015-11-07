@@ -14,11 +14,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import devmobile.tvshow.Actor;
+import devmobile.tvshow.object.Actor;
 import devmobile.tvshow.R;
 import devmobile.tvshow.adapters.CustomAdapterActor;
-import devmobile.tvshow.adapters.CustomAdapterSeason;
-import devmobile.tvshow.alert.CreateEpisodeDialogAlert;
 import devmobile.tvshow.alert.DeleteEpisodeDialogAlert;
 import devmobile.tvshow.alert.EditEpisodeDialogAlert;
 

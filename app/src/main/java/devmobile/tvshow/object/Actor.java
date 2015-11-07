@@ -1,4 +1,4 @@
-package devmobile.tvshow;
+package devmobile.tvshow.object;
 
 /**
  * Created by Elsio on 31.10.15.

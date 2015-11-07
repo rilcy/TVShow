@@ -16,10 +16,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import devmobile.tvshow.adapters.CustomAdapterSeason;
-import devmobile.tvshow.Episode;
+import devmobile.tvshow.object.Episode;
 import devmobile.tvshow.R;
 import devmobile.tvshow.alert.CreateEpisodeDialogAlert;
-import devmobile.tvshow.alert.CreateSeasonDialogAlert;
 import devmobile.tvshow.alert.DeleteSeasonDialogAlert;
 
 public class BySeason extends AppCompatActivity {

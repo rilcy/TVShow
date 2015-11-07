@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import devmobile.tvshow.R;
-import devmobile.tvshow.Season;
+import devmobile.tvshow.object.Season;
 
 public class CustomAdapterShow extends ArrayAdapter<Season>{
 
