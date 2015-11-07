@@ -10,7 +10,7 @@ public class Show {
     private int showEnd;
     private boolean showCompleted;
     private Integer showImage;
-  
+
     // CONSTRUCTEUR A SUPPRIMER
     public Show(String title, Integer showImage){
         this.showTitle = title;
@@ -29,7 +29,7 @@ public class Show {
         this.showImage = showImage;
     }
 
-    // Constructeur de l'objet Show avec boolean
+    // Constructeur de l'objet Show avec boolean lors de la création de l'activité avec des données provenant de la DB.
     public Show(int showId, String showTitle, int showStart, int showEnd, boolean showCompleted, Integer showImage){
         this.showId = showId;
         this.showTitle = showTitle;

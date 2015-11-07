@@ -10,7 +10,6 @@ public class Season {
     private boolean seasonCompleted;
     private int showId;
 
-
     //Constructeur de l'objet Season lors de la création initiale.
     //Le boolean n'est pas ajouté car il doit être "FALSE" de base et ceci n'est pas maitrisé par le user
     public Season(int seasonId, String seasonNumber, int showId){
@@ -20,7 +19,7 @@ public class Season {
         this.showId = showId;
     }
 
-    // Constructeur de l'objet Season
+    // Constructeur de l'objet Show avec boolean lors de la création de l'activité avec des données provenant de la DB.
     public Season(int seasonId, String seasonNumber, boolean seasonCompleted, int showId){
         this.seasonId = seasonId;
         this.seasonNumber = seasonNumber;
@@ -29,7 +28,6 @@ public class Season {
     }
 
     //Getters & setters
-
     public boolean isSeasonCompleted() {
         return seasonCompleted;
     }
