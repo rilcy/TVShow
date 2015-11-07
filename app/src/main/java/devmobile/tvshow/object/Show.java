@@ -10,7 +10,7 @@ public class Show {
     private int showEnd;
     private boolean showCompleted;
     private Integer showImage;
-
+  
     // CONSTRUCTEUR A SUPPRIMER
     public Show(String title, Integer showImage){
         this.showTitle = title;
