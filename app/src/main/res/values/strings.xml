@@ -7,7 +7,8 @@
     <string name="NCISlA_episodesToWatch">16</string>
     <string name="edit_show">Editer la série</string>
     <string name="delete_show">Supprimer la série</string>
-    <string name="add_show">Ajouter une saison</string>
+    <string name="add_show">Ajouter une série</string>
+    <string name="add_season">Ajouter une saison</string>
     <string name="title_activity_by_episode">ByEpisode</string>
     <string name="edit_episode">Editer l\'épisode</string>
     <string name="delete_episode">Supprimer l\'épisode</string>

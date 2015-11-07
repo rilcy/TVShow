@@ -20,6 +20,6 @@
         android:id="@+id/action_addShow"
         android:icon="@drawable/ic_action_add"
         app:showAsAction="ifRoom|withText"
-        android:title="A modifier"/>
+        android:title="@string/add_show"/>
 
 </menu>

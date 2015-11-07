@@ -140,6 +140,12 @@ public class ByShow extends AppCompatActivity {
                 intent = new Intent(ByShow.this, ByActor.class);
                 ByShow.this.startActivity(intent);
                 break;
+
+            case R.id.action_addShow:
+
+                intent = new Intent(ByShow.this, ByShow_Creation.class);
+                ByShow.this.startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

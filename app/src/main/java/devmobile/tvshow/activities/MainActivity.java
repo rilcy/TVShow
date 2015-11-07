@@ -89,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, ByActor.class);
                 MainActivity.this.startActivity(intent);
                 break;
+
+            case R.id.action_addShow:
+
+                intent = new Intent(MainActivity.this, ByShow_Creation.class);
+                MainActivity.this.startActivity(intent);
+                break;
         }
         return true;
     }

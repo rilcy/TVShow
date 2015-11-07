@@ -129,6 +129,12 @@ public class ByShow_Edition extends AppCompatActivity {
                 intent = new Intent(ByShow_Edition.this, ByActor.class);
                 ByShow_Edition.this.startActivity(intent);
                 break;
+
+            case R.id.action_addShow:
+
+                intent = new Intent(ByShow_Edition.this, ByShow_Creation.class);
+                ByShow_Edition.this.startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

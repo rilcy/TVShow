@@ -114,6 +114,12 @@ public class ByEpisode extends AppCompatActivity {
                 intent = new Intent(ByEpisode.this, ByActor.class);
                 ByEpisode.this.startActivity(intent);
                 break;
+
+            case R.id.action_addShow:
+
+                intent = new Intent(ByEpisode.this, ByShow_Creation.class);
+                ByEpisode.this.startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -108,6 +108,12 @@ public class BySeason extends AppCompatActivity {
                 intent = new Intent(BySeason.this, ByActor.class);
                 BySeason.this.startActivity(intent);
                 break;
+
+            case R.id.action_addShow:
+
+                intent = new Intent(BySeason.this, ByShow_Creation.class);
+                BySeason.this.startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
