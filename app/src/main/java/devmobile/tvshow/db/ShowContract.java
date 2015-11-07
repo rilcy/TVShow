@@ -2,6 +2,9 @@ package devmobile.tvshow.db;
 
 import android.provider.BaseColumns;
 
+import devmobile.tvshow.object.Episode;
+import devmobile.tvshow.object.Season;
+
 /**
  * Created by Elsio on 07.11.2015.
  */
@@ -49,6 +52,7 @@ public final class ShowContract {
                 + SeasonEntry.KEY_ID + " INTEGER PRIMARY KEY,"
                 + SeasonEntry.KEY_NUMBER + " INTEGER, "
                 + SeasonEntry.KEY_COMPLETED + " BOOLEAN, "
+                + SeasonEntry.KEY_SHOW_ID + " INTEGER, "
                 + "FOREIGN KEY (" + KEY_SHOW_ID + ") REFERENCES " + ShowEntry.TABLE_SHOW + " (" + KEY_ID + ") "
                 + ");";
     }
@@ -70,6 +74,7 @@ public final class ShowContract {
                 + EpisodeEntry.KEY_TITLE + " TEXT, "
                 + EpisodeEntry.KEY_NUMBER + " INTEGER, "
                 + EpisodeEntry.KEY_COMPLETED + " BOOLEAN, "
+                + EpisodeEntry.KEY_SEASON_ID + " INTEGER, "
                 + "FOREIGN KEY (" + KEY_SEASON_ID + ") REFERENCES " + SeasonEntry.TABLE_SEASON + " (" + KEY_ID + ") "
                 + ");";
     }
@@ -105,12 +110,10 @@ public final class ShowContract {
         public static final String CREATE_TABLE_CASTING_EPISODE = "CREATE TABLE "
                 + TABLE_CASTING_EPISODE + "("
                 + CastingEpisodeEntry.KEY_ID + " INTEGER PRIMARY KEY,"
-                + CastingEpisodeEntry.KEY_CASTING_ID + " INTEGER PRIMARY KEY,"
-                + CastingEpisodeEntry.KEY_EPISODE_ID + " INTEGER FOREIGN KEY"
+                + CastingEpisodeEntry.KEY_CASTING_ID + " INTEGER, "
+                + CastingEpisodeEntry.KEY_EPISODE_ID + " INTEGER, "
+                + "FOREIGN KEY (" + KEY_CASTING_ID + ") REFERENCES " + CastingEntry.TABLE_CASTING + " (" + KEY_ID + ") "
+                + "FOREIGN KEY (" + KEY_EPISODE_ID + ") REFERENCES " + EpisodeEntry.TABLE_EPISODE + " (" + KEY_ID + ") "
                 + ");";
     }
-
-
-
-
 }
