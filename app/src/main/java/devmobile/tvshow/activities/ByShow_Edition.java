@@ -1,23 +1,17 @@
 package devmobile.tvshow.activities;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.PointF;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatMultiAutoCompleteTextView;
-import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -38,6 +32,8 @@ public class ByShow_Edition extends AppCompatActivity {
 
     private static final int RESULT_LOAD_IMG = 1;
 
+    private EditText etShowName;
+    private EditText etShowStart;
     private EditText etShowEnd ;
     private CheckBox cbIsFinished ;
     private TextView tvShowEnd;
@@ -49,6 +45,8 @@ public class ByShow_Edition extends AppCompatActivity {
         setContentView(R.layout.activity_by_show_edition);
 
         cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
+        etShowName = (EditText) findViewById(R.id.etShowName);
+        etShowStart = (EditText) findViewById(R.id.etShowStart);
         etShowEnd = (EditText) findViewById(R.id.etShowEnd);
         tvShowEnd = (TextView) findViewById(R.id.showEnd);
         glShowEditCreat = (GridLayout) findViewById(R.id.glShowEditCreat);
@@ -143,7 +141,35 @@ public class ByShow_Edition extends AppCompatActivity {
     }
 
     public void onClickOk(View view) {
-        // Enregistrer l'image et les modifications
+        /*
+        Enregistrer l'image et les modifications
+        TESTE SI DES VALEURS ONT ETE ENTREES
+        L'IMAGE N'EST PAS TESTEE
+        */
+
+        if(etShowName.length() > 0 && etShowStart.length() > 3  && !cbIsFinished.isChecked())
+            backToPreviousActivity();
+
+        if(etShowName.length() > 0 && etShowStart.length() > 3 && cbIsFinished.isChecked() && etShowEnd.length() > 3)
+            backToPreviousActivity();
+        else{
+            sendToast();
+        }
+
+
+
+
+
+    }
+
+    private void sendToast() {
+        String toast = "Qqch est manquant !";
+
+
+        Toast.makeText(ByShow_Edition.this, toast, Toast.LENGTH_SHORT).show();
+    }
+
+    private void backToPreviousActivity() {
         Intent intent = new Intent(ByShow_Edition.this, ByShow.class);
         ByShow_Edition.this.startActivity(intent);
         finish();

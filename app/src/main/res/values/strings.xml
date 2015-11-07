@@ -44,4 +44,5 @@
     <string name="alert_editEpisodeQuestion">Corriger le nom de l\'épisode :</string>
     <string name="buttonSave">SAUVER</string>
     <string name="cbisFinished">La série est-elle terminée ?</string>
+    <string name="title_activity_by_actor2">ByActor2</string>
 </resources>
