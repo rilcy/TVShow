@@ -11,6 +11,11 @@ public class Show {
     private boolean showCompleted;
     private Integer showImage;
 
+
+    public Show() {
+
+    }
+
     // CONSTRUCTEUR A SUPPRIMER
     public Show(String title, Integer showImage){
         this.showTitle = title;

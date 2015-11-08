@@ -2,9 +2,6 @@ package devmobile.tvshow.db;
 
 import android.provider.BaseColumns;
 
-import devmobile.tvshow.db.object.Episode;
-import devmobile.tvshow.db.object.Season;
-
 /**
  * Created by Elsio on 07.11.2015.
  */
@@ -32,7 +29,7 @@ public final class ShowContract {
                 + ShowEntry.KEY_TITLE + " TEXT, "
                 + ShowEntry.KEY_START + " INTEGER, "
                 + ShowEntry.KEY_END + " INTEGER, "
-                + ShowEntry.KEY_COMPLETED + " BOOLEAN, "
+                + ShowEntry.KEY_COMPLETED + " INTEGER, "
                 + ShowEntry.KEY_IMAGE + " TEXT "
                 + ");";
     }
@@ -51,7 +48,7 @@ public final class ShowContract {
                 + TABLE_SEASON + "("
                 + SeasonEntry.KEY_ID + " INTEGER PRIMARY KEY,"
                 + SeasonEntry.KEY_NUMBER + " INTEGER, "
-                + SeasonEntry.KEY_COMPLETED + " BOOLEAN, "
+                + SeasonEntry.KEY_COMPLETED + " INTEGER, "
                 + SeasonEntry.KEY_SHOW_ID + " INTEGER, "
                 + "FOREIGN KEY (" + KEY_SHOW_ID + ") REFERENCES " + ShowEntry.TABLE_SHOW + " (" + KEY_ID + ") "
                 + ");";
@@ -73,7 +70,7 @@ public final class ShowContract {
                 + EpisodeEntry.KEY_ID + " INTEGER PRIMARY KEY,"
                 + EpisodeEntry.KEY_TITLE + " TEXT, "
                 + EpisodeEntry.KEY_NUMBER + " INTEGER, "
-                + EpisodeEntry.KEY_COMPLETED + " BOOLEAN, "
+                + EpisodeEntry.KEY_COMPLETED + " INTEGER, "
                 + EpisodeEntry.KEY_SEASON_ID + " INTEGER, "
                 + "FOREIGN KEY (" + KEY_SEASON_ID + ") REFERENCES " + SeasonEntry.TABLE_SEASON + " (" + KEY_ID + ") "
                 + ");";

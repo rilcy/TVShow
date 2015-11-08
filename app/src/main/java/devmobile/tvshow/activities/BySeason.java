@@ -30,13 +30,13 @@ public class BySeason extends AppCompatActivity {
 
         final ArrayList<Episode> listOfEpisodes = new ArrayList<Episode>();
 
-        Episode episode1 = new Episode("1", "Avis de recherche");
+        Episode episode1 = new Episode(1, "Avis de recherche");
         listOfEpisodes.add(episode1);
-        Episode episode2 = new Episode("2", "Le Syndrome de Cendrillon");
+        Episode episode2 = new Episode(2, "Le Syndrome de Cendrillon");
         listOfEpisodes.add(episode2);
-        Episode episode3 = new Episode("3", "Un mal nécessaire");
+        Episode episode3 = new Episode(3, "Un mal nécessaire");
         listOfEpisodes.add(episode3);
-        Episode episode4 = new Episode("4", "Tu ne voleras point");
+        Episode episode4 = new Episode(4, "Tu ne voleras point");
         listOfEpisodes.add(episode4);
 
         ListAdapter adapter = new CustomAdapterSeason(this, listOfEpisodes);
