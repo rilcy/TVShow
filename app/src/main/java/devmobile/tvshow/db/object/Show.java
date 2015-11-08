@@ -11,17 +11,17 @@ public class Show {
     private boolean showCompleted;
     private Integer showImage;
 
+    // Empty constructor
+    public Show(){}
 
-    public Show() {
 
-    }
+    // *************
 
-    // CONSTRUCTEUR A SUPPRIMER
+    // DELETE THIS CONSTRUCTOR
     public Show(String title, Integer showImage){
         this.showTitle = title;
         this.showImage = showImage;
     }
-
 
         //Constructeur de l'objet Show lors de la création initiale.
         //Le boolean n'est pas ajouté car il doit être "FALSE" de base et ceci n'est pas maitrisé par le user
@@ -44,6 +44,7 @@ public class Show {
         this.showImage = showImage;
     }
 
+    // **************
 
 
     //Setters & getters

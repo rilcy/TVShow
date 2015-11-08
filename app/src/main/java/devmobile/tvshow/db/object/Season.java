@@ -6,39 +6,30 @@ package devmobile.tvshow.db.object;
 public class Season {
 
     private int seasonId;
-    private String seasonNumber;
-    private boolean seasonCompleted;
+    private int seasonNumber;
+    private int seasonCompleted;
     private int showId;
 
     private String type;
 
+    // Empty constructor
+    public Season(){}
+
+
+    // *******************
     public Season(String type){
         this.type = type;
     }
 
-    //Constructeur de l'objet Season lors de la création initiale.
-    //Le boolean n'est pas ajouté car il doit être "FALSE" de base et ceci n'est pas maitrisé par le user
-    public Season(int seasonId, String seasonNumber, int showId){
-        this.seasonId = seasonId;
-        this.seasonNumber = seasonNumber;
-        this.seasonCompleted = false;
-        this.showId = showId;
-    }
+    // *******************
 
-    // Constructeur de l'objet Show avec boolean lors de la création de l'activité avec des données provenant de la DB.
-    public Season(int seasonId, String seasonNumber, boolean seasonCompleted, int showId){
-        this.seasonId = seasonId;
-        this.seasonNumber = seasonNumber;
-        this.seasonCompleted = seasonCompleted;
-        this.showId = showId;
-    }
 
     //Getters & setters
-    public boolean isSeasonCompleted() {
+    public int isSeasonCompleted() {
         return seasonCompleted;
     }
 
-    public void setSeasonCompleted(boolean seasonCompleted) {
+    public void setSeasonCompleted(int seasonCompleted) {
         this.seasonCompleted = seasonCompleted;
     }
 
@@ -58,11 +49,11 @@ public class Season {
         this.showId = showId;
     }
 
-    public String getSeasonNumber() {
+    public int getSeasonNumber() {
         return seasonNumber;
     }
 
-    public void setSeasonNumber(String seasonNumber) {
+    public void setSeasonNumber(int seasonNumber) {
         this.seasonNumber = seasonNumber;
     }
 }

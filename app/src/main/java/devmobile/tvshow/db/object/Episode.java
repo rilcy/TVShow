@@ -9,12 +9,17 @@ public class Episode {
     private String episodeTitle;
     private int episodeNumber;
     private int seasonID;
-    private boolean episodeCompleted;
+    private int episodeCompleted;
 
     // Supprimer ces deux attributs
     private String episodeInfo;
     private Integer img;
 
+    // Empty constructor
+    public Episode(){};
+
+
+    // ***********
 
     // CONSTRUCTEUR A SUPPRIMER
     public Episode(int episodeNumber, String episodeTitle){
@@ -37,7 +42,7 @@ public class Episode {
         this.episodeTitle = episodeTitle;
         this.episodeNumber = episodeNumber;
         this.seasonID = seasonID;
-        this.episodeCompleted = false;
+        this.episodeCompleted = 0;
     }
 
     // Constructeur de l'objet Show avec boolean lors de la création de l'activité avec des données provenant de la DB.
@@ -46,17 +51,19 @@ public class Episode {
         this.episodeTitle = episodeTitle;
         this.episodeNumber = episodeNumber;
         this.seasonID = seasonID;
-        this.episodeCompleted = episodeCompleted;
+        this.episodeCompleted = 0;
     }
+
+    // ************
+
 
     //Getters & setters
 
-
-    public boolean isEpisodeCompleted() {
+    public int isEpisodeCompleted() {
         return episodeCompleted;
     }
 
-    public void setEpisodeCompleted(boolean episodeCompleted) {
+    public void setEpisodeCompleted(int episodeCompleted) {
         this.episodeCompleted = episodeCompleted;
     }
 

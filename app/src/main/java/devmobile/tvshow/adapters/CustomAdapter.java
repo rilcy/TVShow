@@ -38,8 +38,8 @@ public class CustomAdapter extends ArrayAdapter<Show>{
         TextView textView = (TextView) customView.findViewById(R.id.serieTitle);
         ImageView imageView = (ImageView) customView.findViewById(R.id.imageSerie);
 
-        textView.setText(showToShow.getTitle());
-        imageView.setImageResource(showToShow.getImg());
+        textView.setText(showToShow.getShowTitle());
+        imageView.setImageResource(showToShow.getShowImage());
 
         // SRC POUR AJOUTER L'IMAGE : http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
         // https://youtu.be/U_Jvk4G28YE New Boston
