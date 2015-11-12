@@ -11,6 +11,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
 
+import devmobile.tvshow.db.SQLiteHelper;
+import devmobile.tvshow.db.adapter.ShowDataSource;
 import devmobile.tvshow.db.object.Show;
 import devmobile.tvshow.adapters.CustomAdapter;
 import devmobile.tvshow.R;
@@ -23,10 +25,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ShowDataSource sds = new ShowDataSource(this);
 
-        final ArrayList<Show> listOfSeries = new ArrayList<Show>();
+        ArrayList<Show> listOfSeries = (ArrayList<Show>) sds.getAllShows();
 
+        ListView list = (ListView) findViewById(R.id.listOfSeries);
 
+        ListAdapter adapter = new CustomAdapter(this, listOfSeries);
+/*
+        Show show = new Show();
+        show.setShowTitle("Daredevil");
+        show.setShowStart("2015");
+        show.setShowEnd("2015");
+        show.setShowCompleted(0);
+
+        int resID = getResources().getIdentifier("@drawable/daredevil", "drawable", getPackageName());
+
+        show.setShowImage(resID);
+
+        sds.createShow(show);
+*/
+        list.setAdapter(adapter);
+
+        /*
         Show ncis = new Show("NCIS : Los Angeles", R.drawable.ncis_la);
         listOfSeries.add(ncis);
         Show got = new Show("Game of Thrones", R.drawable.got);
@@ -41,12 +62,7 @@ public class MainActivity extends AppCompatActivity {
         listOfSeries.add(americans);
         Show daredevil = new Show("Daredevil", R.drawable.daredevil);
         listOfSeries.add(daredevil);
-
-
-        ListAdapter adapter = new CustomAdapter(this, listOfSeries);
-
-        ListView list = (ListView) findViewById(R.id.listOfSeries);
-        list.setAdapter(adapter);
+        */
 
         list.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -63,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        SQLiteHelper sqlHelper = SQLiteHelper.getInstance(this);
+        sqlHelper.getWritableDatabase().close();
 
 
     }

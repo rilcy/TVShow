@@ -38,7 +38,7 @@ public class CustomAdapterNextToWatch extends ArrayAdapter<Episode>{
 
         textViewTitle.setText(episode.getEpisodeTitle());
         textViewInfo.setText(episode.getEpisodeInfo());
-        imageView.setImageResource(episode.getImg());
+        imageView.setImageResource(R.drawable.ncis_la);
 
         // SRC POUR AJOUTER L'IMAGE : http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
         // https://youtu.be/U_Jvk4G28YE New Boston

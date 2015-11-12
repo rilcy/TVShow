@@ -59,8 +59,9 @@ public class ShowDataSource {
         Show show = new Show();
         show.setShowId(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_ID)));
         show.setShowTitle(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_TITLE)));
-        show.setShowStart(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_START)));
-        show.setShowEnd(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_END)));
+        show.setShowStart(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_START)));
+        show.setShowEnd(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_END)));
+        show.setShowCompleted(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_COMPLETED)));
         show.setShowImage(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_IMAGE)));
 
         return show;
@@ -80,10 +81,10 @@ public class ShowDataSource {
                 Show show = new Show();
                 show.setShowId(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_ID)));
                 show.setShowTitle(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_TITLE)));
-                show.setShowStart(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_START)));
-                show.setShowEnd(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_END)));
+                show.setShowStart(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_START)));
+                show.setShowEnd(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_END)));
+                show.setShowCompleted(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_COMPLETED)));
                 show.setShowImage(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_IMAGE)));
-
                 shows.add(show);
             } while(cursor.moveToNext());
         }
@@ -99,8 +100,8 @@ public class ShowDataSource {
         values.put(ShowEntry.KEY_TITLE, show.getShowTitle());
         values.put(ShowEntry.KEY_START, show.getShowStart());
         values.put(ShowEntry.KEY_END, show.getShowEnd());
-        values.put(ShowEntry.KEY_IMAGE, show.getShowImage());
         values.put(ShowEntry.KEY_COMPLETED, show.isShowCompleted());
+        values.put(ShowEntry.KEY_IMAGE, show.getShowImage());
 
         return this.db.update(ShowEntry.TABLE_SHOW, values, ShowEntry.KEY_ID + " = ?",
                 new String[] { String.valueOf(show.getShowId()) });

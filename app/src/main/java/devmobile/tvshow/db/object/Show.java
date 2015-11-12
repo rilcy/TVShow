@@ -6,45 +6,13 @@ package devmobile.tvshow.db.object;
 public class Show {
     private int showId;
     private String showTitle;
-    private int showStart;
-    private int showEnd;
-    private boolean showCompleted;
-    private Integer showImage;
+    private String showStart;
+    private String showEnd;
+    private int showCompleted;
+    private int showImage;
 
     // Empty constructor
     public Show(){}
-
-
-    // *************
-
-    // DELETE THIS CONSTRUCTOR
-    public Show(String title, Integer showImage){
-        this.showTitle = title;
-        this.showImage = showImage;
-    }
-
-        //Constructeur de l'objet Show lors de la création initiale.
-        //Le boolean n'est pas ajouté car il doit être "FALSE" de base et ceci n'est pas maitrisé par le user
-    public Show(int showId, String showTitle, int showStart, int showEnd, Integer showImage){
-        this.showId = showId;
-        this.showTitle = showTitle;
-        this.showStart = showStart;
-        this.showEnd = showEnd;
-        this.showCompleted = false;
-        this.showImage = showImage;
-    }
-
-    // Constructeur de l'objet Show avec boolean lors de la création de l'activité avec des données provenant de la DB.
-    public Show(int showId, String showTitle, int showStart, int showEnd, boolean showCompleted, Integer showImage){
-        this.showId = showId;
-        this.showTitle = showTitle;
-        this.showStart = showStart;
-        this.showEnd = showEnd;
-        this.showCompleted = showCompleted;
-        this.showImage = showImage;
-    }
-
-    // **************
 
 
     //Setters & getters
@@ -57,11 +25,11 @@ public class Show {
         this.showId = showId;
     }
 
-    public int getShowEnd() {
+    public String getShowEnd() {
         return showEnd;
     }
 
-    public void setShowEnd(int showEnd) {
+    public void setShowEnd(String showEnd) {
         this.showEnd = showEnd;
     }
 
@@ -73,27 +41,27 @@ public class Show {
         this.showTitle = showTitle;
     }
 
-    public Integer getShowImage() {
+    public int getShowImage() {
         return showImage;
     }
 
-    public void setShowImage(Integer showImage) {
+    public void setShowImage(int showImage) {
         this.showImage = showImage;
     }
 
-    public int getShowStart() {
+    public String getShowStart() {
         return showStart;
     }
 
-    public void setShowStart(int showStart) {
+    public void setShowStart(String showStart) {
         this.showStart = showStart;
     }
 
-    public boolean isShowCompleted() {
+    public int isShowCompleted() {
         return showCompleted;
     }
 
-    public void setShowCompleted(boolean showCompleted) {
+    public void setShowCompleted(int showCompleted) {
         this.showCompleted = showCompleted;
     }
 }

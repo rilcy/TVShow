@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.net.URI;
 import java.util.Calendar;
 
 import devmobile.tvshow.R;
@@ -69,19 +71,8 @@ public class ByShow_Creation extends AppCompatActivity{
                     && null != data) {
 
                 Uri selectedImage = data.getData();
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                imgView.setImageURI(selectedImage);
 
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String imgDecodableString = cursor.getString(columnIndex);
-                cursor.close();
-                imgView = (ImageView) findViewById(R.id.imgView);
-
-                imgView.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
 
             } else {
                 Toast.makeText(this, "You haven't picked Image",

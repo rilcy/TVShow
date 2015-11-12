@@ -25,12 +25,12 @@ public final class ShowContract {
         //Table Show create statement
         public static final String CREATE_TABLE_SHOW = "CREATE TABLE "
                 + TABLE_SHOW + "("
-                + ShowEntry.KEY_ID + " INTEGER PRIMARY KEY,"
+                + ShowEntry.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + ShowEntry.KEY_TITLE + " TEXT, "
-                + ShowEntry.KEY_START + " INTEGER, "
-                + ShowEntry.KEY_END + " INTEGER, "
+                + ShowEntry.KEY_START + " TEXT, "
+                + ShowEntry.KEY_END + " TEXT, "
                 + ShowEntry.KEY_COMPLETED + " INTEGER, "
-                + ShowEntry.KEY_IMAGE + " TEXT "
+                + ShowEntry.KEY_IMAGE + " INTEGER "
                 + ");";
     }
 
@@ -46,7 +46,7 @@ public final class ShowContract {
         //Table Season create statement
         public static final String CREATE_TABLE_SEASON = "CREATE TABLE "
                 + TABLE_SEASON + "("
-                + SeasonEntry.KEY_ID + " INTEGER PRIMARY KEY,"
+                + SeasonEntry.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + SeasonEntry.KEY_NUMBER + " INTEGER, "
                 + SeasonEntry.KEY_COMPLETED + " INTEGER, "
                 + SeasonEntry.KEY_SHOW_ID + " INTEGER, "
@@ -67,7 +67,7 @@ public final class ShowContract {
         //Table Episode create statement
         public static final String CREATE_TABLE_EPISODE = "CREATE TABLE "
                 + TABLE_EPISODE + "("
-                + EpisodeEntry.KEY_ID + " INTEGER PRIMARY KEY,"
+                + EpisodeEntry.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + EpisodeEntry.KEY_TITLE + " TEXT, "
                 + EpisodeEntry.KEY_NUMBER + " INTEGER, "
                 + EpisodeEntry.KEY_COMPLETED + " INTEGER, "
@@ -88,7 +88,7 @@ public final class ShowContract {
         //Table Casting create statement
         public static final String CREATE_TABLE_CASTING = "CREATE TABLE "
                 + TABLE_CASTING + "("
-                + CastingEntry.KEY_ID + " INTEGER PRIMARY KEY,"
+                + CastingEntry.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + CastingEntry.KEY_FIRSTNAME + " TEXT, "
                 + CastingEntry.KEY_LASTNAME + " TEXT"
                 + ");";
@@ -106,7 +106,7 @@ public final class ShowContract {
         //Table CastingEpisode create statement
         public static final String CREATE_TABLE_CASTING_EPISODE = "CREATE TABLE "
                 + TABLE_CASTING_EPISODE + "("
-                + CastingEpisodeEntry.KEY_ID + " INTEGER PRIMARY KEY,"
+                + CastingEpisodeEntry.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + CastingEpisodeEntry.KEY_CASTING_ID + " INTEGER, "
                 + CastingEpisodeEntry.KEY_EPISODE_ID + " INTEGER, "
                 + "FOREIGN KEY (" + KEY_CASTING_ID + ") REFERENCES " + CastingEntry.TABLE_CASTING + " (" + KEY_ID + ") "

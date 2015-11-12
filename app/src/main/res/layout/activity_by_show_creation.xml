@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:maxHeight="200dp"
                 android:maxWidth="200dp"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:src="@drawable/e250250"
                 android:onClick="onClickSelectImg"
                 android:adjustViewBounds="true"/>

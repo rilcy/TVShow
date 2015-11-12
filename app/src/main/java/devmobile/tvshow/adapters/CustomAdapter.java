@@ -5,6 +5,7 @@ package devmobile.tvshow.adapters;
  */
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 import devmobile.tvshow.R;
@@ -19,12 +21,15 @@ import devmobile.tvshow.db.object.Show;
 
 public class CustomAdapter extends ArrayAdapter<Show>{
 
-    private Show show;
+    private CustomAdapter customAdapter = null;
+    private Context context;
+    private TextView textView = null;
+    private ImageView imageView = null;
 
-    public CustomAdapter(Context context, ArrayList<Show> show) {
-        super(context, R.layout.custom_row_main, (ArrayList) show);
-
-
+    public CustomAdapter(Context context, ArrayList<Show> shows) {
+        super(context, R.layout.custom_row_main, shows);
+        this.customAdapter = this;
+        this.context = context;
     }
 
 
@@ -34,12 +39,14 @@ public class CustomAdapter extends ArrayAdapter<Show>{
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View customView = inflater.inflate(R.layout.custom_row_main, parent, false);
 
-        Show showToShow = getItem(position);
-        TextView textView = (TextView) customView.findViewById(R.id.serieTitle);
-        ImageView imageView = (ImageView) customView.findViewById(R.id.imageSerie);
+        textView = (TextView) customView.findViewById(R.id.serieTitle);
+        imageView = (ImageView) customView.findViewById(R.id.imageSerie);
 
-        textView.setText(showToShow.getShowTitle());
-        imageView.setImageResource(showToShow.getShowImage());
+        final int i = position;
+        final Show show = this.getItem(position);
+        textView.setText(show.getShowTitle());
+
+        imageView.setImageResource(show.getShowImage());
 
         // SRC POUR AJOUTER L'IMAGE : http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
         // https://youtu.be/U_Jvk4G28YE New Boston
