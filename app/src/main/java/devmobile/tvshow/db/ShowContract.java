@@ -30,7 +30,7 @@ public final class ShowContract {
                 + ShowEntry.KEY_START + " TEXT, "
                 + ShowEntry.KEY_END + " TEXT, "
                 + ShowEntry.KEY_COMPLETED + " INTEGER, "
-                + ShowEntry.KEY_IMAGE + " INTEGER "
+                + ShowEntry.KEY_IMAGE + " TEXT "
                 + ");";
     }
 

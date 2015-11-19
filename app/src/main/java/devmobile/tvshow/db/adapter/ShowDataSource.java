@@ -62,7 +62,7 @@ public class ShowDataSource {
         show.setShowStart(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_START)));
         show.setShowEnd(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_END)));
         show.setShowCompleted(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_COMPLETED)));
-        show.setShowImage(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_IMAGE)));
+        show.setShowImage(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_IMAGE)));
 
         return show;
     }
@@ -84,7 +84,7 @@ public class ShowDataSource {
                 show.setShowStart(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_START)));
                 show.setShowEnd(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_END)));
                 show.setShowCompleted(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_COMPLETED)));
-                show.setShowImage(cursor.getInt(cursor.getColumnIndex(ShowEntry.KEY_IMAGE)));
+                show.setShowImage(cursor.getString(cursor.getColumnIndex(ShowEntry.KEY_IMAGE)));
                 shows.add(show);
             } while(cursor.moveToNext());
         }

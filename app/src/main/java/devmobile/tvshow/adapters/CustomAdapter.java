@@ -5,6 +5,8 @@ package devmobile.tvshow.adapters;
  */
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.ArrayList;
 
@@ -24,6 +29,7 @@ public class CustomAdapter extends ArrayAdapter<Show>{
     private CustomAdapter customAdapter = null;
     private Context context;
     private TextView textView = null;
+    private TextView text = null;
     private ImageView imageView = null;
 
     public CustomAdapter(Context context, ArrayList<Show> shows) {
@@ -45,9 +51,21 @@ public class CustomAdapter extends ArrayAdapter<Show>{
         final int i = position;
         final Show show = this.getItem(position);
         textView.setText(show.getShowTitle());
+        //text.setText(show.getShowImage());
 
-        imageView.setImageResource(show.getShowImage());
+        File imgFile = new  File(show.getShowImage());
 
+        if(imgFile.exists()) {
+            try {
+                File f = new File(imgFile.getPath());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                Uri uri = Uri.fromFile(imgFile);
+                imageView.setImageURI(uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
         // SRC POUR AJOUTER L'IMAGE : http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
         // https://youtu.be/U_Jvk4G28YE New Boston
 

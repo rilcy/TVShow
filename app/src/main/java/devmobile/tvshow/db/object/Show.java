@@ -9,7 +9,7 @@ public class Show {
     private String showStart;
     private String showEnd;
     private int showCompleted;
-    private int showImage;
+    private String showImage;
 
     // Empty constructor
     public Show(){}
@@ -41,11 +41,11 @@ public class Show {
         this.showTitle = showTitle;
     }
 
-    public int getShowImage() {
+    public String getShowImage() {
         return showImage;
     }
 
-    public void setShowImage(int showImage) {
+    public void setShowImage(String showImage) {
         this.showImage = showImage;
     }
 

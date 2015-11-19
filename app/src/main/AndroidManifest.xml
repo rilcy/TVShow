@@ -6,9 +6,10 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -59,8 +60,6 @@
 
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-        <activity android:name=".activities.ByShow_Creation" >
-        </activity>
         <activity android:name=".alert.CreateSeasonDialogAlert" >
         </activity>
         <activity android:name=".alert.DeleteSeasonDialogAlert" >
@@ -70,6 +69,11 @@
         <activity android:name=".alert.DeleteEpisodeDialogAlert" >
         </activity>
         <activity android:name=".alert.EditEpisodeDialogAlert" >
+        </activity>
+        <activity
+            android:name=".activities.ByShow_Creation"
+            android:label="@string/title_activity_by_show_creation"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 
