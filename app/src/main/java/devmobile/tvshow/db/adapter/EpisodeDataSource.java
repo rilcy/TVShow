@@ -28,7 +28,9 @@ public class EpisodeDataSource {
     }
 
 
-    // Add a new episode
+    /**
+     * Add a new episode
+     */
     public long createEpisode(Episode episode){
         long id;
         ContentValues values = new ContentValues();
