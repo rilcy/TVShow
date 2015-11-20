@@ -171,6 +171,7 @@ public class ByShow_Creation extends AppCompatActivity {
     public void onClickSave(View v) {
         sendToast("test");
         if (isPicture && etShowName.length() > 0 && etShowStart.length() > 3) {
+            saveButton.setFocusableInTouchMode(false);
             saveNewShow();
         }
     }

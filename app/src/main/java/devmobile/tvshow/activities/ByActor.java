@@ -5,18 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import devmobile.tvshow.*;
-import devmobile.tvshow.adapters.CustomAdapter;
 import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.db.object.Actor;
-import devmobile.tvshow.db.object.Show;
 
 public class ByActor extends AppCompatActivity {
 

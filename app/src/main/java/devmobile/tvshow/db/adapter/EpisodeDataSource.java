@@ -72,9 +72,10 @@ public class EpisodeDataSource {
     /**
      * Get all Episode
      */
-    public List<Episode> getAllEpisodes(){
+    public List<Episode> getAllEpisodes(int seasonID){
         List<Episode> episodes = new ArrayList<Episode>();
-        String sql = "SELECT * FROM " + EpisodeEntry.TABLE_EPISODE + " ORDER BY " + EpisodeEntry.KEY_NUMBER;
+        String sql = "SELECT * FROM " + EpisodeEntry.TABLE_EPISODE + " WHERE " + EpisodeEntry.KEY_SEASON_ID + " = " + seasonID
+                + " ORDER BY " + EpisodeEntry.KEY_NUMBER;
 
         Cursor cursor = this.db.rawQuery(sql, null);
 

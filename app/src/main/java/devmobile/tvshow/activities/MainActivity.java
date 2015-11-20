@@ -14,11 +14,13 @@ import java.util.ArrayList;
 import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.adapter.ShowDataSource;
 import devmobile.tvshow.db.object.Show;
-import devmobile.tvshow.adapters.CustomAdapter;
+import devmobile.tvshow.adapters.CustomAdapterMain;
 import devmobile.tvshow.R;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public  final static String SHOW_ID = "devemobile.tvshow.activities.MainActivity.SHOW_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,51 +33,24 @@ public class MainActivity extends AppCompatActivity {
 
         ListView list = (ListView) findViewById(R.id.listOfSeries);
 
-        ListAdapter adapter = new CustomAdapter(this, listOfSeries);
-/*
-        Show show = new Show();
-        show.setShowTitle("Daredevil");
-        show.setShowStart("2015");
-        show.setShowEnd("2015");
-        show.setShowCompleted(0);
+        final ListAdapter adapter = new CustomAdapterMain(this, listOfSeries);
 
-        int resID = getResources().getIdentifier("@drawable/daredevil", "drawable", getPackageName());
-
-        show.setShowImage(resID);
-
-        sds.createShow(show);
-*/
         list.setAdapter(adapter);
-
-        /*
-        Show ncis = new Show("NCIS : Los Angeles", R.drawable.ncis_la);
-        listOfSeries.add(ncis);
-        Show got = new Show("Game of Thrones", R.drawable.got);
-        listOfSeries.add(got);
-        Show impastor = new Show("Impastor", R.drawable.impastor);
-        listOfSeries.add(impastor);
-        Show poi = new Show("Person of Interest", R.drawable.person_of_interest);
-        listOfSeries.add(poi);
-        Show dexter = new Show("Dexter", R.drawable.dexter);
-        listOfSeries.add(dexter);
-        Show americans = new Show("The Americans", R.drawable.the_americans);
-        listOfSeries.add(americans);
-        Show daredevil = new Show("Daredevil", R.drawable.daredevil);
-        listOfSeries.add(daredevil);
-        */
 
         list.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                         Intent appInfo = new Intent(MainActivity.this, ByShow.class);
+
+                        Show show = (Show) adapter.getItem(position);
+
+                        appInfo.putExtra(SHOW_ID, String.valueOf(show.getShowId()));
+
+
                         startActivity(appInfo);
-                        /*
-                        Show serie = listOfSeries.get(position);
-                        Toast.makeText(MainActivity.this, serie.getTitle(), LENGTH_LONG).show();
-                        */
+
                     }
                 }
         );

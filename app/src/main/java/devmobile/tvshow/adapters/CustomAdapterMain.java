@@ -15,26 +15,31 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.URI;
 import java.util.ArrayList;
 
 import devmobile.tvshow.R;
+import devmobile.tvshow.db.SQLiteHelper;
+import devmobile.tvshow.db.adapter.EpisodeDataSource;
+import devmobile.tvshow.db.object.Episode;
 import devmobile.tvshow.db.object.Show;
 
-public class CustomAdapter extends ArrayAdapter<Show>{
+public class CustomAdapterMain extends ArrayAdapter<Show>{
 
-    private CustomAdapter customAdapter = null;
+    private CustomAdapterMain customAdapterMain = null;
     private Context context;
     private TextView textView = null;
     private TextView text = null;
     private ImageView imageView = null;
 
-    public CustomAdapter(Context context, ArrayList<Show> shows) {
+
+    public CustomAdapterMain(Context context, ArrayList<Show> shows) {
         super(context, R.layout.custom_row_main, shows);
-        this.customAdapter = this;
+        this.customAdapterMain = this;
         this.context = context;
     }
 
@@ -46,12 +51,17 @@ public class CustomAdapter extends ArrayAdapter<Show>{
         View customView = inflater.inflate(R.layout.custom_row_main, parent, false);
 
         textView = (TextView) customView.findViewById(R.id.serieTitle);
+        text = (TextView) customView.findViewById(R.id.serieInfo);
         imageView = (ImageView) customView.findViewById(R.id.imageSerie);
 
         final int i = position;
         final Show show = this.getItem(position);
+
+
+        text.setText("No Episode have been added to this show yet !");
+
         textView.setText(show.getShowTitle());
-        //text.setText(show.getShowImage());
+
 
         File imgFile = new  File(show.getShowImage());
 
@@ -66,6 +76,8 @@ public class CustomAdapter extends ArrayAdapter<Show>{
             }
 
         }
+
+
         // SRC POUR AJOUTER L'IMAGE : http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
         // https://youtu.be/U_Jvk4G28YE New Boston
 

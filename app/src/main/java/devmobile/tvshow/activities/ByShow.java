@@ -12,16 +12,19 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import devmobile.tvshow.adapters.CustomAdapterNextToWatch;
 import devmobile.tvshow.adapters.CustomAdapterShow;
+import devmobile.tvshow.db.adapter.ShowDataSource;
 import devmobile.tvshow.db.object.Episode;
 import devmobile.tvshow.R;
 import devmobile.tvshow.db.object.Season;
 import devmobile.tvshow.alert.CreateSeasonDialogAlert;
 import devmobile.tvshow.alert.DeleteShowDialogAlert;
+import devmobile.tvshow.db.object.Show;
 
 public class ByShow extends AppCompatActivity {
 
@@ -30,8 +33,20 @@ public class ByShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show);
 
+        String pass = getIntent().getStringExtra(MainActivity.SHOW_ID);
+
+        Toast.makeText(this, pass, Toast.LENGTH_LONG).show();
+
+        long num = Long.parseLong(pass);
+
+        ShowDataSource sds = new ShowDataSource(this);
+
+        Show show = sds.getShowById(num);
+
+        Toast.makeText(this, show.getShowTitle(), Toast.LENGTH_LONG).show();
 
 
+        /*
 
         //PARTIE SUPERIEURE "A VOIR PROCHAINEMENT"
 
@@ -79,7 +94,7 @@ public class ByShow extends AppCompatActivity {
                     }
                 }
         );
-
+        */
         LinearLayout llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editShow);
         llayout_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +126,7 @@ public class ByShow extends AppCompatActivity {
 
             }
         });
+
     }
 
 
