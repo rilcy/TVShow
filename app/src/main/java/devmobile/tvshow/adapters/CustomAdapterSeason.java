@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,11 +19,18 @@ import devmobile.tvshow.R;
 
 public class CustomAdapterSeason extends ArrayAdapter<Episode>{
 
+    private CustomAdapterSeason customAdapterMain = null;
+    private Context context;
+    private TextView textView = null;
+    private TextView text = null;
+    private ImageView imageView = null;
+
     private Episode episode;
 
     public CustomAdapterSeason(Context context, ArrayList<Episode> episode) {
         super(context, R.layout.custom_row_episode, (ArrayList) episode);
-
+        this.customAdapterMain = this;
+        this.context = context;
     }
 
     @Override

@@ -89,7 +89,6 @@ public class ByShow_Creation extends AppCompatActivity {
     private void saveNewShow() {
         Show show = null;
         String imagePath;
-        sendToast("test3");
         // Create show if we have enter all the required information
         if (cbIsFinished.isChecked() && etShowEnd.length() > 3) {
             imagePath = saveToInternalSorage(bitmap);
@@ -99,14 +98,12 @@ public class ByShow_Creation extends AppCompatActivity {
             show.setShowEnd(etShowEnd.getText().toString());
             show.setShowCompleted(0);
             show.setShowImage(imagePath);
-            sendToast(imagePath);
             saveIntoDB(show);
             backToPreviousActivity();
         }
 
         // Create show if we only set Image, name of the show and starts date
         else {
-            sendToast("test4");
             imagePath = saveToInternalSorage(bitmap);
             show = new Show();
             show.setShowTitle(etShowName.getText().toString());
@@ -114,7 +111,6 @@ public class ByShow_Creation extends AppCompatActivity {
             show.setShowEnd("En production");
             show.setShowCompleted(0);
             show.setShowImage(imagePath);
-            sendToast(imagePath);
             saveIntoDB(show);
             backToPreviousActivity();
         }

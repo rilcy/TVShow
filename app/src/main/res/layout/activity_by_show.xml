@@ -200,7 +200,7 @@
                 android:id="@+id/addShowText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/add_show"
+                android:text="@string/add_season"
                 android:textSize="23sp" />
 
         </LinearLayout>

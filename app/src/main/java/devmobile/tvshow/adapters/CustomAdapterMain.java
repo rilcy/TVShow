@@ -15,8 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -54,11 +52,15 @@ public class CustomAdapterMain extends ArrayAdapter<Show>{
         text = (TextView) customView.findViewById(R.id.serieInfo);
         imageView = (ImageView) customView.findViewById(R.id.imageSerie);
 
-        final int i = position;
+
         final Show show = this.getItem(position);
+        EpisodeDataSource eds = new EpisodeDataSource(context.getApplicationContext());
+        ArrayList<Episode> ep = (ArrayList) eds.getAllEpisodes(1);
+
+        if(ep.isEmpty())
+            text.setText("No episode added yet !");
 
 
-        text.setText("No Episode have been added to this show yet !");
 
         textView.setText(show.getShowTitle());
 
@@ -77,6 +79,8 @@ public class CustomAdapterMain extends ArrayAdapter<Show>{
 
         }
 
+        SQLiteHelper sqlHelper = SQLiteHelper.getInstance(context.getApplicationContext());
+        sqlHelper.getWritableDatabase().close();
 
         // SRC POUR AJOUTER L'IMAGE : http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
         // https://youtu.be/U_Jvk4G28YE New Boston
