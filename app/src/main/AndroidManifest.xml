@@ -73,7 +73,10 @@
         <activity
             android:name=".activities.ByShow_Creation"
             android:label="@string/title_activity_by_show_creation"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
         </activity>
     </application>
 

@@ -60,6 +60,7 @@ public class ByShow_Creation extends AppCompatActivity {
 
         etShowEnd.setVisibility(View.GONE);
         tvShowEnd.setVisibility(View.GONE);
+
     }
 
     // NEXT METHODS HELP US TO PICK AN IMAGE FROM THE DB
@@ -82,6 +83,42 @@ public class ByShow_Creation extends AppCompatActivity {
     public void onClickUpload(View v) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESULT_LOAD_IMG);
+    }
+
+    private void setupActionBar() {
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+                Intent intent = new Intent(ByShow_Creation.this, BySeason.class);
+                ByShow_Creation.this.startActivity(intent);
+                break;
+
+            case R.id.action_byActor:
+
+                intent = new Intent(ByShow_Creation.this, ByActor.class);
+                ByShow_Creation.this.startActivity(intent);
+                break;
+
+            case R.id.action_addShow:
+
+                intent = new Intent(ByShow_Creation.this, ByShow_Creation.class);
+                ByShow_Creation.this.startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -201,35 +238,5 @@ public class ByShow_Creation extends AppCompatActivity {
         ByShow_Creation.this.startActivity(intent);
         finish();
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-
-                Intent intent = new Intent(ByShow_Creation.this, BySeason.class);
-                ByShow_Creation.this.startActivity(intent);
-                break;
-
-            case R.id.action_byActor:
-
-                intent = new Intent(ByShow_Creation.this, ByActor.class);
-                ByShow_Creation.this.startActivity(intent);
-                break;
-
-            case R.id.action_addShow:
-
-                intent = new Intent(ByShow_Creation.this, ByShow_Creation.class);
-                ByShow_Creation.this.startActivity(intent);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
