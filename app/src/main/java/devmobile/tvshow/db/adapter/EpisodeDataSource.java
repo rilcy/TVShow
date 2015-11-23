@@ -102,6 +102,7 @@ public class EpisodeDataSource {
      *   - if an episode has (not) been watched.
      *   - if another data was modified
      */
+
     /**
      *  Update the status of an episode. An episode may be watched or not be watched.
      */
@@ -109,10 +110,10 @@ public class EpisodeDataSource {
         ContentValues values = new ContentValues();
         values.put(EpisodeEntry.KEY_COMPLETED, episode.isEpisodeCompleted());
 
-        /** TODO: 07.11.15 Vérifier le "?" ci-dessous. S'assurer de la validité du return.
-         *  de
+        /** TODO: 07.11.15 Vérifier le "?" ci-dessous. S'assurer de la validité du return. Retiré le ? après le =, vérifier que tout est OK
+         *
          *  */
-        return this.db.update(EpisodeEntry.TABLE_EPISODE, values, EpisodeEntry.KEY_ID + " = ?",
+        return this.db.update(EpisodeEntry.TABLE_EPISODE, values, EpisodeEntry.KEY_ID + " = ",
                 new String[] { String.valueOf(episode.getEpisodeID()) });
     }
 
@@ -124,10 +125,10 @@ public class EpisodeDataSource {
         values.put(EpisodeEntry.KEY_TITLE, episode.getEpisodeTitle());
         values.put(EpisodeEntry.KEY_NUMBER, episode.getEpisodeNumber());
 
-        /** TODO: 07.11.15 Vérifier le "?" ci-dessous. S'assurer de la validité du return.
-         *  de
+        /** TODO: 07.11.15 Vérifier le "?" ci-dessous. S'assurer de la validité du return. Retiré le ? après le =, vérifier que tout est OK
+         *
          *  */
-        return this.db.update(EpisodeEntry.TABLE_EPISODE, values, EpisodeEntry.KEY_ID + " = ?",
+        return this.db.update(EpisodeEntry.TABLE_EPISODE, values, EpisodeEntry.KEY_ID + " = ",
                 new String[] { String.valueOf(episode.getEpisodeID()) });
     }
 
@@ -137,6 +138,7 @@ public class EpisodeDataSource {
     public void deleteEpisode(long id){
 
         // TODO: 07.11.15 A vérifier avec Elsio.
+        this.db.delete(EpisodeEntry.TABLE_EPISODE, EpisodeEntry.KEY_ID + " = ", new String[] {String.valueOf(id)});
     }
 
 }
