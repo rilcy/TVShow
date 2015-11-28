@@ -98,7 +98,7 @@ public class SeasonDataSource {
         values.put(SeasonEntry.KEY_COMPLETED, season.isSeasonCompleted());
 
         return this.db.update(SeasonEntry.TABLE_SEASON, values, SeasonEntry.KEY_ID + " = ?",
-                new String[] { String.valueOf(season.getShowId()) });
+                new String[] { String.valueOf(season.getSeasonId()) });
     }
 
 

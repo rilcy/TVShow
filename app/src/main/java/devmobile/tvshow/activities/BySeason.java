@@ -49,6 +49,7 @@ public class BySeason extends AppCompatActivity {
     private ShowDataSource showds;
     private SeasonDataSource seasonds;
     private EpisodeDataSource episodeds;
+    private Season season;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class BySeason extends AppCompatActivity {
 
         // Get data from the Season
         seasonds = new SeasonDataSource(this);
-        final Season season = seasonds.getSeasonById((int)num);
+        season = seasonds.getSeasonById((int)num);
 
         // Get data from the Show
         showds = new ShowDataSource(this);
