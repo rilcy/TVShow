@@ -15,7 +15,6 @@
         app:showAsAction="ifRoom|withText|"
         android:title="@string/byActor_pageTitle"/>
 
-    <!--TODO: Modifier le titre lorsque la page Ajouter série sera faite -->
     <item
         android:id="@+id/action_addShow"
         android:icon="@drawable/ic_action_add"

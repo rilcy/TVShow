@@ -1,142 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context=".activities.ByShow_Creation">
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/scrollView">
-
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:padding="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        tools:context=".ByShowCreation"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
 
         <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="1dp"
-            android:background="@color/colorPrimaryDark">
+            android:padding="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            tools:context=".ByShowCreation"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
 
-
-            <ImageView
-                android:id="@+id/imgView"
-                android:layout_gravity="center_horizontal"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxHeight="200dp"
-                android:maxWidth="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/e250250"
-                android:adjustViewBounds="true"
+                android:layout_gravity="center_horizontal"
+                android:padding="1dp"
+                android:background="@color/colorPrimaryDark">
+
+
+                <ImageView
+                    android:id="@+id/imgView"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="200dp"
+                    android:maxWidth="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/e250250"
+                    android:adjustViewBounds="true"
+                    android:onClick="onClickUpload" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonLoadPicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/buttonLoadPicture"
                 android:onClick="onClickUpload" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="30dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:hint="@string/ShowName"
+                android:id="@+id/showName" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etShowName"
+                android:inputType="textCapWords"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:hint="@string/ShowStart"
+                android:id="@+id/showStart" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:digits="0123456789"
+                android:maxLength="4"
+                android:id="@+id/etShowStart" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/cbisFinished"
+                android:id="@+id/cbiSFinished"
+                android:onClick="onClickCheckbox" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:hint="@string/ShowEnd"
+                android:id="@+id/showEnd" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:digits="0123456789"
+                android:maxLength="4"
+                android:id="@+id/etShowEnd"/>
+
+
+            <GridLayout
+                android:id="@+id/glShowEditCreat"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:rowCount="1"
+                android:columnCount="3">
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/buttonSave"
+                    android:id="@+id/buttonOk"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:onClick="onClickSave" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/buttonCancel"
+                    android:id="@+id/buttonCancel"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:onClick="onClickCancel" />
+            </GridLayout>
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/buttonLoadPicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="@string/buttonLoadPicture"
-            android:onClick="onClickUpload" />
+    </ScrollView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="30dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:hint="@string/ShowName"
-            android:id="@+id/showName" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etShowName"
-            android:inputType="textCapWords"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:hint="@string/ShowStart"
-            android:id="@+id/showStart" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:digits="0123456789"
-            android:maxLength="4"
-            android:id="@+id/etShowStart" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/cbisFinished"
-            android:id="@+id/cbiSFinished"
-            android:onClick="onClickCheckbox" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:hint="@string/ShowEnd"
-            android:id="@+id/showEnd" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:digits="0123456789"
-            android:maxLength="4"
-            android:id="@+id/etShowEnd"/>
-
-
-        <GridLayout
-            android:id="@+id/glShowEditCreat"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:rowCount="1"
-            android:columnCount="3">
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/buttonSave"
-                android:id="@+id/buttonOk"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:onClick="onClickSave" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/buttonCancel"
-                android:id="@+id/buttonCancel"
-                android:layout_row="0"
-                android:layout_column="2"
-                android:onClick="onClickCancel" />
-        </GridLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

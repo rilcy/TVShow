@@ -46,5 +46,5 @@
     <string name="buttonSave">SAUVER</string>
     <string name="cbisFinished">La série est-elle terminée ?</string>
     <string name="title_activity_by_actor2">ByActor2</string>
-    <string name="title_activity_by_show_creation">ByShowCreation</string>
+    <string name="title_activity_by_show_creation">Ajouter une série</string>
 </resources>
