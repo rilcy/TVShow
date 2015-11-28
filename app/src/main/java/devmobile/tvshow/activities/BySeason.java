@@ -130,7 +130,6 @@ public class BySeason extends AppCompatActivity {
 
         list.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
-
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent appInfo = new Intent(BySeason.this, ByEpisode.class);
