@@ -12,6 +12,7 @@ import java.util.List;
 import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.ShowContract.*;
 import devmobile.tvshow.db.object.Episode;
+import devmobile.tvshow.db.object.Season;
 
 /**
  * Created by Elsio on 07.11.2015.
@@ -52,6 +53,30 @@ public class EpisodeDataSource {
     public Episode getEpisodeById(long id){
         String sql = "SELECT * FROM " + EpisodeEntry.TABLE_EPISODE +
                 " WHERE " + EpisodeEntry.KEY_ID + " = " + id;
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor != null){
+            cursor.moveToFirst();
+        }
+
+        Episode episode = new Episode();
+        episode.setEpisodeID(cursor.getInt(cursor.getColumnIndex(EpisodeEntry.KEY_ID)));
+        episode.setEpisodeTitle(cursor.getString(cursor.getColumnIndex(EpisodeEntry.KEY_TITLE)));
+        episode.setEpisodeCompleted(cursor.getInt(cursor.getColumnIndex(EpisodeEntry.KEY_COMPLETED)));
+        episode.setEpisodeNumber(cursor.getInt(cursor.getColumnIndex(EpisodeEntry.KEY_NUMBER)));
+        episode.setSeasonID(cursor.getInt(cursor.getColumnIndex(EpisodeEntry.KEY_SEASON_ID)));
+
+
+        return episode;
+    }
+
+    /**
+     * Get last episode
+     */
+    public Episode getNextEpisode(int showID, ArrayList<Season> seasons){
+        String sql = "SELECT * FROM " + EpisodeEntry.TABLE_EPISODE + " INNER JOIN " + " WHERE " + EpisodeEntry.KEY_SEASON_ID + " = " + showID
+                + " ORDER BY " + EpisodeEntry.KEY_NUMBER + " ASC LIMIT 1";
 
         Cursor cursor = this.db.rawQuery(sql, null);
 

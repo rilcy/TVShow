@@ -73,7 +73,7 @@
 
             <CheckBox
                 android:button="@drawable/customwatchedcheckbox"
-                android:id="@+id/cbFullEpisodeToWatch"
+                android:id="@+id/cbNumberEpisodeToWatch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:checked="false"

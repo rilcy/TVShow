@@ -11,10 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -39,6 +43,11 @@ public class ByShow extends AppCompatActivity {
     private Season season;
     private SeasonDataSource seasonds;
 
+    private TextView beginYearByShow;
+    private TextView endYearByShow;
+    private CheckBox cbNumberEpisodeToWatch;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +61,20 @@ public class ByShow extends AppCompatActivity {
         seasonds = new SeasonDataSource(this);
 
 
-        /*
-
         //PARTIE SUPERIEURE "A VOIR PROCHAINEMENT"
 
+
+        //PARTIE MEDIANE
+        beginYearByShow = (TextView) findViewById(R.id.beginYearByShow);
+        endYearByShow = (TextView) findViewById(R.id.endYearByShow);
+        cbNumberEpisodeToWatch = (CheckBox) findViewById(R.id.cbNumberEpisodeToWatch);
+
+        beginYearByShow.setText(show.getShowStart());
+        endYearByShow.setText(show.getShowEnd());
+
+
+
+        /*
         final ArrayList<Episode> ep = new ArrayList<Episode>();
 
 
@@ -79,8 +98,8 @@ public class ByShow extends AppCompatActivity {
         ListView list = (ListView) findViewById(R.id.listOfSeasons);
         list.setAdapter(adapter);
 
-        SQLiteHelper sqlHelper = SQLiteHelper.getInstance(this);
-        sqlHelper.getWritableDatabase().close();
+
+
         setListViewHeightBasedOnChildren(list);
         // Retire le focus sur la liste afin que l'activité démarre en haut de la page
         list.setFocusable(false);
