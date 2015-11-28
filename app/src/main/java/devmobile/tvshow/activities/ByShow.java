@@ -1,9 +1,11 @@
 package devmobile.tvshow.activities;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,16 +14,13 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import devmobile.tvshow.adapters.CustomAdapterNextToWatch;
 import devmobile.tvshow.adapters.CustomAdapterShow;
 import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
-import devmobile.tvshow.db.object.Episode;
 import devmobile.tvshow.R;
 import devmobile.tvshow.db.object.Season;
 import devmobile.tvshow.alert.CreateSeasonDialogAlert;
@@ -30,17 +29,22 @@ import devmobile.tvshow.db.object.Show;
 
 public class ByShow extends AppCompatActivity {
 
+    private ArrayList<Season> listOfSeasons;
+    private long numberSeasons;
+    private long num;
+    private Season season;
+    private SeasonDataSource seasonds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show);
 
         String pass = getIntent().getStringExtra(MainActivity.SHOW_ID);
-        final long num = Long.parseLong(pass);
-
+        num = Long.parseLong(pass);
         ShowDataSource sds = new ShowDataSource(this);
-
         Show show = sds.getShowById(num);
+        seasonds = new SeasonDataSource(this);
 
         /*
 
@@ -60,18 +64,18 @@ public class ByShow extends AppCompatActivity {
 
         // PARTIE INFERIEURE "LISTE DES SAISONS"
         SeasonDataSource seasons = new SeasonDataSource(this);
-        Toast.makeText(ByShow.this, "test", Toast.LENGTH_SHORT).show();
+        listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons(num);
+        numberSeasons = listOfSeasons.size();
 
-        final ArrayList<Season> listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons(num);
-
-
-
-        //ListAdapter adapter = new CustomAdapterShow(this, listOfSeasons);
+        final ListAdapter adapter = new CustomAdapterShow(this, listOfSeasons);
 
 
         ListView list = (ListView) findViewById(R.id.listOfSeasons);
-       // list.setAdapter(adapter);
-        //setListViewHeightBasedOnChildren(list);
+        list.setAdapter(adapter);
+
+        SQLiteHelper sqlHelper = SQLiteHelper.getInstance(this);
+        sqlHelper.getWritableDatabase().close();
+        setListViewHeightBasedOnChildren(list);
         // Retire le focus sur la liste afin que l'activité démarre en haut de la page
         list.setFocusable(false);
 
@@ -85,6 +89,7 @@ public class ByShow extends AppCompatActivity {
                     }
                 }
         );
+
 
 
 
@@ -114,26 +119,23 @@ public class ByShow extends AppCompatActivity {
         llayout_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 DialogFragment newFragment = new CreateSeasonDialogAlert();
                 Bundle args = new Bundle();
                 int i = (int) num;
-                args.putInt("num", i);
+                args.putInt("numShow", i);
+                args.putInt("numSeasons", (int) numberSeasons);
                 newFragment.setArguments(args);
                 newFragment.show(getFragmentManager(), "create");
-
             }
         });
 
-        SQLiteHelper sqlHelper = SQLiteHelper.getInstance(getApplicationContext());
-        sqlHelper.getWritableDatabase().close();
 
     }
 
 
     private void setupActionBar() {
-
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override

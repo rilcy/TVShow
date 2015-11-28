@@ -88,7 +88,6 @@ public class ShowDataSource {
                 shows.add(show);
             } while(cursor.moveToNext());
         }
-
         return shows;
     }
 
