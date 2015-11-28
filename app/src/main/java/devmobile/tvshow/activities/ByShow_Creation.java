@@ -3,8 +3,10 @@ package devmobile.tvshow.activities;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Locale;
 
 import devmobile.tvshow.R;
 import devmobile.tvshow.db.SQLiteHelper;
@@ -46,6 +49,9 @@ public class ByShow_Creation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show_creation);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
         cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
         etShowName = (EditText) findViewById(R.id.etShowName);
@@ -238,5 +244,15 @@ public class ByShow_Creation extends AppCompatActivity {
         ByShow_Creation.this.startActivity(intent);
         finish();
 
+    }
+
+    public void changeLanguage(String lang){
+        Locale myLocale = new Locale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
+        buttonLoadPicture.setText(R.string.buttonLoadPicture);
     }
 }

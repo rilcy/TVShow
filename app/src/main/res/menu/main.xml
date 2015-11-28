@@ -21,4 +21,9 @@
         app:showAsAction="ifRoom|withText"
         android:title="@string/add_show"/>
 
+    <item
+        android:id="@+id/action_settings"
+        app:showAsAction="never"
+        android:title="@string/action_settings"/>
+
 </menu>

@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
+import java.util.Locale;
 
 import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.adapter.ShowDataSource;
@@ -101,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch(item.getItemId()){
 
-            //TODO : Ajouter ici l'action pour la page d'ajout de séries lorsque la page sera créée
-
             case R.id.action_byActor:
 
                 intent = new Intent(MainActivity.this, ByActor.class);
@@ -114,7 +115,26 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, ByShow_Creation.class);
                 MainActivity.this.startActivity(intent);
                 break;
+
+            case R.id.action_settings:
+
+                intent = new Intent(MainActivity.this, Settings.class);
+                MainActivity.this.startActivity(intent);
+                break;
         }
         return true;
     }
+
+    //TODO : définir cette méthode
+    /*
+    public void changeLanguage(String lang){
+        Locale myLocale = new Locale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        TextView welcome = (TextView) findViewById(R.id.main_txt_welcome);
+        welcome.setText(R.string.main_welcome);
+    }
+    */
 }

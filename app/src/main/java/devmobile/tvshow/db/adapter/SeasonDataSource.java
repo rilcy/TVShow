@@ -96,10 +96,7 @@ public class SeasonDataSource {
         ContentValues values = new ContentValues();
         values.put(SeasonEntry.KEY_COMPLETED, season.isSeasonCompleted());
 
-        /** TODO: 07.11.15 Vérifier le "?" ci-dessous. S'assurer de la validité du return. Retiré le ? après le =, vérifier que tout est OK
-         *  de
-         *  */
-        return this.db.update(SeasonEntry.TABLE_SEASON, values, SeasonEntry.KEY_ID + " = ",
+        return this.db.update(SeasonEntry.TABLE_SEASON, values, SeasonEntry.KEY_ID + " = ?",
                 new String[] { String.valueOf(season.getShowId()) });
     }
 
