@@ -2,6 +2,8 @@ package devmobile.tvshow.activities;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import devmobile.tvshow.db.object.Actor;
 import devmobile.tvshow.R;
@@ -26,6 +30,9 @@ public class ByEpisode extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_episode);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
         final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
 
@@ -80,7 +87,7 @@ public class ByEpisode extends AppCompatActivity {
         llayout_addActor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent appInfo = new Intent(ByEpisode.this, ByActor.class);
+                Intent appInfo = new Intent(ByEpisode.this, ActorByEpisode.class);
                 startActivity(appInfo);
             }
         });
@@ -109,7 +116,7 @@ public class ByEpisode extends AppCompatActivity {
 
             case R.id.action_byActor:
 
-                intent = new Intent(ByEpisode.this, ByActor.class);
+                intent = new Intent(ByEpisode.this, ActorByEpisode.class);
                 ByEpisode.this.startActivity(intent);
                 break;
 
@@ -142,5 +149,37 @@ public class ByEpisode extends AppCompatActivity {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+    public void changeLanguage(String lang){
+        Locale myLocale = new Locale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        TextView editEpisode = (TextView) findViewById(R.id.editEpisodeText);
+        editEpisode.setText(R.string.edit_episode);
+        TextView deleteEpisode = (TextView) findViewById(R.id.deleteEpisodeText);
+        deleteEpisode.setText(R.string.delete_episode);
+        TextView addActor = (TextView) findViewById(R.id.addActorText);
+        addActor.setText(R.string.add_actor);
+
+        /*
+        Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
+        buttonLoadPicture.setText(R.string.buttonLoadPicture);
+        TextView showName = (TextView) findViewById(R.id.showName);
+        showName.setText(R.string.ShowName);
+        TextView showStart = (TextView) findViewById(R.id.showStart);
+        showStart.setText(R.string.ShowStart);
+        CheckBox cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
+        cbIsFinished.setText(R.string.cbisFinished);
+        TextView showEnd = (TextView) findViewById(R.id.showEnd);
+        showEnd.setText(R.string.ShowEnd);
+        Button buttonOk = (Button) findViewById(R.id.buttonOk);
+        buttonOk.setText(R.string.buttonOk);
+        Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
+        buttonCancel.setText(R.string.buttonCancel);
+        */
     }
 }

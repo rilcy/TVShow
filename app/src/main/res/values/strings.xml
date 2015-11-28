@@ -12,7 +12,7 @@
     <string name="title_activity_by_episode">ByEpisode</string>
     <string name="edit_episode">Editer l\'épisode</string>
     <string name="delete_episode">Supprimer l\'épisode</string>
-    <string name="add_actor">Associer un acteur</string>
+    <string name="add_actor">Ajouter un acteur</string>
     <string name="NCISLA_season">Saison 2</string>
     <string name="delete_season">Supprimer la saison</string>
     <string name="add_episode">Ajouter un épisode</string>
@@ -49,5 +49,7 @@
     <string name="title_activity_by_show_creation">Ajouter une série</string>
     <string name="pref_summary">Choisissez votre langue préférée</string>
     <string name="pref_select_language">Choisissez votre langue</string>
+    <string name="nextToWatchCount"> épisode(s) à regarder</string>
+    <string name="validateAddActor">Valider</string>
 
 </resources>

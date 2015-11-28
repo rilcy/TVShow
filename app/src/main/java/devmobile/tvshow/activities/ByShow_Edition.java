@@ -126,7 +126,7 @@ public class ByShow_Edition extends AppCompatActivity {
 
             case R.id.action_byActor:
 
-                intent = new Intent(ByShow_Edition.this, ByActor.class);
+                intent = new Intent(ByShow_Edition.this, ActorByEpisode.class);
                 ByShow_Edition.this.startActivity(intent);
                 break;
 
@@ -194,6 +194,8 @@ public class ByShow_Edition extends AppCompatActivity {
         }
 
     }
+
+
 
 
 }

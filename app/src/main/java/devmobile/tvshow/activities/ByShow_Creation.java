@@ -114,7 +114,7 @@ public class ByShow_Creation extends AppCompatActivity {
 
             case R.id.action_byActor:
 
-                intent = new Intent(ByShow_Creation.this, ByActor.class);
+                intent = new Intent(ByShow_Creation.this, ActorByEpisode.class);
                 ByShow_Creation.this.startActivity(intent);
                 break;
 
@@ -243,6 +243,9 @@ public class ByShow_Creation extends AppCompatActivity {
 
     }
 
+    /**
+     * Méthode permettant la localisation du texte de l'activité
+     */
     public void changeLanguage(String lang){
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);
@@ -251,5 +254,17 @@ public class ByShow_Creation extends AppCompatActivity {
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
         buttonLoadPicture.setText(R.string.buttonLoadPicture);
+        TextView showName = (TextView) findViewById(R.id.showName);
+        showName.setText(R.string.ShowName);
+        TextView showStart = (TextView) findViewById(R.id.showStart);
+        showStart.setText(R.string.ShowStart);
+        CheckBox cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
+        cbIsFinished.setText(R.string.cbisFinished);
+        TextView showEnd = (TextView) findViewById(R.id.showEnd);
+        showEnd.setText(R.string.ShowEnd);
+        Button buttonOk = (Button) findViewById(R.id.buttonOk);
+        buttonOk.setText(R.string.buttonOk);
+        Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
+        buttonCancel.setText(R.string.buttonCancel);
     }
 }

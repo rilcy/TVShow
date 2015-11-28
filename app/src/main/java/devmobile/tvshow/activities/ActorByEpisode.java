@@ -10,16 +10,16 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import devmobile.tvshow.R;
+import devmobile.tvshow.*;
 import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.db.object.Actor;
 
-public class ByActor extends AppCompatActivity {
+public class ActorByEpisode extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_by_actor);
+        setContentView(R.layout.activity_actor_by_episode);
 
         final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
 
@@ -62,14 +62,14 @@ public class ByActor extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                Intent intent = new Intent(ByActor.this, MainActivity.class);
-                ByActor.this.startActivity(intent);
+                Intent intent = new Intent(ActorByEpisode.this, MainActivity.class);
+                ActorByEpisode.this.startActivity(intent);
                 return true;
 
             case R.id.action_addShow:
 
-                intent = new Intent(ByActor.this, ByShow_Creation.class);
-                ByActor.this.startActivity(intent);
+                intent = new Intent(ActorByEpisode.this, ByShow_Creation.class);
+                ActorByEpisode.this.startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);

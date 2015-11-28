@@ -2,9 +2,11 @@ package devmobile.tvshow.activities;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,15 +22,13 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import devmobile.tvshow.adapters.CustomAdapterSeason;
-import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
@@ -55,6 +55,9 @@ public class BySeason extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_season);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
         String dataTransfered = getIntent().getStringExtra(ByShow.SEASON_ID);
         num = Long.parseLong(dataTransfered);
@@ -187,7 +190,7 @@ public class BySeason extends AppCompatActivity {
 
             case R.id.action_byActor:
 
-                intent = new Intent(BySeason.this, ByActor.class);
+                intent = new Intent(BySeason.this, ActorByEpisode.class);
                 BySeason.this.startActivity(intent);
                 break;
 
@@ -220,5 +223,34 @@ public class BySeason extends AppCompatActivity {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+    public void changeLanguage(String lang){
+        Locale myLocale = new Locale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        TextView deleteSeason = (TextView) findViewById(R.id.deleteSeasonText);
+        deleteSeason.setText(R.string.delete_season);
+        TextView addEpisode = (TextView) findViewById(R.id.addEpisodeText);
+        addEpisode.setText(R.string.add_episode);
+        /*
+        Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
+        buttonLoadPicture.setText(R.string.buttonLoadPicture);
+        TextView showName = (TextView) findViewById(R.id.showName);
+        showName.setText(R.string.ShowName);
+        TextView showStart = (TextView) findViewById(R.id.showStart);
+        showStart.setText(R.string.ShowStart);
+        CheckBox cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
+        cbIsFinished.setText(R.string.cbisFinished);
+        TextView showEnd = (TextView) findViewById(R.id.showEnd);
+        showEnd.setText(R.string.ShowEnd);
+        Button buttonOk = (Button) findViewById(R.id.buttonOk);
+        buttonOk.setText(R.string.buttonOk);
+        Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
+        buttonCancel.setText(R.string.buttonCancel);
+        */
     }
 }

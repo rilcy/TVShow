@@ -26,7 +26,7 @@ public class CustomAdapterActor extends ArrayAdapter<Actor>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View customView = inflater.inflate(R.layout.custom_row_actor, parent, false);
+        View customView = inflater.inflate(R.layout.custom_row_by_actor, parent, false);
 
         Actor actorToShow = getItem(position);
         TextView firstNameTextView = (TextView) customView.findViewById(R.id.actorFirstname);

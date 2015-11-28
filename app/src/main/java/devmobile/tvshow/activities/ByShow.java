@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import devmobile.tvshow.adapters.CustomAdapterShow;
 import devmobile.tvshow.db.SQLiteHelper;
-import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
 import devmobile.tvshow.R;
@@ -44,13 +43,11 @@ public class ByShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show);
 
-        Intent intent = getIntent();
-        String dataTransfered = intent.getStringExtra("SHOW_ID");
+        String dataTransfered = getIntent().getStringExtra(MainActivity.SHOW_ID);
         num = Long.parseLong(dataTransfered);
         ShowDataSource sds = new ShowDataSource(this);
-        final Show show = sds.getShowById(num);
+        Show show = sds.getShowById(num);
         seasonds = new SeasonDataSource(this);
-
 
         /*
 
@@ -124,8 +121,9 @@ public class ByShow extends AppCompatActivity {
 
                 DialogFragment newFragment = new CreateSeasonDialogAlert();
                 Bundle args = new Bundle();
-                args.putInt("showId", show.getShowId());
-                args.putInt("numSeasons", listOfSeasons.size());
+                int i = (int) num;
+                args.putInt("numShow", i);
+                args.putInt("numSeasons", (int) numberSeasons);
                 newFragment.setArguments(args);
                 newFragment.show(getFragmentManager(), "create");
             }
