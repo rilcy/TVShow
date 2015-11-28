@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.adapter.ShowDataSource;

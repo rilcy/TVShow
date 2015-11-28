@@ -44,12 +44,11 @@ public class CreateEpisodeDialogAlert extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        etNewEpisode = (EditText) getView().findViewById(R.id.etNewEpisode);
-                        String text = String.valueOf(etNewEpisode.getText());
+                        etNewEpisode = (EditText) getDialog().findViewById(R.id.etNewEpisode);
+                        String text = etNewEpisode.getText().toString();
                         EpisodeDataSource episodeds = new EpisodeDataSource(getActivity());
                         episodeds.createEpisode((int)seasonId, (int)numEpisodes, text);
-                        SQLiteHelper sqlHelper = SQLiteHelper.getInstance(getActivity());
-                        sqlHelper.getWritableDatabase().close();
+
 
                         Intent intent = new Intent(getActivity(), BySeason.class);
                         intent.putExtra(SEASON_ID, String.valueOf(seasonId));

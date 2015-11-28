@@ -158,7 +158,6 @@ public class BySeason extends AppCompatActivity {
                 args.putInt("numEpisodes", finalListOfEpisodes.size());
                 newFragment.setArguments(args);
                 newFragment.show(getFragmentManager(), "create");
-
             }
         });
 
