@@ -28,15 +28,15 @@ public class SeasonDataSource {
     }
 
     // Add a new season
-    public long createSeason(int mNum, int numSeasons){
+    public long createSeason(int show_Id, int numSeasons){
         long id;
         ContentValues values = new ContentValues();
 
-        int numRows = mNum + 1;
+        int numRows = numSeasons + 1;
 
         values.put(SeasonEntry.KEY_NUMBER, numRows);
         values.put(SeasonEntry.KEY_COMPLETED, 0);
-        values.put(SeasonEntry.KEY_SHOW_ID, numSeasons);
+        values.put(SeasonEntry.KEY_SHOW_ID, show_Id);
         id = this.db.insert(SeasonEntry.TABLE_SEASON, null, values);
 
         return id;
@@ -67,10 +67,10 @@ public class SeasonDataSource {
     /**
      * Get all seasons
      */
-    public List<Season> getAllSeasons(int num){
+    public List<Season> getAllSeasons(int show_Id){
         List<Season> seasons = new ArrayList<Season>();
-        String sql = "SELECT * FROM " + SeasonEntry.TABLE_SEASON + " WHERE " + SeasonEntry.KEY_SHOW_ID + " = " + num  + " ORDER BY " + SeasonEntry.KEY_NUMBER;
-
+        String sql = "SELECT * FROM " + SeasonEntry.TABLE_SEASON + " WHERE " + SeasonEntry.KEY_SHOW_ID + " = " + show_Id
+                + " ORDER BY " + SeasonEntry.KEY_NUMBER;
         Cursor cursor = this.db.rawQuery(sql, null);
 
         if(cursor.moveToFirst()){

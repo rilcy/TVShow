@@ -17,18 +17,14 @@ import devmobile.tvshow.db.adapter.SeasonDataSource;
 
 public class CreateSeasonDialogAlert extends DialogFragment {
 
-    public final static String SHOW_ID = "devemobile.tvshow.activities.MainActivity.SHOW_ID";
     int mNumSeasons;
     int mNum;
-    long numSeasons;
-    long numShow;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        mNum = getArguments().getInt("numSeasonId");
+        mNum = getArguments().getInt("showId");
         mNumSeasons = getArguments().getInt("numSeasons");
-        numShow = (long) mNum;
-        numSeasons = (long) mNumSeasons;
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
@@ -42,12 +38,10 @@ public class CreateSeasonDialogAlert extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         SeasonDataSource sds = new SeasonDataSource(getActivity());
-                        sds.createSeason(mNum, (int) numSeasons);
-                        SQLiteHelper sqlHelper = SQLiteHelper.getInstance(getActivity());
-                        sqlHelper.getWritableDatabase().close();
+                        sds.createSeason(mNum, mNumSeasons);
 
                         Intent intent = new Intent(getActivity(), ByShow.class);
-                        intent.putExtra(SHOW_ID, String.valueOf(numShow));
+                        intent.putExtra("SHOW_ID", String.valueOf(mNum));
                         startActivity(intent);
                         getActivity().finish();
                     }

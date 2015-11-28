@@ -9,27 +9,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.object.Episode;
 import devmobile.tvshow.R;
 
 public class CustomAdapterSeason extends ArrayAdapter<Episode>{
 
-    private CustomAdapterSeason customAdapterMain = null;
+    private CustomAdapterSeason customAdapterSeason = null;
     private Context context;
-    private TextView textView = null;
     private TextView text = null;
     private ImageView imageView = null;
 
-    private Episode episode;
+    private Episode episodeToShow;
+    private CheckBox cbEpisode;
+    private TextView textView;
+    private EpisodeDataSource episodeds;
 
     public CustomAdapterSeason(Context context, ArrayList<Episode> episode) {
         super(context, R.layout.custom_row_episode, (ArrayList) episode);
-        this.customAdapterMain = this;
+        this.customAdapterSeason = this;
         this.context = context;
     }
 
@@ -38,10 +43,34 @@ public class CustomAdapterSeason extends ArrayAdapter<Episode>{
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View customView = inflater.inflate(R.layout.custom_row_episode, parent, false);
 
-        Episode episodeToShow = getItem(position);
-        TextView textView = (TextView) customView.findViewById(R.id.episodeTitle);
+        episodeToShow = getItem(position);
+        textView = (TextView) customView.findViewById(R.id.episodeTitle);
+        textView.setText(episodeToShow.getEpisodeNumber() + " " + episodeToShow.getEpisodeTitle());
 
-        textView.setText(episodeToShow.getEpisodeTitle());
+        cbEpisode = (CheckBox) customView.findViewById(R.id.episodeCheckBox);
+        episodeds = new EpisodeDataSource(context.getApplicationContext());
+
+        if(episodeToShow.isEpisodeCompleted() == 0)
+            cbEpisode.setChecked(false);
+        else
+            cbEpisode.setChecked(true);
+
+        cbEpisode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    episodeToShow.setEpisodeCompleted(1);
+                    episodeds.updateEpisodeIfWatched(episodeToShow);
+                }
+                else
+                {
+                    episodeToShow.setEpisodeCompleted(0);
+                    episodeds.updateEpisodeIfWatched(episodeToShow);
+                }
+            }
+        });
+
 
         return customView;
     }

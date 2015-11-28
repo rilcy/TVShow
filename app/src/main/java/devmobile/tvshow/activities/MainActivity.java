@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Show show = (Show) adapter.getItem(position);
 
-                        appInfo.putExtra(SHOW_ID, String.valueOf(show.getShowId()));
+                        appInfo.putExtra("SHOW_ID", String.valueOf(show.getShowId()));
 
 
                         startActivity(appInfo);
