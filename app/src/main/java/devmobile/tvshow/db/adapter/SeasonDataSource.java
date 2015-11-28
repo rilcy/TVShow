@@ -28,22 +28,23 @@ public class SeasonDataSource {
     }
 
     // Add a new season
-    public void createSeason(long SHOW_ID, long NUMBER_SEASONS){
+    public long createSeason(Season season){
         long id;
         ContentValues values = new ContentValues();
-
-        long numRows = NUMBER_SEASONS + 1;
-
+        long numRows = (int) DatabaseUtils.longForQuery(db, "SELECT COUNT(*) FROM TABLE_SEASON WHERE KEY_SHOW_ID = " + season.getShowId(), null);
+        numRows += 1;
         values.put(SeasonEntry.KEY_NUMBER, numRows);
         values.put(SeasonEntry.KEY_COMPLETED, 0);
-        values.put(SeasonEntry.KEY_SHOW_ID, (int) SHOW_ID);
-        this.db.insert(SeasonEntry.TABLE_SEASON, null, values);
+        values.put(SeasonEntry.KEY_SHOW_ID, season.getShowId());
+        id = this.db.insert(SeasonEntry.TABLE_SEASON, null, values);
+
+        return id;
     }
 
     /**
      * Get one season
      */
-    public Season getSeasonById(long id){
+    public Season getSeasonById(int id){
         String sql = "SELECT * FROM " + SeasonEntry.TABLE_SEASON +
                 " WHERE " + SeasonEntry.KEY_ID + " = " + id;
 
@@ -65,9 +66,9 @@ public class SeasonDataSource {
     /**
      * Get all seasons
      */
-    public List<Season> getAllSeasons(long SHOW_ID){
+    public List<Season> getAllSeasons(){
         List<Season> seasons = new ArrayList<Season>();
-        String sql = "SELECT * FROM " + SeasonEntry.TABLE_SEASON + " WHERE " + SeasonEntry.KEY_SHOW_ID + " = " + SHOW_ID + " ORDER BY " + SeasonEntry.KEY_NUMBER;
+        String sql = "SELECT * FROM " + SeasonEntry.TABLE_SEASON + "WHERE KEY_SHOW_ID = " + SeasonEntry.KEY_SHOW_ID  + " ORDER BY " + SeasonEntry.KEY_NUMBER;
 
         Cursor cursor = this.db.rawQuery(sql, null);
 
@@ -94,8 +95,9 @@ public class SeasonDataSource {
     public int updatenSeason(Season season){
         ContentValues values = new ContentValues();
         values.put(SeasonEntry.KEY_COMPLETED, season.isSeasonCompleted());
-        int i = season.getSeasonNumber();
-        return this.db.update(SeasonEntry.TABLE_SEASON, values, SeasonEntry.KEY_ID + "= ?", new String[] {String.valueOf(season.getSeasonId())});
+
+        return this.db.update(SeasonEntry.TABLE_SEASON, values, SeasonEntry.KEY_ID + " = ?",
+                new String[] { String.valueOf(season.getShowId()) });
     }
 
 
@@ -104,7 +106,8 @@ public class SeasonDataSource {
      */
     public void deleteSeason(long id){
         
-        // TODO: 07.11.15 A vérifier avec Elsio.
+        // TODO: Pas encore validé, à vérifier le fonctionnement
+
     }
 
 }

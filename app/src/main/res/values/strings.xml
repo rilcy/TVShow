@@ -22,7 +22,7 @@
     <string name="create">CREER</string>
     <string name="delete">Supprimer</string>
     <string name="action_search">Recherche</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Paramètres</string>
     <string name="byShow_pageTitle">Série</string>
     <string name="bySeason_pageTitle">Saison</string>
     <string name="byEpisode_pageTitle">Episode</string>
@@ -47,4 +47,7 @@
     <string name="cbisFinished">La série est-elle terminée ?</string>
     <string name="title_activity_by_actor2">ByActor2</string>
     <string name="title_activity_by_show_creation">Ajouter une série</string>
+    <string name="pref_summary">Choisissez votre langue préférée</string>
+    <string name="pref_select_language">Choisissez votre langue</string>
+
 </resources>

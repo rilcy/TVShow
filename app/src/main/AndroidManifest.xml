@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.ByShow"
             android:label="@string/byShow_pageTitle"
@@ -31,6 +32,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
         <activity
             android:name=".activities.BySeason"
             android:label="@string/bySeason_pageTitle"
@@ -39,6 +41,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
         <activity
             android:name=".activities.ByEpisode"
             android:label="@string/byEpisode_pageTitle"
@@ -47,6 +50,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
         <activity
             android:name=".activities.ByActor"
             android:label="@string/byActor_pageTitle"
@@ -55,6 +59,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".activities.Settings"
+            android:label="@string/action_settings"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+
         <activity android:name=".activities.ByShow_Edition" >
         </activity>
 
