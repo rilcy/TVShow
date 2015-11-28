@@ -80,6 +80,12 @@
                 android:textSize="23sp" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=" "/>
+
+
+            <TextView
                 android:id="@+id/textViewEpisodesToView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

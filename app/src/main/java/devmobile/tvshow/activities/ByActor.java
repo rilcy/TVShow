@@ -1,10 +1,13 @@
 package devmobile.tvshow.activities;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -12,6 +15,8 @@ import java.util.ArrayList;
 
 import devmobile.tvshow.R;
 import devmobile.tvshow.adapters.CustomAdapterActor;
+import devmobile.tvshow.alert.CreateActorDialogAlert;
+import devmobile.tvshow.alert.CreateEpisodeDialogAlert;
 import devmobile.tvshow.db.object.Actor;
 
 public class ByActor extends AppCompatActivity {
@@ -21,8 +26,17 @@ public class ByActor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_actor);
 
+        LinearLayout llayout_create = (LinearLayout) findViewById (R.id.linearLayout_createActor);
         final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
+        llayout_create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new CreateActorDialogAlert();
+                newFragment.show(getFragmentManager(), "create");
+            }
+        });
 
+        /*
         Actor actor1 = new Actor("Jean", "Reno");
         listOfActors.add(actor1);
         Actor actor2 = new Actor("Michael", "Douglas");
@@ -38,6 +52,7 @@ public class ByActor extends AppCompatActivity {
         Actor actor7 = new Actor("Kaley", "Kuoco");
         listOfActors.add(actor7);
 
+*/
         ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
 
         ListView list = (ListView) findViewById(R.id.listOfActors);

@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import devmobile.tvshow.alert.DeleteShowDialogAlert;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
@@ -109,6 +110,10 @@ public class ByEpisode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new DeleteEpisodeDialogAlert();
+                Bundle args = new Bundle();
+                int i = (int) num;
+                args.putInt("numEpisodeId", (int) episode.getEpisodeID());
+                newFragment.setArguments(args);
                 newFragment.show(getFragmentManager(), "delete");
             }
         });

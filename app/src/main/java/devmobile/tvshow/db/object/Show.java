@@ -10,6 +10,8 @@ public class Show {
     private String showEnd;
     private int showCompleted;
     private String showImage;
+    //TODO voir si OK
+    private Season[] seasons;
 
     // Empty constructor
     public Show(){}
@@ -63,5 +65,19 @@ public class Show {
 
     public void setShowCompleted(int showCompleted) {
         this.showCompleted = showCompleted;
+    }
+
+    public Season[] getSeasons(){
+        return new Season[0];//todo cherche les seasons
+    }
+    public Episode getNextToSee(){
+        Season[] myContent=getSeasons();
+        int cpt=0;
+        while (myContent[cpt].getNextToSee()==null)
+            ++cpt;
+        if (cpt==myContent.length)
+            return null;
+        else
+            return myContent[cpt].getNextToSee();
     }
 }

@@ -15,8 +15,11 @@ import devmobile.tvshow.activities.ByShow;
 
 public class DeleteEpisodeDialogAlert extends DialogFragment {
 
+    int numEpisodeId;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        numEpisodeId = getArguments().getInt("numSeasonId");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater

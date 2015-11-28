@@ -36,20 +36,22 @@
     <string name="buttonCancel">ANNULER</string>
     <string name="buttonLoadPicture">CHARGER UNE PHOTO !</string>
     <string name="alert_create">CREER</string>
-    <string name="alert_editEpisode">EDITIER</string>
+    <string name="alert_editEpisode">EDITER</string>
     <string name="alert_newSeasonQuestion">Êtes-vous sûr de vouloir créer une nouvelle saison ?</string>
     <string name="message_alert_delete_season">Êtes-vous sûr de vouloir supprimer la saison ? Ceci est une action irréversible.</string>
     <string name="message_alert_delete_show">Êtes-vous sûr de vouloir supprimer la série ? Ceci est une action irréversible.</string>
     <string name="message_alert_delete_episode">Êtes-vous sûr de vouloir supprimer l\'épisode ? Ceci est une action irréversible.</string>
-    <string name="alert_newEpisodeQuestion">Quel est le nom de l épisode ?</string>
-    <string name="alert_editEpisodeQuestion">Corriger le nom de l\'épisode :</string>
+    <string name="alert_newEpisodeQuestion">Quel est le nom de l\'épisode ?</string>
+    <string name="alert_editEpisodeQuestion">Corriger le titre de l\'épisode :</string>
     <string name="buttonSave">SAUVER</string>
     <string name="cbisFinished">La série est-elle terminée ?</string>
     <string name="title_activity_by_actor2">ByActor2</string>
     <string name="title_activity_by_show_creation">Ajouter une série</string>
     <string name="pref_summary">Choisissez votre langue préférée</string>
     <string name="pref_select_language">Choisissez votre langue</string>
-    <string name="nextToWatchCount"> épisode(s) à regarder</string>
+    <string name="nextToWatchCount">épisode(s) à regarder</string>
     <string name="validateAddActor">Valider</string>
+    <string name="alert_actorFirstName">Prénom</string>
+    <string name="alert_actorLastName">Nom</string>
 
 </resources>

@@ -114,4 +114,9 @@ public class Episode {
     public void setSeasonID(int seasonID) {
         this.seasonID = seasonID;
     }
+
+    public boolean isWartched(){
+        //// TODO: 28.11.2015 contôle
+        return false;
+    }
 }
