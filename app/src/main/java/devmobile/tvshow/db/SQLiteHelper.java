@@ -24,7 +24,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static SQLiteHelper getInstance(Context context){
         if(instance == null){
             instance = new SQLiteHelper(context.getApplicationContext());
-            instance.db.execSQL("PRAGMA foreign_keys = ON;");
+            //instance.db.execSQL("PRAGMA foreign_keys = ON;");
         }
         return instance;
     }

@@ -31,16 +31,16 @@ public class EpisodeDataSource {
     /**
      * Add a new episode
      */
-    public long createEpisode(Episode episode){
+    public long createEpisode(int seasonId, int numEpisodes, String episodeTitle){
         long id;
         ContentValues values = new ContentValues();
-        long numRows = (int) DatabaseUtils.longForQuery(db, "SELECT COUNT(*) FROM TABLE_EPISODE WHERE KEY_SEASON_ID = " + episode.getSeasonID(), null);
-        numRows += 1;
-        values.put(EpisodeEntry.KEY_NUMBER, numRows);
+
+        long numRows = numEpisodes + 1;
+
         values.put(EpisodeEntry.KEY_COMPLETED, 0); // CANNOT BE WATCHED HAS TO BE FALSE.
-        values.put(EpisodeEntry.KEY_SEASON_ID, episode.getSeasonID());
-        values.put(EpisodeEntry.KEY_NUMBER, episode.getEpisodeNumber());
-        values.put(EpisodeEntry.KEY_TITLE, episode.getEpisodeTitle());
+        values.put(EpisodeEntry.KEY_SEASON_ID, seasonId);
+        values.put(EpisodeEntry.KEY_NUMBER, numRows);
+        values.put(EpisodeEntry.KEY_TITLE, episodeTitle);
         id = this.db.insert(EpisodeEntry.TABLE_EPISODE, null, values);
 
         return id;

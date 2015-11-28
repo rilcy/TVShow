@@ -19,48 +19,37 @@
 
 
         <ImageView
-            android:id="@+id/icon"
+            android:id="@+id/imgBySeason"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="6dp"
-            android:contentDescription="imageShow"
-            android:src="@drawable/ncis_la"
             android:layout_rowSpan="2" />
 
 
         <TextView
-            android:id="@+id/firstLine"
+            android:id="@+id/showTitleBySeason"
             android:layout_width="288dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:hint="@string/NCISLA"
             android:textSize="23sp"
             android:layout_row="0"
             android:layout_column="1"
             android:layout_columnSpan="2" />
 
-        <TextView
-            android:id="@+id/secondLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/NCISLA_season"
-            android:layout_gravity="center_vertical"
-            android:textSize="20sp"
-            android:layout_row="1"
-            android:layout_column="1" />
 
         <CheckBox
             android:button="@drawable/customwatchedcheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:paddingRight="20dp"
+            android:id="@+id/cbSeasonBySeason"
             android:layout_gravity="center_vertical"
+            android:textSize="20sp"
             android:layout_row="1"
-            android:layout_column="2" />
+            android:layout_column="1" />
+
     </GridLayout>
 
     <LinearLayout

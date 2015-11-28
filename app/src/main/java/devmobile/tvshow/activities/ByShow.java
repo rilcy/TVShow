@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ import devmobile.tvshow.db.object.Show;
 
 public class ByShow extends AppCompatActivity {
 
+    public  final static String SEASON_ID = "devemobile.tvshow.activities.ByShow.SEASON_ID";
+
     private ArrayList<Season> listOfSeasons;
     private long numberSeasons;
     private long num;
@@ -40,8 +43,8 @@ public class ByShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show);
 
-        String pass = getIntent().getStringExtra(MainActivity.SHOW_ID);
-        num = Long.parseLong(pass);
+        String dataTransfered = getIntent().getStringExtra(MainActivity.SHOW_ID);
+        num = Long.parseLong(dataTransfered);
         ShowDataSource sds = new ShowDataSource(this);
         Show show = sds.getShowById(num);
         seasonds = new SeasonDataSource(this);
@@ -64,7 +67,7 @@ public class ByShow extends AppCompatActivity {
 
         // PARTIE INFERIEURE "LISTE DES SAISONS"
         SeasonDataSource seasons = new SeasonDataSource(this);
-        listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons(num);
+        listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons((int)num);
         numberSeasons = listOfSeasons.size();
 
         final ListAdapter adapter = new CustomAdapterShow(this, listOfSeasons);
@@ -79,25 +82,21 @@ public class ByShow extends AppCompatActivity {
         // Retire le focus sur la liste afin que l'activité démarre en haut de la page
         list.setFocusable(false);
 
-        list.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent appInfo = new Intent(ByShow.this, BySeason.class);
 
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent appInfo = new Intent(ByShow.this, BySeason.class);
-                        startActivity(appInfo);
-                    }
-                }
-        );
-
-
-
+                Season goToSeason = (Season) adapter.getItem(position);
+                appInfo.putExtra(SEASON_ID, String.valueOf(goToSeason.getSeasonId()));
+                startActivity(appInfo);
+            }
+        });
 
         LinearLayout llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editShow);
         llayout_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent appInfo = new Intent(ByShow.this, ByShow_Edition.class);
                 startActivity(appInfo);
                 finish();

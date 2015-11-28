@@ -28,14 +28,15 @@ public class SeasonDataSource {
     }
 
     // Add a new season
-    public long createSeason(Season season){
+    public long createSeason(int mNum, int numSeasons){
         long id;
         ContentValues values = new ContentValues();
-        long numRows = (int) DatabaseUtils.longForQuery(db, "SELECT COUNT(*) FROM TABLE_SEASON WHERE KEY_SHOW_ID = " + season.getShowId(), null);
-        numRows += 1;
+
+        int numRows = mNum + 1;
+
         values.put(SeasonEntry.KEY_NUMBER, numRows);
         values.put(SeasonEntry.KEY_COMPLETED, 0);
-        values.put(SeasonEntry.KEY_SHOW_ID, season.getShowId());
+        values.put(SeasonEntry.KEY_SHOW_ID, numSeasons);
         id = this.db.insert(SeasonEntry.TABLE_SEASON, null, values);
 
         return id;
@@ -66,9 +67,9 @@ public class SeasonDataSource {
     /**
      * Get all seasons
      */
-    public List<Season> getAllSeasons(){
+    public List<Season> getAllSeasons(int num){
         List<Season> seasons = new ArrayList<Season>();
-        String sql = "SELECT * FROM " + SeasonEntry.TABLE_SEASON + "WHERE KEY_SHOW_ID = " + SeasonEntry.KEY_SHOW_ID  + " ORDER BY " + SeasonEntry.KEY_NUMBER;
+        String sql = "SELECT * FROM " + SeasonEntry.TABLE_SEASON + " WHERE " + SeasonEntry.KEY_SHOW_ID + " = " + num  + " ORDER BY " + SeasonEntry.KEY_NUMBER;
 
         Cursor cursor = this.db.rawQuery(sql, null);
 
@@ -92,7 +93,7 @@ public class SeasonDataSource {
      *
      *  Update the status of a season. A seson may be completed or uncompleted.
      */
-    public int updatenSeason(Season season){
+    public int updateSeason(Season season){
         ContentValues values = new ContentValues();
         values.put(SeasonEntry.KEY_COMPLETED, season.isSeasonCompleted());
 
@@ -105,7 +106,7 @@ public class SeasonDataSource {
      * Delete a season
      */
     public void deleteSeason(long id){
-        
+
         // TODO: Pas encore validé, à vérifier le fonctionnement
 
     }

@@ -46,30 +46,9 @@ public class CustomAdapterShow extends ArrayAdapter<Season>{
 
         season = (Season) this.getItem(position);
         textSeason = (TextView) customView.findViewById(R.id.seasonNumber);
-        cb = (CheckBox) customView.findViewById(R.id.seasonCheckBox);
 
         textSeason.setText("Season " + season.getSeasonNumber());
-        if(season.isSeasonCompleted() == 0)
-            cb.setChecked(false);
-        else
-            cb.setChecked(true);
 
-        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    season.setSeasonCompleted(1);
-                    sds.updatenSeason(season);
-                } else {
-                    season.setSeasonCompleted(0);
-                    sds.updatenSeason(season);
-                }
-            }
-        });
-
-
-        SQLiteHelper sqlHelper = SQLiteHelper.getInstance(context.getApplicationContext());
-        sqlHelper.getWritableDatabase().close();
 
         return customView;
     }

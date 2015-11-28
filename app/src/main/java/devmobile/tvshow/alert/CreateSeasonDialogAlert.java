@@ -25,7 +25,7 @@ public class CreateSeasonDialogAlert extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        mNum = getArguments().getInt("numShow");
+        mNum = getArguments().getInt("numSeasonId");
         mNumSeasons = getArguments().getInt("numSeasons");
         numShow = (long) mNum;
         numSeasons = (long) mNumSeasons;
@@ -42,7 +42,7 @@ public class CreateSeasonDialogAlert extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         SeasonDataSource sds = new SeasonDataSource(getActivity());
-                        sds.createSeason(mNum, numSeasons);
+                        sds.createSeason(mNum, (int) numSeasons);
                         SQLiteHelper sqlHelper = SQLiteHelper.getInstance(getActivity());
                         sqlHelper.getWritableDatabase().close();
 
