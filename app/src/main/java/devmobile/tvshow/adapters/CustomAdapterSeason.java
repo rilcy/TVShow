@@ -5,6 +5,7 @@ package devmobile.tvshow.adapters;
  */
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class CustomAdapterSeason extends ArrayAdapter<Episode>{
         this.customAdapterSeason = this;
         this.context = context;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

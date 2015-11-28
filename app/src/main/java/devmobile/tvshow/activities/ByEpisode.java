@@ -3,6 +3,9 @@ package devmobile.tvshow.activities;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,21 +13,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import devmobile.tvshow.db.adapter.EpisodeDataSource;
+import devmobile.tvshow.db.adapter.SeasonDataSource;
+import devmobile.tvshow.db.adapter.ShowDataSource;
 import devmobile.tvshow.db.object.Actor;
 import devmobile.tvshow.R;
 import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.alert.DeleteEpisodeDialogAlert;
 import devmobile.tvshow.alert.EditEpisodeDialogAlert;
+import devmobile.tvshow.db.object.Episode;
+import devmobile.tvshow.db.object.Season;
+import devmobile.tvshow.db.object.Show;
 
 public class ByEpisode extends AppCompatActivity {
+
+    private long num;
+    private EpisodeDataSource episodeds;
+    private Episode episode;
+    private ImageView imgByEpisode;
+    private TextView titleByEpisode;
+    private CheckBox cbByEpisode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,28 +55,46 @@ public class ByEpisode extends AppCompatActivity {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
-        final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
+        String dataTransfered = getIntent().getStringExtra(BySeason.EPISODE_ID);
+        num = Long.parseLong(dataTransfered);
 
-        Actor actor1 = new Actor("Alan", "Ruck");
-        listOfActors.add(actor1);
-        Actor actor2 = new Actor("Ashanti", "Brown");
-        listOfActors.add(actor2);
-        Actor actor3 = new Actor("Billy", "Magnussen");
-        listOfActors.add(actor3);
-        Actor actor4 = new Actor("Vincent", "Laresca");
-        listOfActors.add(actor4);
-        Actor actor5 = new Actor("Graham", "Shiels");
-        listOfActors.add(actor5);
-        Actor actor6 = new Actor("Bruno", "Gioiello");
-        listOfActors.add(actor6);
-        Actor actor7 = new Actor("Walter", "Fauntleroy");
-        listOfActors.add(actor7);
-        Actor actor8 = new Actor("Zachary", "Stockdale");
-        listOfActors.add(actor8);
-        Actor actor9 = new Actor("Ashanti", "Brown");
-        listOfActors.add(actor9);
-        Actor actor10 = new Actor("Dusty", "Storg");
-        listOfActors.add(actor10);
+        // Get data from the Episode
+        episodeds = new EpisodeDataSource(this);
+        episode = (Episode) episodeds.getEpisodeById(num);
+
+        // Get data from the Season of the Episode
+        SeasonDataSource seasonds = new SeasonDataSource(this);
+        Season season = seasonds.getSeasonById(episode.getSeasonID());
+
+        // Get data from the Show of the Episode
+        ShowDataSource showds = new ShowDataSource(this);
+        Show show = showds.getShowById(season.getShowId());
+
+
+        // TOP OF THE ACTIVITY
+        imgByEpisode = (ImageView) findViewById(R.id.imgByEpisode);
+        titleByEpisode = (TextView) findViewById(R.id.titleByEpisode);
+        cbByEpisode = (CheckBox) findViewById(R.id.cbByEpisode);
+
+        titleByEpisode.setText(episode.getEpisodeTitle());
+        cbByEpisode.setText(" Season " + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
+
+        File imgFile = new  File(show.getShowImage());
+
+        if(imgFile.exists()) {
+            try {
+                File f = new File(imgFile.getPath());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                Uri uri = Uri.fromFile(imgFile);
+                imgByEpisode.setImageURI(uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+        final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
 
         ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
 
@@ -79,7 +118,7 @@ public class ByEpisode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new EditEpisodeDialogAlert();
-                newFragment.show(getFragmentManager(), "delete");
+                newFragment.show(getFragmentManager(), "edit");
             }
         });
 

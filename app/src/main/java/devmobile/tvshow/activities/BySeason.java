@@ -41,6 +41,8 @@ import devmobile.tvshow.db.object.Show;
 
 public class BySeason extends AppCompatActivity {
 
+    public  final static String EPISODE_ID = "devemobile.tvshow.activities.ByShow.EPISODE_ID";
+
     // TOP OF THE ACTIVITY
     private ImageView imgBySeason;
     private TextView showTitleBySeason;
@@ -50,6 +52,7 @@ public class BySeason extends AppCompatActivity {
     private SeasonDataSource seasonds;
     private EpisodeDataSource episodeds;
     private Season season;
+    private ListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +105,6 @@ public class BySeason extends AppCompatActivity {
             }
         });
 
-
-
         showTitleBySeason.setText(show.getShowTitle());
 
         File imgFile = new  File(show.getShowImage());
@@ -120,7 +121,7 @@ public class BySeason extends AppCompatActivity {
         }
 
 
-        ListAdapter adapter = new CustomAdapterSeason(this, listOfEpisodes);
+        adapter = new CustomAdapterSeason(this, listOfEpisodes);
 
         ListView list = (ListView) findViewById(R.id.listOfEpisodes);
         list.setAdapter(adapter);
@@ -133,6 +134,8 @@ public class BySeason extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent appInfo = new Intent(BySeason.this, ByEpisode.class);
+                        Episode goToEpisode = (Episode) adapter.getItem(position);
+                        appInfo.putExtra(EPISODE_ID, String.valueOf(goToEpisode.getEpisodeID()));
                         startActivity(appInfo);
                     }
                 }

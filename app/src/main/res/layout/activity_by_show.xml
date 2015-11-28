@@ -44,7 +44,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewBeginYear"
+                android:id="@+id/beginYearByShow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/NCISLA_beginYear"
@@ -57,7 +57,7 @@
                 android:textSize="23sp" />
 
             <TextView
-                android:id="@+id/textViewEndYear"
+                android:id="@+id/endYearByShow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/NCISLA_endYear"
@@ -73,16 +73,10 @@
 
             <CheckBox
                 android:button="@drawable/customwatchedcheckbox"
-                android:id="@+id/checkBox"
+                android:id="@+id/cbFullEpisodeToWatch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:checked="false" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/NCISlA_episodesToWatch"
+                android:checked="false"
                 android:textSize="23sp" />
 
             <TextView
