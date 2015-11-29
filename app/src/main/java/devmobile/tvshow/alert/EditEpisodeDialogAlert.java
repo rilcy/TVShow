@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import devmobile.tvshow.R;
 
 public class EditEpisodeDialogAlert extends DialogFragment {
+    int mEpisodeId;
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        mEpisodeId = getArguments().getInt("episodeId");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater

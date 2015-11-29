@@ -53,4 +53,5 @@
     <string name="validateAddActor">Validate</string>
     <string name="alert_actorFirstName">Prénom</string>
     <string name="alert_actorLastName">Nom</string>
+    <string name="Season">" Season "</string>
 </resources>

@@ -78,7 +78,7 @@ public class ByEpisode extends AppCompatActivity {
         cbByEpisode = (CheckBox) findViewById(R.id.cbByEpisode);
 
         titleByEpisode.setText(episode.getEpisodeTitle());
-        cbByEpisode.setText(" Season " + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
+        cbByEpisode.setText(getString(R.string.Season) + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
 
         File imgFile = new  File(show.getShowImage());
 
@@ -97,7 +97,7 @@ public class ByEpisode extends AppCompatActivity {
 
         final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
 
-        ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
+        final ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
 
         ListView list = (ListView) findViewById(R.id.listOfActorsForEpisode);
         list.setAdapter(adapter);
@@ -123,6 +123,8 @@ public class ByEpisode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new EditEpisodeDialogAlert();
+                Bundle args = new Bundle();
+                args.putInt("episodeId", episode.getEpisodeID());
                 newFragment.show(getFragmentManager(), "edit");
             }
         });
