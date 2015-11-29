@@ -21,6 +21,7 @@
                 android:layout_gravity="center"
                 android:hint="@string/nextToWatch"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
 
 
@@ -170,7 +171,6 @@
                 android:id="@+id/listOfSeasons"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:headerDividersEnabled="true">
             </ListView>
 

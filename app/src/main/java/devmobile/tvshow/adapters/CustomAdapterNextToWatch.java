@@ -58,7 +58,7 @@ public class CustomAdapterNextToWatch extends ArrayAdapter<Episode>{
         else{
             textViewTitle.setText(show.getShowTitle());
             // TODO: 29.11.15  A TRADUIRE !!
-            textViewInfo.setText("No more episode left to watch !");
+            textViewInfo.setText("No more episode left");
         }
 
         File imgFile = new  File(show.getShowImage());

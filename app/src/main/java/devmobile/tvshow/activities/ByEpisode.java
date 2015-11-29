@@ -21,6 +21,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,6 +48,7 @@ public class ByEpisode extends AppCompatActivity {
     private Episode episode;
     private ImageView imgByEpisode;
     private TextView titleByEpisode;
+    private TextView infoByEpisode;
     private CheckBox cbByEpisode;
 
     @Override
@@ -75,10 +78,11 @@ public class ByEpisode extends AppCompatActivity {
         // TOP OF THE ACTIVITY
         imgByEpisode = (ImageView) findViewById(R.id.imgByEpisode);
         titleByEpisode = (TextView) findViewById(R.id.titleByEpisode);
+        infoByEpisode = (TextView) findViewById(R.id.infoByEpisode);
         cbByEpisode = (CheckBox) findViewById(R.id.cbByEpisode);
 
         titleByEpisode.setText(episode.getEpisodeTitle());
-        cbByEpisode.setText(" Season " + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
+        infoByEpisode.setText(" Season " + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
 
         File imgFile = new  File(show.getShowImage());
 

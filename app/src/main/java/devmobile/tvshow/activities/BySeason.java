@@ -46,6 +46,7 @@ public class BySeason extends AppCompatActivity {
     // TOP OF THE ACTIVITY
     private ImageView imgBySeason;
     private TextView showTitleBySeason;
+    private TextView showInfoBySeason;
     private CheckBox cbSeasonBySeason;
     private long Season_ID;
     private ShowDataSource showds;
@@ -81,11 +82,13 @@ public class BySeason extends AppCompatActivity {
 
         imgBySeason = (ImageView) findViewById(R.id.imgBySeason);
         showTitleBySeason = (TextView) findViewById(R.id.showTitleBySeason);
+        showInfoBySeason = (TextView) findViewById(R.id.showInfoBySeason);
         cbSeasonBySeason = (CheckBox) findViewById(R.id.cbSeasonBySeason);
 
         // TOP OF THE ACTIVITY
         // TODO : Traduction du mot Season
-        cbSeasonBySeason.setText(" Season " + season.getSeasonNumber());
+
+        showInfoBySeason.setText(" Season " + season.getSeasonNumber());
         boolean watched = true;
 
         watched = checkIfAllEpisodesAreWatched(listOfEpisodes, watched);

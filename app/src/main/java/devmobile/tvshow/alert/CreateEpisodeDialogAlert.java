@@ -47,13 +47,13 @@ public class CreateEpisodeDialogAlert extends DialogFragment {
                         etNewEpisode = (EditText) getDialog().findViewById(R.id.etNewEpisode);
                         String text = etNewEpisode.getText().toString();
                         EpisodeDataSource episodeds = new EpisodeDataSource(getActivity());
-                        episodeds.createEpisode((int)seasonId, (int)numEpisodes, text);
+                        episodeds.createEpisode((int) seasonId, (int) numEpisodes, text);
 
 
-                        Intent intent = new Intent(getActivity(), BySeason.class);
-                        intent.putExtra(SEASON_ID, String.valueOf(seasonId));
-                        startActivity(intent);
+                        Intent intent = getActivity().getIntent();
                         getActivity().finish();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
