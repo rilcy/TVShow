@@ -18,6 +18,7 @@ public class EditEpisodeDialogAlert extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mEpisodeId = getArguments().getInt("episodeId");
 
+        
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
