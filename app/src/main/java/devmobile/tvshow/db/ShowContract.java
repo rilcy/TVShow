@@ -73,7 +73,7 @@ public final class ShowContract {
                 + EpisodeEntry.KEY_COMPLETED + " INTEGER, "
                 + EpisodeEntry.KEY_SEASON_ID + " INTEGER, "
                 + "FOREIGN KEY (" + KEY_SEASON_ID + ") REFERENCES " + SeasonEntry.TABLE_SEASON + " (" + KEY_ID + ") "
-                + ");";
+                + ");";  
     }
 
     public static abstract class CastingEntry implements BaseColumns {
