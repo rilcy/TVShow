@@ -94,6 +94,11 @@ public class ByEpisode extends AppCompatActivity {
         }
 
 
+        if(episode.isEpisodeCompleted() == 0)
+            cbByEpisode.setChecked(false);
+        else
+            cbByEpisode.setChecked(true);
+
 
         // IF EPISODE WAS WATCHED
         cbByEpisode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
