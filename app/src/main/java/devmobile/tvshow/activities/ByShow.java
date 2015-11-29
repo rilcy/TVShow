@@ -22,12 +22,14 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import devmobile.tvshow.adapters.CustomAdapterNextToWatch;
 import devmobile.tvshow.adapters.CustomAdapterShow;
 import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
 import devmobile.tvshow.R;
+import devmobile.tvshow.db.object.Episode;
 import devmobile.tvshow.db.object.Season;
 import devmobile.tvshow.alert.CreateSeasonDialogAlert;
 import devmobile.tvshow.alert.DeleteShowDialogAlert;
@@ -35,7 +37,6 @@ import devmobile.tvshow.db.object.Show;
 
 public class ByShow extends AppCompatActivity {
 
-    public  final static String SEASON_ID = "devemobile.tvshow.activities.ByShow.SEASON_ID";
 
     private ArrayList<Season> listOfSeasons;
     private long numberSeasons;
@@ -61,7 +62,24 @@ public class ByShow extends AppCompatActivity {
         seasonds = new SeasonDataSource(this);
 
 
+        SeasonDataSource seasons = new SeasonDataSource(this);
+        listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons((int)num);
+
+
         //PARTIE SUPERIEURE "A VOIR PROCHAINEMENT"
+        Episode ep = findNextEpisodeToWatch(listOfSeasons);
+
+
+            final ArrayList<Episode> eplist = new ArrayList<Episode>();
+
+            eplist.add(ep);
+
+            ListAdapter adapterNextoWatch = new CustomAdapterNextToWatch(this, eplist, show.getShowImage(), show.getShowId());
+
+            ListView listNextToWatch = (ListView) findViewById(R.id.listeNextToWatch);
+            listNextToWatch.setAdapter(adapterNextoWatch);
+
+
 
 
         //PARTIE MEDIANE
@@ -72,24 +90,7 @@ public class ByShow extends AppCompatActivity {
         beginYearByShow.setText(show.getShowStart());
         endYearByShow.setText(show.getShowEnd());
 
-
-
-        /*
-        final ArrayList<Episode> ep = new ArrayList<Episode>();
-
-
-        Episode ncis = new Episode(2, "Un mal nécessaire", "Saison 2 Episode 3", R.drawable.ncis_la);
-        ep.add(ncis);
-
-        ListAdapter adapterNextoWatch = new CustomAdapterNextToWatch(this, ep);
-
-        ListView listNextToWatch = (ListView) findViewById(R.id.listeNextToWatch);
-        listNextToWatch.setAdapter(adapterNextoWatch);
-        */
-
         // PARTIE INFERIEURE "LISTE DES SAISONS"
-        SeasonDataSource seasons = new SeasonDataSource(this);
-        listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons((int)num);
         numberSeasons = listOfSeasons.size();
 
         final ListAdapter adapter = new CustomAdapterShow(this, listOfSeasons);
@@ -110,7 +111,7 @@ public class ByShow extends AppCompatActivity {
                 Intent appInfo = new Intent(ByShow.this, BySeason.class);
 
                 Season goToSeason = (Season) adapter.getItem(position);
-                appInfo.putExtra(SEASON_ID, String.valueOf(goToSeason.getSeasonId()));
+                appInfo.putExtra("SEASON_ID", String.valueOf(goToSeason.getSeasonId()));
                 startActivity(appInfo);
             }
         });
@@ -151,6 +152,28 @@ public class ByShow extends AppCompatActivity {
         });
 
 
+    }
+
+    private Episode findNextEpisodeToWatch(ArrayList<Season> listOfSeasons) {
+        EpisodeDataSource episodeds = new EpisodeDataSource(this);
+        Episode ep = null;
+
+        int cptSeasons = 0;
+        while(cptSeasons < listOfSeasons.size()){
+            if(listOfSeasons.get(cptSeasons).isSeasonCompleted() == 0) {
+                Season season = seasonds.getSeasonById(listOfSeasons.get(cptSeasons).getSeasonId());
+                ArrayList<Episode> listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(season.getSeasonId());
+                int cptEpisode = 0;
+                while(cptEpisode < listOfEpisode.size()){
+                    if(listOfEpisode.get(cptEpisode).isEpisodeCompleted() == 0){
+                        return ep = episodeds.getEpisodeById(listOfEpisode.get(cptEpisode).getEpisodeID());
+                    }
+                    ++cptEpisode;
+                }
+            }
+            ++cptSeasons;
+        }
+        return ep;
     }
 
 

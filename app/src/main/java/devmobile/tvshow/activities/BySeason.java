@@ -47,7 +47,7 @@ public class BySeason extends AppCompatActivity {
     private ImageView imgBySeason;
     private TextView showTitleBySeason;
     private CheckBox cbSeasonBySeason;
-    private long num;
+    private long Season_ID;
     private ShowDataSource showds;
     private SeasonDataSource seasonds;
     private EpisodeDataSource episodeds;
@@ -62,12 +62,12 @@ public class BySeason extends AppCompatActivity {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
-        String dataTransfered = getIntent().getStringExtra(ByShow.SEASON_ID);
-        num = Long.parseLong(dataTransfered);
+        String dataTransfered = getIntent().getStringExtra("SEASON_ID");
+        Season_ID = Long.parseLong(dataTransfered);
 
         // Get data from the Season
         seasonds = new SeasonDataSource(this);
-        season = seasonds.getSeasonById((int)num);
+        season = seasonds.getSeasonById((int)Season_ID);
 
         // Get data from the Show
         showds = new ShowDataSource(this);
@@ -86,24 +86,55 @@ public class BySeason extends AppCompatActivity {
         // TOP OF THE ACTIVITY
         // TODO : Traduction du mot Season
         cbSeasonBySeason.setText(" Season " + season.getSeasonNumber());
+        boolean watched = true;
 
-        if(season.isSeasonCompleted() == 0)
-            cbSeasonBySeason.setChecked(false);
-        else
-            cbSeasonBySeason.setChecked(true);
+        watched = checkIfAllEpisodesAreWatched(listOfEpisodes, watched);
 
-        cbSeasonBySeason.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (cbSeasonBySeason.isChecked()) {
-                    season.setSeasonCompleted(1);
-                    seasonds.updateSeason(season);
-                } else {
-                    season.setSeasonCompleted(0);
-                    seasonds.updateSeason(season);
-                }
+
+        //
+        if(listOfEpisodes.size() != 0) {
+            if (watched) {
+                cbSeasonBySeason.setChecked(true);
+                season.setSeasonCompleted(1);
+                seasonds.updateSeason(season);
+            } else {
+                cbSeasonBySeason.setChecked(false);
+                season.setSeasonCompleted(0);
+                seasonds.updateSeason(season);
             }
-        });
+        }
+
+        if(listOfEpisodes.size() != 0) {
+            final ArrayList<Episode> finalListOfEpisodes1 = listOfEpisodes;
+            cbSeasonBySeason.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    // SEASON IS COMPLETED --> ALL EPISODES HAVE TO BE COMPLETED
+                    if (cbSeasonBySeason.isChecked()) {
+                        season.setSeasonCompleted(1);
+                        seasonds.updateSeason(season);
+                        for (Episode e : finalListOfEpisodes1) {
+                            e.setEpisodeCompleted(1);
+                            episodeds.updateEpisodeIfWatched(e);
+                        }
+                        refreshMyActivity();
+                    }
+                    // SEASON IS NOT COMPLETED --> LAST EPISODES HAS TO BE UNCHECKED
+                    else {
+                        season.setSeasonCompleted(0);
+                        seasonds.updateSeason(season);
+                        int i = finalListOfEpisodes1.size() - 1;
+                        if (i != -1) {
+                            finalListOfEpisodes1.get(i).setEpisodeCompleted(0);
+                            episodeds.updateEpisodeIfWatched(finalListOfEpisodes1.get(i));
+                            refreshMyActivity();
+                        }
+                    }
+                }
+            });
+        }
+        else
+            cbSeasonBySeason.setClickable(false);
 
         showTitleBySeason.setText(show.getShowTitle());
 
@@ -159,7 +190,7 @@ public class BySeason extends AppCompatActivity {
             public void onClick(View v) {
                 DialogFragment newFragment = new CreateEpisodeDialogAlert();
                 Bundle args = new Bundle();
-                int i = (int) num;
+                int i = (int) Season_ID;
                 args.putInt("numSeasonId", (int) season.getSeasonId());
                 args.putInt("numEpisodes", finalListOfEpisodes.size());
                 newFragment.setArguments(args);
@@ -167,6 +198,24 @@ public class BySeason extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void refreshMyActivity() {
+        finish();
+        Intent intent = getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(getIntent());
+    }
+
+    private boolean checkIfAllEpisodesAreWatched(ArrayList<Episode> listOfEpisodes, boolean watched) {
+        int cpt = 0;
+        while(cpt < listOfEpisodes.size() && watched == true){
+
+            if(listOfEpisodes.get(cpt).isEpisodeCompleted() == 0)
+                watched = false;
+            ++cpt;
+        }
+        return watched;
     }
 
     private void setupActionBar() {
