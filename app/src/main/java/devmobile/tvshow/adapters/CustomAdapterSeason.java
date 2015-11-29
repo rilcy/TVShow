@@ -33,12 +33,13 @@ public class CustomAdapterSeason extends ArrayAdapter<Episode>{
     private TextView textView;
     private EpisodeDataSource episodeds;
 
+    private RecyclerView.ViewHolder viewHolder;
+
     public CustomAdapterSeason(Context context, ArrayList<Episode> episode) {
         super(context, R.layout.custom_row_episode, (ArrayList) episode);
         this.customAdapterSeason = this;
         this.context = context;
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -50,7 +51,7 @@ public class CustomAdapterSeason extends ArrayAdapter<Episode>{
         textView.setText(episodeToShow.getEpisodeNumber() + " " + episodeToShow.getEpisodeTitle());
 
         cbEpisode = (CheckBox) customView.findViewById(R.id.episodeCheckBox);
-        episodeds = new EpisodeDataSource(context.getApplicationContext());
+        episodeds = new EpisodeDataSource(context);
 
         if(episodeToShow.isEpisodeCompleted() == 0)
             cbEpisode.setChecked(false);

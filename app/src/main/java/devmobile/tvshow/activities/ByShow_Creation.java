@@ -176,12 +176,6 @@ public class ByShow_Creation extends AppCompatActivity {
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
 
-        // Name of the file which wiil be used to set the name
-        //String imageName = etShowName.getText().toString();
-        sendToast("LE 5");
-        // Delete spaces in the String's name.
-        //imageName.replaceAll("\\s+","");
-
         // Create a random number to add to image path to make a picture unique
         int random = 10 + (int) (Math.random() * 5000);
 
@@ -208,7 +202,6 @@ public class ByShow_Creation extends AppCompatActivity {
 
     // NEXT METHODS ARE THE onClick METHODS
     public void onClickSave(View v) {
-        sendToast("test");
         if (isPicture && etShowName.length() > 0 && etShowStart.length() > 3) {
             saveButton.setFocusableInTouchMode(false);
             saveNewShow();
@@ -229,11 +222,6 @@ public class ByShow_Creation extends AppCompatActivity {
             tvShowEnd.setVisibility(View.GONE);
             etShowEnd.setText("");
         }
-    }
-
-
-    private void sendToast(String toast) {
-        Toast.makeText(ByShow_Creation.this, toast, Toast.LENGTH_SHORT).show();
     }
 
     private void backToPreviousActivity() {

@@ -144,13 +144,12 @@ public class EpisodeDataSource {
     /**
      *  Update datas of an episode.
      */
-    public int updateEpisode(Episode episode){
+    public int updateEpisode(int episodeId, String episodeTitle){
         ContentValues values = new ContentValues();
-        values.put(EpisodeEntry.KEY_TITLE, episode.getEpisodeTitle());
-        values.put(EpisodeEntry.KEY_NUMBER, episode.getEpisodeNumber());
+        values.put(EpisodeEntry.KEY_TITLE, episodeTitle);
 
-        return this.db.update(EpisodeEntry.TABLE_EPISODE, values, EpisodeEntry.KEY_ID + " = ?",
-                new String[] { String.valueOf(episode.getEpisodeID()) });
+        return this.db.update(EpisodeEntry.TABLE_EPISODE, values, EpisodeEntry.KEY_ID + " = ? ",
+                new String[] { String.valueOf(episodeId) });
     }
 
     /**

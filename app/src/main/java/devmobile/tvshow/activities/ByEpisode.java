@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -26,7 +27,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import devmobile.tvshow.alert.DeleteShowDialogAlert;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
@@ -56,7 +56,7 @@ public class ByEpisode extends AppCompatActivity {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
-        String dataTransfered = getIntent().getStringExtra(BySeason.EPISODE_ID);
+        String dataTransfered = getIntent().getStringExtra("EPISODE_ID");
         num = Long.parseLong(dataTransfered);
 
         // Get data from the Episode
@@ -95,6 +95,23 @@ public class ByEpisode extends AppCompatActivity {
 
 
 
+        // IF EPISODE WAS WATCHED
+        cbByEpisode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    episode.setEpisodeCompleted(1);
+                    episodeds.updateEpisodeIfWatched(episode);
+                }
+                else{
+                    episode.setEpisodeCompleted(0);
+                    episodeds.updateEpisodeIfWatched(episode);
+                }
+            }
+        });
+
+
+
         final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
 
         ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
@@ -123,7 +140,12 @@ public class ByEpisode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new EditEpisodeDialogAlert();
+                Bundle args = new Bundle();
+                int i = (int) num;
+                args.putInt("numEpisodeId", episode.getEpisodeID());
+                newFragment.setArguments(args);
                 newFragment.show(getFragmentManager(), "edit");
+
             }
         });
 

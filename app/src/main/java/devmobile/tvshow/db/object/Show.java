@@ -70,6 +70,7 @@ public class Show {
     public Season[] getSeasons(){
         return new Season[0];//todo cherche les seasons
     }
+
     public Episode getNextToSee(){
         Season[] myContent=getSeasons();
         int cpt=0;

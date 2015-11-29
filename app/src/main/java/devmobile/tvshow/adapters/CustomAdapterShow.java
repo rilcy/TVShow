@@ -25,7 +25,7 @@ public class CustomAdapterShow extends ArrayAdapter<Season>{
     private CustomAdapterShow customAdapterShow = null;
     private Context context;
     private TextView textSeason = null;
-    private CheckBox cb = null;
+    private CheckBox cbSeasonBySeason = null;
     private Season season = null;
     private SeasonDataSource sds;
 
@@ -46,8 +46,14 @@ public class CustomAdapterShow extends ArrayAdapter<Season>{
 
         season = (Season) this.getItem(position);
         textSeason = (TextView) customView.findViewById(R.id.seasonNumber);
+        cbSeasonBySeason = (CheckBox) customView.findViewById(R.id.cbSeasonBySeason);
 
         textSeason.setText("Season " + season.getSeasonNumber());
+
+        if(season.isSeasonCompleted() == 0)
+            cbSeasonBySeason.setChecked(false);
+        else
+            cbSeasonBySeason.setChecked(true);
 
 
         return customView;
