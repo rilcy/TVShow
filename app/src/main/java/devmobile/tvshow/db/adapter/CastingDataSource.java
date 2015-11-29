@@ -27,6 +27,19 @@ public class CastingDataSource {
         this.context = context;
     }
 
+    /*
+    // Add a new actor
+    public long createCasting(Actor actor){
+        long id;
+        ContentValues values = new ContentValues();
+        values.put(CastingEntry.KEY_LASTNAME, actor.getLastName());
+        values.put(CastingEntry.KEY_FIRSTNAME, actor.getFirstName());
+        id = this.db.insert(CastingEntry.TABLE_CASTING, null, values);
+
+        return id;
+    }
+    */
+
     // Add a new actor
     public long createCasting(Actor actor){
         long id;

@@ -56,4 +56,20 @@ public class Season {
     public void setSeasonNumber(int seasonNumber) {
         this.seasonNumber = seasonNumber;
     }
+
+    public Episode[] getEpisodes(){
+        return new Episode[0];//// TODO: 28.11.2015 recherche des épisodes
+    }
+
+    public Episode getNextToSee(){
+        Episode[] myContent=getEpisodes();
+        int cpt=0;
+        while (myContent[cpt].isWartched())
+            ++cpt;
+        if (cpt==myContent.length)
+            return null;
+        else
+            return myContent[cpt];
+
+    }
 }

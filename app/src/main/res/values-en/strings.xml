@@ -3,7 +3,7 @@
     <string name="NCISLA">NCIS : Los Angeles</string>
     <string name="NCISLA_desc">Saison 2 Episode 3</string>
     <string name="NCISLA_beginYear">2009</string>
-    <string name="NCISLA_endYear">En production</string>
+    <string name="NCISLA_endYear">In production</string>
     <string name="NCISlA_episodesToWatch">16</string>
     <string name="edit_show">Edit show</string>
     <string name="delete_show">Delete show</string>
@@ -49,6 +49,8 @@
     <string name="title_activity_by_show_creation">Add a show</string>
     <string name="pref_summary">Define your preferred language</string>
     <string name="pref_select_language">Select your language</string>
-    <string name="nextToWatchCount"> episode(s) to watch</string>
+    <string name="nextToWatchCount">episode(s) to watch</string>
     <string name="validateAddActor">Validate</string>
+    <string name="alert_actorFirstName">Prénom</string>
+    <string name="alert_actorLastName">Nom</string>
 </resources>
