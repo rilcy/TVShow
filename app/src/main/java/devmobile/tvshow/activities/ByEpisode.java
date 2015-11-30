@@ -193,8 +193,7 @@ public class ByEpisode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent appInfo = new Intent(ByEpisode.this, ActorByEpisode.class);
-                Episode goToEpisode = episode.getEpisodeID();
-                appInfo.putExtra("EPISODE_ID", String.valueOf(goToEpisode.getEpisodeID()));
+                appInfo.putExtra("EPISODE_ID", String.valueOf(episode.getEpisodeID()));
                 startActivity(appInfo);
             }
         });
