@@ -227,9 +227,29 @@ public class ByEpisode extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return false;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+                Intent intent = new Intent(ByEpisode.this, ByShow.class);
+                ByEpisode.this.startActivity(intent);
+                break;
+
+            case R.id.action_byActor:
+
+                intent = new Intent(ByEpisode.this, ActorByEpisode.class);
+                ByEpisode.this.startActivity(intent);
+                break;
+
+            case R.id.action_addShow:
+
+                intent = new Intent(ByEpisode.this, ByShow_Creation.class);
+                ByEpisode.this.startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // Source : http://stackoverflow.com/questions/18367522/android-list-view-inside-a-scroll-view
