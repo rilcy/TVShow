@@ -26,6 +26,7 @@ import org.w3c.dom.Text;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -45,7 +46,11 @@ public class ByEpisode extends AppCompatActivity {
 
     private long num;
     private EpisodeDataSource episodeds;
+    private SeasonDataSource seasonds;
+    private ShowDataSource showds;
     private Episode episode;
+    private Season season;
+    private Show show;
     private ImageView imgByEpisode;
     private TextView titleByEpisode;
     private TextView infoByEpisode;
@@ -67,12 +72,12 @@ public class ByEpisode extends AppCompatActivity {
         episode = (Episode) episodeds.getEpisodeById(num);
 
         // Get data from the Season of the Episode
-        SeasonDataSource seasonds = new SeasonDataSource(this);
-        Season season = seasonds.getSeasonById(episode.getSeasonID());
+        seasonds = new SeasonDataSource(this);
+        season = seasonds.getSeasonById(episode.getSeasonID());
 
         // Get data from the Show of the Episode
-        ShowDataSource showds = new ShowDataSource(this);
-        Show show = showds.getShowById(season.getShowId());
+        showds = new ShowDataSource(this);
+        show = showds.getShowById(season.getShowId());
 
 
         // TOP OF THE ACTIVITY
@@ -82,6 +87,8 @@ public class ByEpisode extends AppCompatActivity {
         cbByEpisode = (CheckBox) findViewById(R.id.cbByEpisode);
 
         titleByEpisode.setText(episode.getEpisodeTitle());
+
+        // TODO TRADUCTION
         infoByEpisode.setText(" Season " + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
 
         File imgFile = new  File(show.getShowImage());
@@ -97,7 +104,6 @@ public class ByEpisode extends AppCompatActivity {
             }
         }
 
-
         if(episode.isEpisodeCompleted() == 0)
             cbByEpisode.setChecked(false);
         else
@@ -111,10 +117,12 @@ public class ByEpisode extends AppCompatActivity {
                 if(isChecked) {
                     episode.setEpisodeCompleted(1);
                     episodeds.updateEpisodeIfWatched(episode);
+                    checkIfSeasonHasToBeCompleted();
                 }
                 else{
                     episode.setEpisodeCompleted(0);
                     episodeds.updateEpisodeIfWatched(episode);
+                    checkIfSeasonsHasToBeUnchecked();
                 }
             }
         });
@@ -168,6 +176,28 @@ public class ByEpisode extends AppCompatActivity {
         });
     }
 
+
+    private void checkIfSeasonHasToBeCompleted() {
+        ArrayList<Episode> listOfEpisode = new ArrayList<Episode>();
+        listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(season.getSeasonId());
+        int cpt = 0;
+        while (cpt < listOfEpisode.size() && listOfEpisode.get(cpt).isEpisodeCompleted() == 1){
+            cpt++;
+        }
+
+        if(listOfEpisode.get(cpt-1).isEpisodeCompleted() == 1){
+            season.setSeasonCompleted(1);
+            seasonds.updateSeason(season);
+        }
+    }
+
+
+    private void checkIfSeasonsHasToBeUnchecked() {
+        season.setSeasonCompleted(0);
+        seasonds.updateSeason(season);
+    }
+
+
     private void setupActionBar() {
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -182,32 +212,7 @@ public class ByEpisode extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-
-                Intent intent = new Intent(ByEpisode.this, BySeason.class);
-                ByEpisode.this.startActivity(intent);
-                break;
-
-            case R.id.action_byActor:
-
-                intent = new Intent(ByEpisode.this, ActorByEpisode.class);
-                ByEpisode.this.startActivity(intent);
-                break;
-
-            case R.id.action_addShow:
-
-                intent = new Intent(ByEpisode.this, ByShow_Creation.class);
-                ByEpisode.this.startActivity(intent);
-                break;
-
-            case R.id.action_settings:
-
-                intent = new Intent(ByEpisode.this, Settings.class);
-                ByEpisode.this.startActivity(intent);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     // Source : http://stackoverflow.com/questions/18367522/android-list-view-inside-a-scroll-view
