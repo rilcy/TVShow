@@ -20,6 +20,7 @@ import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.db.adapter.CastingDataSource;
 import devmobile.tvshow.db.adapter.CastingEpisodeDataSource;
 import devmobile.tvshow.db.object.Actor;
+import devmobile.tvshow.db.object.CastingEpisode;
 import devmobile.tvshow.db.object.Episode;
 
 public class ActorByEpisode extends AppCompatActivity {
@@ -40,28 +41,58 @@ public class ActorByEpisode extends AppCompatActivity {
         CastingDataSource cds = new CastingDataSource(this);
         final ArrayList<Actor> listOfActors = (ArrayList<Actor>) cds.getAllActors();
 
+
         final CastingEpisodeDataSource castingEpisodeds = new CastingEpisodeDataSource(this);
 
-        ListView list = (ListView) findViewById(R.id.listOfActorsFromEpisode);
-        final ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
-        list.setAdapter(adapter);
+        ArrayList<CastingEpisode> listOfCasting = (ArrayList) castingEpisodeds.getActorsIdByEpisodeId((int) Episode_ID);
 
-        list.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Actor actor = (Actor) adapter.getItem(position);
-                        String nom = actor.getFirstName();
-                        castingEpisodeds.createActorEpisode(actor.getIdActor(), Episode_ID);
-
-                        finish();
-                        Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
-                        appInfo.putExtra("EPISODE_ID", String.valueOf(Episode_ID));
-                        startActivity(appInfo);
-                        finish();
-                    }
+        for (int i = 0; i < listOfCasting.size(); i++) {
+            int idActor = listOfCasting.get(i).getCastingId();
+            boolean is = true;
+            int cpt = 0;
+            while(is && cpt < listOfActors.size()){
+                int id = listOfActors.get(cpt).getIdActor();
+                if (id == idActor) {
+                    listOfActors.remove(cpt);
+                    is = false;
                 }
-        );
+                ++cpt;
+            }
+        }
+
+        int i = listOfActors.size();
+        if (listOfActors.size() > 0) {
+            ListView list = (ListView) findViewById(R.id.listOfActorsFromEpisode);
+            final ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
+            list.setAdapter(adapter);
+
+            list.setOnItemClickListener(
+                    new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Actor actor = (Actor) adapter.getItem(position);
+                            String nom = actor.getFirstName();
+                            castingEpisodeds.createActorEpisode(actor.getIdActor(), Episode_ID);
+
+                            finish();
+                            Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
+                            appInfo.putExtra("EPISODE_ID", String.valueOf(Episode_ID));
+                            startActivity(appInfo);
+                            finish();
+                        }
+                    }
+            );
+        }
+        else{
+
+            
+            finish();
+            Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
+            appInfo.putExtra("EPISODE_ID", String.valueOf(Episode_ID));
+            startActivity(appInfo);
+            finish();
+        }
+
     }
 
     private void setupActionBar() {
