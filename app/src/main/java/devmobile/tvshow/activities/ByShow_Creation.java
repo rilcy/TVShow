@@ -201,7 +201,7 @@ public class ByShow_Creation extends AppCompatActivity {
     }
 
     public void onClickCancel(View v) {
-        Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         backToPreviousActivity();
     }
 
