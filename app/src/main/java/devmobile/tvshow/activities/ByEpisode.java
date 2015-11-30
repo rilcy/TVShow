@@ -189,6 +189,10 @@ public class ByEpisode extends AppCompatActivity {
         });
     }
 
+    protected void onPause(){
+        super.onPause();
+    }
+
 
     private void checkIfSeasonHasToBeCompleted() {
         int cpt = 1;
