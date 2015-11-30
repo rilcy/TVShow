@@ -24,7 +24,7 @@ import devmobile.tvshow.db.object.Episode;
 
 public class ActorByEpisode extends AppCompatActivity {
 
-    private long num;
+    private long Episode_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class ActorByEpisode extends AppCompatActivity {
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
         final String dataTransfered = getIntent().getStringExtra("EPISODE_ID");
-        num = Long.parseLong(dataTransfered);
+        Episode_ID = Long.parseLong(dataTransfered);
 
         CastingDataSource cds = new CastingDataSource(this);
         final ArrayList<Actor> listOfActors = (ArrayList<Actor>) cds.getAllActors();
@@ -51,8 +51,8 @@ public class ActorByEpisode extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
-                        //Actor actor = (Actor) adapter.getItem(position);
-                        castingEpisodeds.createActorEpisode(id, num);
+                        Actor actor = (Actor) adapter.getItem(position);
+                        castingEpisodeds.createActorEpisode(id, Episode_ID);
                         startActivity(appInfo);
                     }
                 }

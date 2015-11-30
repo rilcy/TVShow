@@ -46,7 +46,7 @@ import devmobile.tvshow.db.object.Show;
 
 public class ByEpisode extends AppCompatActivity {
 
-    private long num;
+    private long Episode_ID;
     private EpisodeDataSource episodeds;
     private SeasonDataSource seasonds;
     private ShowDataSource showds;
@@ -70,11 +70,12 @@ public class ByEpisode extends AppCompatActivity {
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
         String dataTransfered = getIntent().getStringExtra("EPISODE_ID");
-        num = Long.parseLong(dataTransfered);
+        Episode_ID = Long.parseLong(dataTransfered);
 
         // Get data from the Episode
         episodeds = new EpisodeDataSource(this);
-        episode = (Episode) episodeds.getEpisodeById(num);
+        episode = episodeds.getEpisodeById(Episode_ID);
+
         listOfEpisode = new ArrayList<Episode>();
         listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(episode.getSeasonID());
 
@@ -160,7 +161,7 @@ public class ByEpisode extends AppCompatActivity {
                 if(episode.getEpisodeNumber() == listOfEpisode.get(lastEpisode).getEpisodeNumber()) {
                     DialogFragment newFragment = new DeleteEpisodeDialogAlert();
                     Bundle args = new Bundle();
-                    int i = (int) num;
+                    int i = (int) Episode_ID;
                     args.putInt("numEpisodeId", (int) episode.getEpisodeID());
                     newFragment.setArguments(args);
                     newFragment.show(getFragmentManager(), "delete");
@@ -180,7 +181,7 @@ public class ByEpisode extends AppCompatActivity {
             public void onClick(View v) {
                 DialogFragment newFragment = new EditEpisodeDialogAlert();
                 Bundle args = new Bundle();
-                int i = (int) num;
+                int i = (int) Episode_ID;
                 args.putInt("numEpisodeId", episode.getEpisodeID());
                 newFragment.setArguments(args);
                 newFragment.show(getFragmentManager(), "edit");
