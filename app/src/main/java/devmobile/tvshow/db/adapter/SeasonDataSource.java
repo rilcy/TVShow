@@ -108,7 +108,6 @@ public class SeasonDataSource {
     public void deleteSeason(long id){
         this.db.delete(SeasonEntry.TABLE_SEASON, SeasonEntry.KEY_ID + " = ?",
                 new String[] { String.valueOf(id) });
-
     }
 
 }

@@ -118,9 +118,11 @@ public class ShowDataSource {
     }
 
     /**
-     * Delete one show
+     * Delete a show
      */
+    public void deleteShow(long id){
+        this.db.delete(ShowEntry.TABLE_SHOW, ShowEntry.KEY_ID + " = ?",
+                new String[]{String.valueOf(id)});
+    }
 
-
-    //TODO : A faire Delete one show
 }

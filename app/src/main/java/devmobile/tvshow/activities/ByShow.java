@@ -157,6 +157,9 @@ public class ByShow extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new DeleteShowDialogAlert();
+                Bundle args = new Bundle();
+                args.putInt("SHOW_ID", (int)show_Id);
+                newFragment.setArguments(args);
                 newFragment.show(getFragmentManager(), "delete");
 
             }
@@ -170,7 +173,7 @@ public class ByShow extends AppCompatActivity {
 
                 DialogFragment newFragment = new CreateSeasonDialogAlert();
                 Bundle args = new Bundle();
-                args.putInt("showId", show.getShowId());
+                args.putInt("SHOW_ID", show.getShowId());
                 args.putInt("numSeasons", listOfSeasons.size());
                 newFragment.setArguments(args);
                 newFragment.show(getFragmentManager(), "create");
@@ -201,15 +204,17 @@ public class ByShow extends AppCompatActivity {
     private void checkAllSeasonsAndEpisode() {
         for (int i = 0; i < listOfSeasons.size(); i++) {
             ArrayList<Episode> listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(listOfSeasons.get(i).getSeasonId());
-            for (int j = 0; j < listOfEpisodes.size(); j++) {
-                if (listOfEpisodes.get(j).isEpisodeCompleted() == 0) {
-                    listOfEpisodes.get(j).setEpisodeCompleted(1);
-                    episodeds.updateEpisodeIfWatched(listOfEpisodes.get(j));
+            if(listOfEpisodes.size() != 0) {
+                for (int j = 0; j < listOfEpisodes.size(); j++) {
+                    if (listOfEpisodes.get(j).isEpisodeCompleted() == 0) {
+                        listOfEpisodes.get(j).setEpisodeCompleted(1);
+                        episodeds.updateEpisodeIfWatched(listOfEpisodes.get(j));
+                    }
                 }
-            }
-            if (listOfSeasons.get(i).isSeasonCompleted() == 0) {
-                listOfSeasons.get(i).setSeasonCompleted(1);
-                seasonds.updateSeason(listOfSeasons.get(i));
+                if (listOfSeasons.get(i).isSeasonCompleted() == 0) {
+                    listOfSeasons.get(i).setSeasonCompleted(1);
+                    seasonds.updateSeason(listOfSeasons.get(i));
+                }
             }
         }
         show.setShowCompleted(1);
@@ -222,16 +227,19 @@ public class ByShow extends AppCompatActivity {
         show.setShowCompleted(0);
         showds.updateShow(show);
 
-        // CHANGE STATUT OF LAST SEASON AS NOT WATCHED
         int i = listOfSeasons.size()-1;
-        listOfSeasons.get(i).setSeasonCompleted(0);
-        seasonds.updateSeason(listOfSeasons.get(i));
+        ArrayList<Episode> listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(listOfSeasons.get(i).getSeasonId());
+
+        // CHANGE STATUT OF LAST SEASON AS NOT WATCHED
+        if (listOfEpisodes.size() != 0){
+            listOfSeasons.get(i).setSeasonCompleted(0);
+            seasonds.updateSeason(listOfSeasons.get(i));
 
         // CHANGE LAST EPISODE OF LAST SEASON AS NOT WATCHED
-        ArrayList<Episode> listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(listOfSeasons.get(i).getSeasonId());
-        int j = listOfEpisodes.size()-1;
-        listOfEpisodes.get(j).setEpisodeCompleted(0);
-        episodeds.updateEpisodeIfWatched(listOfEpisodes.get(j));
+            int j = listOfEpisodes.size()-1;
+            listOfEpisodes.get(j).setEpisodeCompleted(0);
+            episodeds.updateEpisodeIfWatched(listOfEpisodes.get(j));
+        }
     }
 
     private void refreshMyActivity() {

@@ -1,5 +1,12 @@
 package devmobile.tvshow.db.object;
 
+import android.app.Activity;
+
+import java.util.ArrayList;
+
+import devmobile.tvshow.db.adapter.CastingEpisodeDataSource;
+import devmobile.tvshow.db.adapter.EpisodeDataSource;
+
 /**
  * Created by Elsio on 30.11.2015.
  */
@@ -28,4 +35,16 @@ public class CastingEpisode {
     public int getEpisodeId() {return episodeId;}
 
     public void setEpisodeId(int episodeId) {this.episodeId = episodeId;}
+
+    public void deleteACasting(int episode_Id, Activity activity){
+        CastingEpisodeDataSource castingds = new CastingEpisodeDataSource(activity);
+        castingds.deleteAllCastingsForAnEpisode(episode_Id);
+    }
+
+    public void deleteAllCastings(ArrayList<CastingEpisode> list, Activity activity){
+        CastingEpisodeDataSource castingds = new CastingEpisodeDataSource(activity);
+        for(int i = 0; i<list.size(); i++){
+            castingds.deleteAllCastingsForAnEpisode(list.get(i).getEpisodeId());
+        }
+    }
 }

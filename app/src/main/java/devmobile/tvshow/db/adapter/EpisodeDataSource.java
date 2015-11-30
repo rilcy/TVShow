@@ -156,9 +156,8 @@ public class EpisodeDataSource {
      * Delete a episode
      */
     public void deleteEpisode(long id){
-
-        // TODO: 07.11.15 A vérifier avec Elsio.
-        this.db.delete(EpisodeEntry.TABLE_EPISODE, EpisodeEntry.KEY_ID + " = ? ", new String[] {String.valueOf(id)});
+        this.db.delete(EpisodeEntry.TABLE_EPISODE, EpisodeEntry.KEY_ID + " = ?",
+                new String[]{String.valueOf(id)});
     }
 
 }

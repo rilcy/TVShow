@@ -1,5 +1,12 @@
 package devmobile.tvshow.db.object;
 
+import android.app.Activity;
+
+import java.util.ArrayList;
+
+import devmobile.tvshow.db.adapter.SeasonDataSource;
+import devmobile.tvshow.db.adapter.ShowDataSource;
+
 /**
  * Created by Elsio on 28.10.2015.
  */
@@ -55,5 +62,17 @@ public class Season {
 
     public void setSeasonNumber(int seasonNumber) {
         this.seasonNumber = seasonNumber;
+    }
+
+    public void deleteASeason(int season_Id, Activity activity){
+        SeasonDataSource seasonds = new SeasonDataSource(activity);
+        seasonds.deleteSeason(season_Id);
+    }
+
+    public void deleteAllSeasons(ArrayList<Season> list, Activity activity){
+        ShowDataSource showsds = new ShowDataSource(activity);
+        for(int i = 0; i<list.size(); i++){
+            showsds.deleteShow(list.get(i).getSeasonId());
+        }
     }
 }

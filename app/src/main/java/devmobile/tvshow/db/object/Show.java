@@ -1,5 +1,11 @@
 package devmobile.tvshow.db.object;
 
+import android.app.Activity;
+
+import java.util.ArrayList;
+
+import devmobile.tvshow.db.adapter.ShowDataSource;
+
 /**
  * Created by rilcy on 17.10.15.
  */
@@ -65,5 +71,10 @@ public class Show {
 
     public void setShowCompleted(int showCompleted) {
         this.showCompleted = showCompleted;
+    }
+
+    public void deleteShow(int show_Id, Activity activity){
+        ShowDataSource showsds = new ShowDataSource(activity);
+        showsds.deleteShow(show_Id);
     }
 }

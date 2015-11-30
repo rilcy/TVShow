@@ -227,7 +227,7 @@ public class ByEpisode extends AppCompatActivity {
 
         if (cpt == 0)
             cpt = 1;
-        if(listOfEpisode.get(cpt-1).isEpisodeCompleted() == 1){
+        if(listOfEpisode.get(cpt-1).isEpisodeCompleted() == 0){
             season.setSeasonCompleted(1);
             seasonds.updateSeason(season);
         }

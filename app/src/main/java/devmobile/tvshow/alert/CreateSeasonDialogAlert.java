@@ -22,7 +22,7 @@ public class CreateSeasonDialogAlert extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        mNum = getArguments().getInt("showId");
+        mNum = getArguments().getInt("SHOW_ID");
         mNumSeasons = getArguments().getInt("numSeasons");
 
 

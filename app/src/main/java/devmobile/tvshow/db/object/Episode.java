@@ -1,5 +1,13 @@
 package devmobile.tvshow.db.object;
 
+import android.app.Activity;
+
+import java.util.ArrayList;
+
+import devmobile.tvshow.db.adapter.EpisodeDataSource;
+import devmobile.tvshow.db.adapter.SeasonDataSource;
+import devmobile.tvshow.db.adapter.ShowDataSource;
+
 /**
  * Created by Elsio on 28.10.2015.
  */
@@ -115,8 +123,17 @@ public class Episode {
         this.seasonID = seasonID;
     }
 
-    public boolean isWartched(){
-        //// TODO: 28.11.2015 contôle
-        return false;
+    public void deleteAnEpisode(int episode_Id, Activity activity){
+        EpisodeDataSource episodeds = new EpisodeDataSource(activity);
+        episodeds.deleteEpisode(episode_Id);
     }
+
+    public void deleteAllEpisodes(ArrayList<Episode> list, Activity activity){
+        EpisodeDataSource episodeds = new EpisodeDataSource(activity);
+        for(int i = 0; i<list.size(); i++){
+            episodeds.deleteEpisode(list.get(i).getEpisodeID());
+        }
+    }
+
+
 }

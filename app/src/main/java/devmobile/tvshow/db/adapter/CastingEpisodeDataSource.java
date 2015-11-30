@@ -88,11 +88,10 @@ public class CastingEpisodeDataSource {
     }
 
     /**
-     * deletes reference between an actor and an episode
+     * delete all casting for an Episode
      */
-    public void deleteEpisode(long id){
-
-        // TODO: 07.11.15 A vérifier avec Elsio.
+    public void deleteAllCastingsForAnEpisode(long idShow){
+        this.db.delete(CastingEpisodeEntry.TABLE_CASTING_EPISODE, CastingEpisodeEntry.KEY_EPISODE_ID + " = ?",
+                new String[]{String.valueOf(idShow)});
     }
-
 }
