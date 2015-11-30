@@ -16,7 +16,6 @@ public class Show {
     private String showEnd;
     private int showCompleted;
     private String showImage;
-    //TODO voir si OK
     private Season[] seasons;
 
     // Empty constructor

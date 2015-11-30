@@ -59,6 +59,9 @@ public class CustomAdapterMain extends ArrayAdapter<Show>{
 
         if(ep.isEmpty())
             text.setText(R.string.no_episode_added);
+        else {
+            text.setText("Pouet pouet camion");
+        }
 
 
 

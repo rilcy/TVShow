@@ -62,4 +62,7 @@
     <string name="title_too_short">\Title too short !</string>
     <string name="no_episode_added">No episode added yet !</string>
     <string name="only_last_season">Only the last season can be deleted</string>
+    <string name="no_more_actor">No more actor to add !</string>
+    <string name="message_alert_delete_actor">Etes-vous sûr(e) de vouloir retirer cette personne ?</string>
+    <string name="title_activity_by_show_edition">Edit the show</string>
 </resources>

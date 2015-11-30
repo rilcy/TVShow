@@ -84,6 +84,7 @@ public class ByActor extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_byActor).setVisible(false);
         return true;
     }
 
@@ -100,12 +101,6 @@ public class ByActor extends AppCompatActivity {
             case R.id.action_addShow:
 
                 intent = new Intent(ByActor.this, ByShow_Creation.class);
-                ByActor.this.startActivity(intent);
-                break;
-
-            case R.id.action_settings:
-
-                intent = new Intent(ByActor.this, Settings.class);
                 ByActor.this.startActivity(intent);
                 break;
         }

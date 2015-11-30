@@ -86,8 +86,7 @@ public class ActorByEpisode extends AppCompatActivity {
         }
         else{
 
-            // todo traduction
-            String text = "No more actor to add !";
+            String text = getString(R.string.no_more_actor);
             Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
             toast.show();
             finish();

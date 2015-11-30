@@ -47,8 +47,9 @@ public class ByShow_Edition extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show_edition);
-        //SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        //changeLanguage(sharedPrefs.getString("pref_lang", "en"));
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
         Intent intent = getIntent();
         String dataTransfered = intent.getStringExtra("SHOWID");
@@ -75,8 +76,7 @@ public class ByShow_Edition extends AppCompatActivity {
         etShowName.setText(show.getShowTitle());
         etShowStart.setText(show.getShowStart());
 
-        // TODO : Vérifier que le remplacement du texte hardcodé ne pose pas de problème
-        if (show.getShowEnd().equals(getString(R.string.on_production))){
+        if (show.getShowEnd().startsWith("En")){
             etShowEnd.setText("");
         }
         else{
@@ -111,6 +111,8 @@ public class ByShow_Edition extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_addShow).setVisible(false);
+        menu.findItem(R.id.action_byActor).setVisible(false);
         return true;
     }
 
@@ -120,18 +122,6 @@ public class ByShow_Edition extends AppCompatActivity {
             case android.R.id.home:
 
                 Intent intent = new Intent(ByShow_Edition.this, BySeason.class);
-                ByShow_Edition.this.startActivity(intent);
-                break;
-
-            case R.id.action_byActor:
-
-                intent = new Intent(ByShow_Edition.this, ActorByEpisode.class);
-                ByShow_Edition.this.startActivity(intent);
-                break;
-
-            case R.id.action_addShow:
-
-                intent = new Intent(ByShow_Edition.this, ByShow_Creation.class);
                 ByShow_Edition.this.startActivity(intent);
                 break;
         }
@@ -158,8 +148,7 @@ public class ByShow_Edition extends AppCompatActivity {
             Show showToUpdate = show;
             showToUpdate.setShowTitle(etShowName.getText().toString());
             showToUpdate.setShowStart(etShowStart.getText().toString());
-            //TODO remplacé le texte hardcodé par R.string.on_production, vérifier que tout est OK.
-            showToUpdate.setShowEnd(getString(R.string.on_production));
+            showToUpdate.setShowEnd("En production");
             showToUpdate.setShowId((int) Show_Id);
             updateIntoDB(showToUpdate);
             backToPreviousActivity();
@@ -214,6 +203,8 @@ public class ByShow_Edition extends AppCompatActivity {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        getSupportActionBar().setTitle(R.string.title_activity_by_show_edition);
+        /*
         Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
         buttonLoadPicture.setText(R.string.buttonLoadPicture);
         TextView showName = (TextView) findViewById(R.id.showName);
@@ -228,5 +219,6 @@ public class ByShow_Edition extends AppCompatActivity {
         buttonOk.setText(R.string.buttonOk);
         Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
         buttonCancel.setText(R.string.buttonCancel);
+        */
     }
 }

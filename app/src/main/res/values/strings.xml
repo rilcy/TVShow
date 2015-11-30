@@ -37,10 +37,10 @@
     <string name="buttonLoadPicture">CHARGER UNE PHOTO !</string>
     <string name="alert_create">CREER</string>
     <string name="alert_editEpisode">EDITER</string>
-    <string name="alert_newSeasonQuestion">Êtes-vous sûr de vouloir créer une nouvelle saison ?</string>
-    <string name="message_alert_delete_season">Êtes-vous sûr de vouloir supprimer la saison ? Ceci est une action irréversible.</string>
-    <string name="message_alert_delete_show">Êtes-vous sûr de vouloir supprimer la série ? Ceci est une action irréversible.</string>
-    <string name="message_alert_delete_episode">Êtes-vous sûr de vouloir supprimer l\'épisode ? Ceci est une action irréversible.</string>
+    <string name="alert_newSeasonQuestion">Êtes-vous sûr(e) de vouloir créer une nouvelle saison ?</string>
+    <string name="message_alert_delete_season">Êtes-vous sûr(e) de vouloir supprimer la saison ? Ceci est une action irréversible.</string>
+    <string name="message_alert_delete_show">Êtes-vous sûr(e) de vouloir supprimer la série ? Ceci est une action irréversible.</string>
+    <string name="message_alert_delete_episode">Êtes-vous sûr(e) de vouloir supprimer l\'épisode ? Ceci est une action irréversible.</string>
     <string name="alert_newEpisodeQuestion">Quel est le nom de l\'épisode ?</string>
     <string name="alert_editEpisodeQuestion">Corriger le titre de l\'épisode :</string>
     <string name="buttonSave">SAUVER</string>
@@ -62,5 +62,8 @@
     <string name="title_too_short">Titre trop court !</string>
     <string name="no_episode_added">Aucun épisode ajouté !</string>
     <string name="only_last_season">Vous pouvez seulement supprimer la dernière saison</string>
+    <string name="no_more_actor">Pas d\'autre acteur à ajouter !</string>
+    <string name="message_alert_delete_actor">Etes-vous sûr(e) de vouloir retirer cette personne ?</string>
+    <string name="title_activity_by_show_edition">Modifier la série</string>
 
 </resources>

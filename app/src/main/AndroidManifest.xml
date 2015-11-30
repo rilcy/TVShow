@@ -80,7 +80,12 @@
                 android:value=".activities.MainActivity" />
         </activity>
 
-        <activity android:name=".activities.ByShow_Edition" >
+        <activity android:name=".activities.ByShow_Edition"
+            android:label="@string/title_activity_by_show_edition"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
         </activity>
 
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -95,6 +100,7 @@
         </activity>
         <activity android:name=".alert.EditEpisodeDialogAlert" >
         </activity>
+
         <activity
             android:name=".activities.ByShow_Creation"
             android:label="@string/title_activity_by_show_creation"

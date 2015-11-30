@@ -101,6 +101,9 @@ public class ByShow_Creation extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_addShow).setVisible(false);
+        menu.findItem(R.id.action_byActor).setVisible(false);
         return true;
     }
 
@@ -110,18 +113,6 @@ public class ByShow_Creation extends AppCompatActivity {
             case android.R.id.home:
 
                 Intent intent = new Intent(ByShow_Creation.this, BySeason.class);
-                ByShow_Creation.this.startActivity(intent);
-                break;
-
-            case R.id.action_byActor:
-
-                intent = new Intent(ByShow_Creation.this, ActorByEpisode.class);
-                ByShow_Creation.this.startActivity(intent);
-                break;
-
-            case R.id.action_addShow:
-
-                intent = new Intent(ByShow_Creation.this, ByShow_Creation.class);
                 ByShow_Creation.this.startActivity(intent);
                 break;
         }
@@ -152,7 +143,6 @@ public class ByShow_Creation extends AppCompatActivity {
             show = new Show();
             show.setShowTitle(etShowName.getText().toString());
             show.setShowStart(etShowStart.getText().toString());
-            // TODO  Plutôt entrer une valeur vide "" et gérer à l'affichage si vide. plus simple pour la traduction, sinon la donnée est entrée en dur
             show.setShowEnd("En production");
             show.setShowCompleted(0);
             show.setShowImage(imagePath);

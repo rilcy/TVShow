@@ -46,7 +46,7 @@ public class DeleteActorEpisodeDialogAlert extends DialogFragment {
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.activity_alert_delete, null))
+        builder.setView(inflater.inflate(R.layout.activity_alert_delete_actor, null))
                 // Add action buttons
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
