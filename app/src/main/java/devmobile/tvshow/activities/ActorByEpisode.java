@@ -51,36 +51,17 @@ public class ActorByEpisode extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Actor actor = (Actor) adapter.getItem(position);
+                        String nom = actor.getFirstName();
                         castingEpisodeds.createActorEpisode(actor.getIdActor(), Episode_ID);
+
+                        finish();
                         Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
                         appInfo.putExtra("EPISODE_ID", String.valueOf(Episode_ID));
                         startActivity(appInfo);
+                        finish();
                     }
                 }
         );
-/*
-        final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
-
-        Actor actor1 = new Actor("Jean", "Reno");
-        listOfActors.add(actor1);
-        Actor actor2 = new Actor("Michael", "Douglas");
-        listOfActors.add(actor2);
-        Actor actor3 = new Actor("Leonardo", "DiCaprio");
-        listOfActors.add(actor3);
-        Actor actor4 = new Actor("Brad", "Pitt");
-        listOfActors.add(actor4);
-        Actor actor5 = new Actor("Kevin", "Spacey");
-        listOfActors.add(actor5);
-        Actor actor6 = new Actor("Jim", "Parsons");
-        listOfActors.add(actor6);
-        Actor actor7 = new Actor("Kaley", "Kuoco");
-        listOfActors.add(actor7);
-
-        ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
-
-        ListView list = (ListView) findViewById(R.id.listOfActors);
-        list.setAdapter(adapter);
-        */
     }
 
     private void setupActionBar() {
