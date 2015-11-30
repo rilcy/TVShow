@@ -242,6 +242,7 @@ public class ByShow_Creation extends AppCompatActivity {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        getSupportActionBar().setTitle(R.string.title_activity_by_show_creation);
         Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
         buttonLoadPicture.setText(R.string.buttonLoadPicture);
         TextView showName = (TextView) findViewById(R.id.showName);
