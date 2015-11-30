@@ -45,8 +45,8 @@ public class CastingDataSource {
         long id;
 
         ContentValues values = new ContentValues();
-        values.put(CastingEntry.KEY_LASTNAME, lastName);
         values.put(CastingEntry.KEY_FIRSTNAME, firstName);
+        values.put(CastingEntry.KEY_LASTNAME, lastName);
         id = this.db.insert(CastingEntry.TABLE_CASTING, null, values);
 
         return id;
@@ -88,8 +88,8 @@ public class CastingDataSource {
             do{
                 Actor actor = new Actor();
                 actor.setIdActor(cursor.getInt(cursor.getColumnIndex(CastingEntry.KEY_ID)));
-                actor.setLastName(cursor.getString(cursor.getColumnIndex(CastingEntry.KEY_LASTNAME)));
                 actor.setFirstName(cursor.getString(cursor.getColumnIndex(CastingEntry.KEY_FIRSTNAME)));
+                actor.setLastName(cursor.getString(cursor.getColumnIndex(CastingEntry.KEY_LASTNAME)));
 
                 actors.add(actor);
             } while(cursor.moveToNext());

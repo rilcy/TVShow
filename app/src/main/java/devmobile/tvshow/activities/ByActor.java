@@ -50,7 +50,7 @@ public class ByActor extends AppCompatActivity {
                 newFragment.show(getFragmentManager(), "create");
             }
         });
-        
+
     }
 
     private void setupActionBar() {

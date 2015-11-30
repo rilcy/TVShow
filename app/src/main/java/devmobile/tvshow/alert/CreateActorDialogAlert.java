@@ -45,12 +45,7 @@ public class CreateActorDialogAlert extends DialogFragment {
                         actorLastName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextLastName);
                         String stringLastName = actorLastName.getText().toString();
                         CastingDataSource castingds = new CastingDataSource(getActivity());
-                        castingds.createCasting(stringLastName, stringFirstName);
-                        /*
-                        actor.setFirstName(stringFirstName);
-                        actor.setLastName(stringLastName);
-                        actor.setIdActor((int) castingds.createCasting(actor));
-                        */
+                        castingds.createCasting(stringFirstName, stringLastName);
 
                         Intent intent = getActivity().getIntent();
                         getActivity().finish();
