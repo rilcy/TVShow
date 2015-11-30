@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -85,7 +86,10 @@ public class ActorByEpisode extends AppCompatActivity {
         }
         else{
 
-            
+            // todo traduction
+            String text = "No more actor to add !";
+            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+            toast.show();
             finish();
             Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
             appInfo.putExtra("EPISODE_ID", String.valueOf(Episode_ID));
