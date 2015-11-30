@@ -40,11 +40,12 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxHeight="200dp"
-                    android:maxWidth="200dp"
+                    android:maxHeight="300px"
+                    android:maxWidth="300px"
+                    android:minHeight="300px"
+                    android:minWidth="300px"
                     android:scaleType="centerCrop"
                     android:src="@drawable/e250250"
-                    android:adjustViewBounds="true"
                     android:onClick="onClickUpload" />
 
             </LinearLayout>
