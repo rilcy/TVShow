@@ -54,4 +54,9 @@
     <string name="alert_actorFirstName">Prénom</string>
     <string name="alert_actorLastName">Nom</string>
     <string name="Season">" Season "</string>
+    <string name="on_production">On production</string>
+    <string name="picked_image">You haven\'t picked Image</string>
+    <string name="something_wrong">Something went wrong</string>
+    <string name="only_last_episode">Only the last episode can be deleted</string>
+    <string name="no_more_episodes">No more episode left</string>
 </resources>

@@ -53,13 +53,12 @@ public class CustomAdapterNextToWatch extends ArrayAdapter<Episode>{
             textViewTitle.setText(episode.getEpisodeTitle());
             SeasonDataSource seasonds = new SeasonDataSource(getContext());
             Season season = seasonds.getSeasonById(episode.getSeasonID());
-            // TODO : A TRADUIRE
-            textViewInfo.setText("Season " + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
+            textViewInfo.setText(R.string.Season + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
         }
         else{
             textViewTitle.setText(show.getShowTitle());
-            // TODO: 29.11.15  A TRADUIRE !!
-            textViewInfo.setText("No more episode left");
+            // TODO: Traduction OK ?
+            textViewInfo.setText(R.string.no_more_episodes);
         }
 
         File imgFile = new  File(show.getShowImage());

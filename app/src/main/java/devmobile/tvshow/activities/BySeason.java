@@ -92,14 +92,11 @@ public class BySeason extends AppCompatActivity {
 
         // TOP OF THE ACTIVITY
 
-        // TODO : Traduction du mot Season
-        showInfoBySeason.setText(" Season " + season.getSeasonNumber());
+        showInfoBySeason.setText(getString(R.string.Season) + season.getSeasonNumber());
         boolean watched = true;
 
         watched = checkIfAllEpisodesAreWatched(listOfEpisodes, watched);
 
-
-        //
         if(listOfEpisodes.size() != 0) {
             if (watched) {
                 cbSeasonBySeason.setChecked(true);
@@ -215,8 +212,8 @@ public class BySeason extends AppCompatActivity {
                     newFragment.show(getFragmentManager(), "delete");
                 }
                 else{
-                    // todo traduction
-                    String text = "Only the last episode can be deleted";
+
+                    String text = getString(R.string.only_last_episode);
                     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                     toast.show();
                 }

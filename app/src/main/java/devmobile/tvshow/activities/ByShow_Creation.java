@@ -80,10 +80,10 @@ public class ByShow_Creation extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                 isPicture = true;
             } else {
-                Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.picked_image, Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.something_wrong, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -101,6 +101,7 @@ public class ByShow_Creation extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_settings).setVisible(false);
         return true;
     }
 
@@ -152,7 +153,7 @@ public class ByShow_Creation extends AppCompatActivity {
             show = new Show();
             show.setShowTitle(etShowName.getText().toString());
             show.setShowStart(etShowStart.getText().toString());
-            show.setShowEnd("En production");
+            show.setShowEnd(getString(R.string.on_production));
             show.setShowCompleted(0);
             show.setShowImage(imagePath);
             saveIntoDB(show);
@@ -210,7 +211,7 @@ public class ByShow_Creation extends AppCompatActivity {
     }
 
     public void onClickCancel(View v) {
-        Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.something_wrong, Toast.LENGTH_LONG).show();
         backToPreviousActivity();
     }
 

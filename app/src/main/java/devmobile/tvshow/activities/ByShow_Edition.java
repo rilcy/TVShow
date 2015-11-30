@@ -75,7 +75,8 @@ public class ByShow_Edition extends AppCompatActivity {
         etShowName.setText(show.getShowTitle());
         etShowStart.setText(show.getShowStart());
 
-        if (show.getShowEnd().equals("En production")){
+        // TODO : Vérifier que le remplacement du texte hardcodé ne pose pas de problème
+        if (show.getShowEnd().equals(getString(R.string.on_production))){
             etShowEnd.setText("");
         }
         else{
@@ -109,6 +110,7 @@ public class ByShow_Edition extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_settings).setVisible(false);
         return true;
     }
 
@@ -156,7 +158,8 @@ public class ByShow_Edition extends AppCompatActivity {
             Show showToUpdate = show;
             showToUpdate.setShowTitle(etShowName.getText().toString());
             showToUpdate.setShowStart(etShowStart.getText().toString());
-            showToUpdate.setShowEnd("En production");
+            //TODO remplacé le texte hardcodé par R.string.on_production, vérifier que tout est OK.
+            showToUpdate.setShowEnd(getString(R.string.on_production));
             showToUpdate.setShowId((int) Show_Id);
             updateIntoDB(showToUpdate);
             backToPreviousActivity();
