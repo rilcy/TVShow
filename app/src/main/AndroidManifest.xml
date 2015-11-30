@@ -15,6 +15,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_action_tv"
         android:label="@string/app_name"
+        android:configChanges="locale"
         android:theme="@style/AppTheme" >
         <activity android:name=".activities.MainActivity" >
             <intent-filter>
@@ -36,6 +37,7 @@
         <activity
             android:name=".activities.BySeason"
             android:label="@string/bySeason_pageTitle"
+            android:configChanges="locale"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

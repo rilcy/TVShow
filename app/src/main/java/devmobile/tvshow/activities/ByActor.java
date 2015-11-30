@@ -86,6 +86,12 @@ public class ByActor extends AppCompatActivity {
                 intent = new Intent(ByActor.this, ByShow_Creation.class);
                 ByActor.this.startActivity(intent);
                 break;
+
+            case R.id.action_settings:
+
+                intent = new Intent(ByActor.this, Settings.class);
+                ByActor.this.startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

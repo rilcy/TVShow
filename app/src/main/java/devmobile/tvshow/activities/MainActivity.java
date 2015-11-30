@@ -1,6 +1,8 @@
 package devmobile.tvshow.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,8 +11,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.adapter.ShowDataSource;
@@ -27,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
         ShowDataSource sds = new ShowDataSource(this);
 
@@ -98,16 +105,21 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //TODO : définir cette méthode
-    /*
+    //TODO : Tester si ok
+    private void refreshMyActivity() {
+        finish();
+        Intent intent = getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(getIntent());
+    }
+
+    //TODO : tester si ok
     public void changeLanguage(String lang){
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        TextView welcome = (TextView) findViewById(R.id.main_txt_welcome);
-        welcome.setText(R.string.main_welcome);
+
     }
-    */
 }

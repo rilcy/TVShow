@@ -200,6 +200,12 @@ public class ByEpisode extends AppCompatActivity {
                 intent = new Intent(ByEpisode.this, ByShow_Creation.class);
                 ByEpisode.this.startActivity(intent);
                 break;
+
+            case R.id.action_settings:
+
+                intent = new Intent(ByEpisode.this, Settings.class);
+                ByEpisode.this.startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -232,6 +238,7 @@ public class ByEpisode extends AppCompatActivity {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        getSupportActionBar().setTitle(R.string.byEpisode_pageTitle);
 
         TextView editEpisode = (TextView) findViewById(R.id.editEpisodeText);
         editEpisode.setText(R.string.edit_episode);

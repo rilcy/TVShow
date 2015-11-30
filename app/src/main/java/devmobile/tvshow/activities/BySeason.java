@@ -231,6 +231,7 @@ public class BySeason extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_settings).setVisible(false);
         return true;
     }
 
@@ -286,26 +287,12 @@ public class BySeason extends AppCompatActivity {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        getSupportActionBar().setTitle(R.string.bySeason_pageTitle);
 
         TextView deleteSeason = (TextView) findViewById(R.id.deleteSeasonText);
         deleteSeason.setText(R.string.delete_season);
         TextView addEpisode = (TextView) findViewById(R.id.addEpisodeText);
         addEpisode.setText(R.string.add_episode);
-        /*
-        Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
-        buttonLoadPicture.setText(R.string.buttonLoadPicture);
-        TextView showName = (TextView) findViewById(R.id.showName);
-        showName.setText(R.string.ShowName);
-        TextView showStart = (TextView) findViewById(R.id.showStart);
-        showStart.setText(R.string.ShowStart);
-        CheckBox cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
-        cbIsFinished.setText(R.string.cbisFinished);
-        TextView showEnd = (TextView) findViewById(R.id.showEnd);
-        showEnd.setText(R.string.ShowEnd);
-        Button buttonOk = (Button) findViewById(R.id.buttonOk);
-        buttonOk.setText(R.string.buttonOk);
-        Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
-        buttonCancel.setText(R.string.buttonCancel);
-        */
+
     }
 }
