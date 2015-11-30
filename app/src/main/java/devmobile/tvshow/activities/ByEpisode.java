@@ -124,7 +124,7 @@ public class ByEpisode extends AppCompatActivity {
         cbByEpisode = (CheckBox) findViewById(R.id.cbByEpisode);
 
         titleByEpisode.setText(episode.getEpisodeTitle());
-        
+
         infoByEpisode.setText(getString(R.string.Season) + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
 
         File imgFile = new  File(show.getShowImage());
