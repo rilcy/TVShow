@@ -115,7 +115,7 @@ public class SeasonDataSource {
      * Delete all seasons via the showId
      */
     public void deleteAllSeasonsByShowId(long showId){
-        this.db.delete(EpisodeEntry.TABLE_EPISODE, EpisodeEntry.KEY_SEASON_ID + " = ?",
+        this.db.delete(SeasonEntry.TABLE_SEASON, SeasonEntry.KEY_SHOW_ID + " = ?",
                 new String[]{String.valueOf(showId)});
     }
 

@@ -29,10 +29,11 @@ public class DeleteShowDialogAlert extends DialogFragment {
 
     private int show_id;
     private Show show;
+    private Season season;
     private ArrayList<Season> listOfSeasons;
     private ArrayList<Episode> listOfEpisodes;
     private ArrayList<CastingEpisode> listOfCastingEpisode;
-    private ShowDataSource showsds;
+    private ShowDataSource showds;
     private SeasonDataSource seasonds;
     private EpisodeDataSource episodeds;
     private CastingEpisodeDataSource castringEpds;
@@ -55,28 +56,32 @@ public class DeleteShowDialogAlert extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         show = new Show();
 
-                        // DELETE CASTING FROM EPISODES OF SEASONS
-
-
-                        // DELETE EPISODES OF SEASONS
-
-
-                        // DELETE SEASONS
-
-
-                        // DELETE SHOW
-
+                        showds = new ShowDataSource(getActivity());
                         listOfSeasons = new ArrayList<Season>();
-                        listOfEpisodes = new ArrayList<Episode>();
-                        listOfCastingEpisode = new ArrayList<CastingEpisode>();
-                        showsds = new ShowDataSource(getActivity());
                         seasonds = new SeasonDataSource(getActivity());
+                        listOfEpisodes = new ArrayList<Episode>();
                         episodeds = new EpisodeDataSource(getActivity());
+                        listOfCastingEpisode = new ArrayList<CastingEpisode>();
                         castringEpds = new CastingEpisodeDataSource(getActivity());
 
+                        listOfSeasons = (ArrayList) seasonds.getAllSeasons(show_id);
 
+                        for(int i = 0; i < listOfSeasons.size(); i++){
+                            int seasonId = listOfSeasons.get(i).getSeasonId();
+                            listOfEpisodes = (ArrayList) episodeds.getAllEpisodes(seasonId);
+                            for (int j = 0; j<listOfEpisodes.size(); j++){
+                                int episodeId = listOfEpisodes.get(j).getEpisodeID();
+                                // DELETE CASTING FROM EPISODES OF SEASON
+                                castringEpds.deleteAllCastingsForAnEpisode(episodeId);
+                            }
+                            // DELETE EPISODES OF A SEASON
+                            episodeds.deleteAllEpisodesBySeasonId(seasonId);
+                        }
+                        // DELETE ALL SEASONS
+                        seasonds.deleteAllSeasonsByShowId(show_id);
 
-                        show.deleteShow(show_id, getActivity());
+                        // DELETE SHOW
+                        showds.deleteShow(show_id);
 
                         //End activity and get back to the main activity
                         Intent intent = new Intent(getActivity(), MainActivity.class);
