@@ -94,4 +94,9 @@ public class CastingEpisodeDataSource {
         this.db.delete(CastingEpisodeEntry.TABLE_CASTING_EPISODE, CastingEpisodeEntry.KEY_EPISODE_ID + " = ?",
                 new String[]{String.valueOf(idEpisode)});
     }
+
+    public void deleteCastingForActor(int episode_id, int actor_id) {
+        this.db.delete(CastingEpisodeEntry.TABLE_CASTING_EPISODE, CastingEpisodeEntry.KEY_EPISODE_ID + " = ?" + " AND " + CastingEpisodeEntry.KEY_CASTING_ID + " = ?",
+                new String[]{String.valueOf(episode_id), String.valueOf(actor_id)});
+    }
 }

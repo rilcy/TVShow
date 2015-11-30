@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import devmobile.tvshow.alert.DeleteActorEpisodeDialogAlert;
 import devmobile.tvshow.db.adapter.CastingDataSource;
 import devmobile.tvshow.db.adapter.CastingEpisodeDataSource;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
@@ -97,13 +99,33 @@ public class ByEpisode extends AppCompatActivity {
             listOfActors.add(actor);
         }
 
-        ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
+        final ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
         ListView list = (ListView) findViewById(R.id.listOfActorsForEpisode);
         list.setAdapter(adapter);
         setListViewHeightBasedOnChildren(list);
 
         // Retire le focus sur la liste afin que l'activité démarre en haut de la page
         list.setFocusable(false);
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Actor actor = (Actor) adapter.getItem(position);
+
+                DialogFragment newFragment = new DeleteActorEpisodeDialogAlert();
+                Bundle args = new Bundle();
+                int i = (int) Episode_ID;
+                args.putInt("EPISODE_ID", i);
+                String name = actor.getFirstName() + " " + actor.getLastName();
+                args.putString("NAME", name);
+                args.putInt("ACTOR_ID", actor.getIdActor());
+                newFragment.setArguments(args);
+                newFragment.show(getFragmentManager(), "delete");
+
+
+                return false;
+            }
+        });
 
 
         // Get data from the Season of the Episode
