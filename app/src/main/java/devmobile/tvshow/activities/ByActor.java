@@ -2,7 +2,9 @@ package devmobile.tvshow.activities;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,11 +14,13 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import devmobile.tvshow.R;
 import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.alert.CreateActorDialogAlert;
 import devmobile.tvshow.alert.CreateEpisodeDialogAlert;
+import devmobile.tvshow.db.adapter.CastingDataSource;
 import devmobile.tvshow.db.object.Actor;
 import devmobile.tvshow.db.object.Episode;
 
@@ -27,8 +31,18 @@ public class ByActor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_actor);
 
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        changeLanguage(sharedPrefs.getString("pref_lang", "en"));
+
+        CastingDataSource cds = new CastingDataSource(this);
+        final ArrayList<Actor> listOfActors = (ArrayList<Actor>) cds.getAllActors();
+
+        ListView list = (ListView) findViewById(R.id.listOfActors);
+        final ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
+        list.setAdapter(adapter);
+
         LinearLayout llayout_create = (LinearLayout) findViewById (R.id.linearLayout_createActor);
-        final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
+
         llayout_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,28 +50,6 @@ public class ByActor extends AppCompatActivity {
                 newFragment.show(getFragmentManager(), "create");
             }
         });
-
-        /*
-        Actor actor1 = new Actor("Jean", "Reno");
-        listOfActors.add(actor1);
-        Actor actor2 = new Actor("Michael", "Douglas");
-        listOfActors.add(actor2);
-        Actor actor3 = new Actor("Leonardo", "DiCaprio");
-        listOfActors.add(actor3);
-        Actor actor4 = new Actor("Brad", "Pitt");
-        listOfActors.add(actor4);
-        Actor actor5 = new Actor("Kevin", "Spacey");
-        listOfActors.add(actor5);
-        Actor actor6 = new Actor("Jim", "Parsons");
-        listOfActors.add(actor6);
-        Actor actor7 = new Actor("Kaley", "Kuoco");
-        listOfActors.add(actor7);
-
-*/
-        ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
-
-        ListView list = (ListView) findViewById(R.id.listOfActors);
-        list.setAdapter(adapter);
         
     }
 
@@ -96,6 +88,15 @@ public class ByActor extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void changeLanguage(String lang){
+        Locale myLocale = new Locale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
     }
 
 }

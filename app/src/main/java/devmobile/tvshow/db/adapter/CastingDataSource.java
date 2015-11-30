@@ -41,11 +41,12 @@ public class CastingDataSource {
     */
 
     // Add a new actor
-    public long createCasting(Actor actor){
+    public long createCasting(String firstName, String lastName){
         long id;
+
         ContentValues values = new ContentValues();
-        values.put(CastingEntry.KEY_LASTNAME, actor.getLastName());
-        values.put(CastingEntry.KEY_FIRSTNAME, actor.getFirstName());
+        values.put(CastingEntry.KEY_LASTNAME, lastName);
+        values.put(CastingEntry.KEY_FIRSTNAME, firstName);
         id = this.db.insert(CastingEntry.TABLE_CASTING, null, values);
 
         return id;
