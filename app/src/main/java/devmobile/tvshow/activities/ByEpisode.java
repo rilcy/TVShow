@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -49,6 +50,7 @@ public class ByEpisode extends AppCompatActivity {
     private SeasonDataSource seasonds;
     private ShowDataSource showds;
     private Episode episode;
+    private ArrayList<Episode> listOfEpisode;
     private Season season;
     private Show show;
     private ImageView imgByEpisode;
@@ -70,6 +72,8 @@ public class ByEpisode extends AppCompatActivity {
         // Get data from the Episode
         episodeds = new EpisodeDataSource(this);
         episode = (Episode) episodeds.getEpisodeById(num);
+        listOfEpisode = new ArrayList<Episode>();
+        listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(episode.getSeasonID());
 
         // Get data from the Season of the Episode
         seasonds = new SeasonDataSource(this);
@@ -143,12 +147,21 @@ public class ByEpisode extends AppCompatActivity {
         llayout_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment newFragment = new DeleteEpisodeDialogAlert();
-                Bundle args = new Bundle();
-                int i = (int) num;
-                args.putInt("numEpisodeId", (int) episode.getEpisodeID());
-                newFragment.setArguments(args);
-                newFragment.show(getFragmentManager(), "delete");
+                int lastEpisode = listOfEpisode.size()-1;
+                if(episode.getEpisodeNumber() == listOfEpisode.get(lastEpisode).getEpisodeNumber()) {
+                    DialogFragment newFragment = new DeleteEpisodeDialogAlert();
+                    Bundle args = new Bundle();
+                    int i = (int) num;
+                    args.putInt("numEpisodeId", (int) episode.getEpisodeID());
+                    newFragment.setArguments(args);
+                    newFragment.show(getFragmentManager(), "delete");
+                }
+                else{
+                    // todo traduction
+                    String text = "Only the last episode can be deleted";
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
 
@@ -178,8 +191,6 @@ public class ByEpisode extends AppCompatActivity {
 
 
     private void checkIfSeasonHasToBeCompleted() {
-        ArrayList<Episode> listOfEpisode = new ArrayList<Episode>();
-        listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(season.getSeasonId());
         int cpt = 0;
         while (cpt < listOfEpisode.size() && listOfEpisode.get(cpt).isEpisodeCompleted() == 1){
             cpt++;

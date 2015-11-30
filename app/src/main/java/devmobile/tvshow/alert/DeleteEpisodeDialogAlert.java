@@ -12,14 +12,19 @@ import android.view.LayoutInflater;
 import devmobile.tvshow.R;
 import devmobile.tvshow.activities.BySeason;
 import devmobile.tvshow.activities.ByShow;
+import devmobile.tvshow.db.adapter.EpisodeDataSource;
+import devmobile.tvshow.db.object.Episode;
 
 public class DeleteEpisodeDialogAlert extends DialogFragment {
 
-    int numEpisodeId;
+    private EpisodeDataSource episodeds;
+    private Episode episode;
+    private int numEpisodeId;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        numEpisodeId = getArguments().getInt("numSeasonId");
+        numEpisodeId = getArguments().getInt("numEpisodeId");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
@@ -32,11 +37,17 @@ public class DeleteEpisodeDialogAlert extends DialogFragment {
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        episodeds = new EpisodeDataSource(getActivity());
+                        episode = episodeds.getEpisodeById(numEpisodeId);
+
+                        episodeds.deleteEpisode(episode.getEpisodeID());
 
                         //End activity and get back to the previous activity
+                        getActivity().finish();
                         Intent intent = new Intent(getActivity(), BySeason.class);
+                        intent.putExtra("SEASON_ID", String.valueOf(episode.getSeasonID()));
                         startActivity(intent);
-                        getActivity().finish();                      }
+                    }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
