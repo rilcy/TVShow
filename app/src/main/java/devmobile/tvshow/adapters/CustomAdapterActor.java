@@ -35,6 +35,12 @@ public class CustomAdapterActor extends ArrayAdapter<Actor>{
         firstNameTextView.setText(actorToShow.getFirstName());
         lastNameTextView.setText(actorToShow.getLastName());
 
+        if ( position % 2 == 0)
+        customView.setBackgroundResource(R.drawable.listview_selector_even);
+        else
+        customView.setBackgroundResource(R.drawable.listview_selector_odd);
+
+
         return customView;
     }
 }
