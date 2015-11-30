@@ -45,10 +45,7 @@ public class EditEpisodeDialogAlert extends DialogFragment {
                             episodeTitle = etEditEpisodeByEpisode.getText().toString();
                             episodeds.updateEpisode(mNumEpisodeId, episodeTitle);
 
-                            Intent intent = new Intent(getActivity(), ByEpisode.class);
-                            intent.putExtra("EPISODE_ID", String.valueOf(mNumEpisodeId));
-                            startActivity(intent);
-                            getActivity().finish();
+                            refreshMyActivity();
                         }
                         else{
                             //TODO TRANSLATE
@@ -64,5 +61,13 @@ public class EditEpisodeDialogAlert extends DialogFragment {
                 });
 
         return builder.create();
+    }
+
+    private void refreshMyActivity() {
+        getActivity().finish();
+        Intent intent = getActivity().getIntent();
+        getActivity().overridePendingTransition(0, 0);
+        startActivity(getActivity().getIntent());
+        getActivity().overridePendingTransition(0, 0);
     }
 }

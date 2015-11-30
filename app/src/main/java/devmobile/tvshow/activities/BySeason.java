@@ -86,8 +86,8 @@ public class BySeason extends AppCompatActivity {
         cbSeasonBySeason = (CheckBox) findViewById(R.id.cbSeasonBySeason);
 
         // TOP OF THE ACTIVITY
-        // TODO : Traduction du mot Season
 
+        // TODO : Traduction du mot Season
         showInfoBySeason.setText(" Season " + season.getSeasonNumber());
         boolean watched = true;
 
@@ -206,8 +206,9 @@ public class BySeason extends AppCompatActivity {
     private void refreshMyActivity() {
         finish();
         Intent intent = getIntent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        overridePendingTransition(0, 0);
         startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 
     private boolean checkIfAllEpisodesAreWatched(ArrayList<Episode> listOfEpisodes, boolean watched) {
