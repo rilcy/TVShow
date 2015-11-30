@@ -90,8 +90,8 @@ public class CastingEpisodeDataSource {
     /**
      * delete all casting for an Episode
      */
-    public void deleteAllCastingsForAnEpisode(long idShow){
+    public void deleteAllCastingsForAnEpisode(long idEpisode){
         this.db.delete(CastingEpisodeEntry.TABLE_CASTING_EPISODE, CastingEpisodeEntry.KEY_EPISODE_ID + " = ?",
-                new String[]{String.valueOf(idShow)});
+                new String[]{String.valueOf(idEpisode)});
     }
 }

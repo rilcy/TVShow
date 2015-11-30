@@ -22,12 +22,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -90,6 +87,7 @@ public class ByEpisode extends AppCompatActivity {
         castingEpisodeds = new CastingEpisodeDataSource(this);
         castingds = new CastingDataSource(this);
         listOfCastingEpisodes = (ArrayList<CastingEpisode>) castingEpisodeds.getActorsIdByEpisodeId(episode.getEpisodeID());
+
 
         for (int i=0; i<listOfCastingEpisodes.size(); i++){
 
@@ -167,19 +165,21 @@ public class ByEpisode extends AppCompatActivity {
         llayout_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int lastEpisode = listOfEpisode.size()-1;
-                if(episode.getEpisodeNumber() == listOfEpisode.get(lastEpisode).getEpisodeNumber()) {
-                    DialogFragment newFragment = new DeleteEpisodeDialogAlert();
-                    Bundle args = new Bundle();
-                    int i = (int) Episode_ID;
-                    args.putInt("numEpisodeId", (int) episode.getEpisodeID());
-                    newFragment.setArguments(args);
-                    newFragment.show(getFragmentManager(), "delete");
-                }
-                else{
-                    String text = getString(R.string.only_last_episode);// "Only the last episode can be deleted";
-                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-                    toast.show();
+                if (listOfEpisode != null) {
+                    int lastEpisode = listOfEpisode.size() - 1;
+                    if (episode.getEpisodeNumber() == listOfEpisode.get(lastEpisode).getEpisodeNumber()) {
+                        DialogFragment newFragment = new DeleteEpisodeDialogAlert();
+                        Bundle args = new Bundle();
+                        int i = (int) Episode_ID;
+                        args.putInt("numEpisodeId", (int) episode.getEpisodeID());
+                        newFragment.setArguments(args);
+                        newFragment.show(getFragmentManager(), "delete");
+                    } else {
+                        // todo traduction
+                        String text = "Only the last episode can be deleted";
+                        Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
             }
         });

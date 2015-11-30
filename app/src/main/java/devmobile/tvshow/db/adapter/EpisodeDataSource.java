@@ -160,4 +160,9 @@ public class EpisodeDataSource {
                 new String[]{String.valueOf(id)});
     }
 
+    public void deleteAllEpisodesBySeasonId(long seasonId){
+        this.db.delete(EpisodeEntry.TABLE_EPISODE, EpisodeEntry.KEY_SEASON_ID + " = ?",
+                new String[]{String.valueOf(seasonId)});
+    }
+
 }

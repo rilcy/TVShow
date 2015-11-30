@@ -49,11 +49,13 @@ public class DeleteEpisodeDialogAlert extends DialogFragment {
                         ArrayList<CastingEpisode> listOfCasting = new ArrayList<CastingEpisode>();
                         listOfCasting = (ArrayList) castingds.getActorsIdByEpisodeId(numEpisodeId);
 
+                        // DELETE CASTING
                         casting.deleteAllCastings(listOfCasting, getActivity());
 
                         episodeds = new EpisodeDataSource(getActivity());
                         episode = episodeds.getEpisodeById(numEpisodeId);
 
+                        // DELETE EPISODE
                         episodeds.deleteEpisode(episode.getEpisodeID());
 
                         //End activity and get back to the previous activity

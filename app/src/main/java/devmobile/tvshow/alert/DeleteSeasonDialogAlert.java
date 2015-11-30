@@ -9,21 +9,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import java.util.ArrayList;
+
 import devmobile.tvshow.R;
+import devmobile.tvshow.activities.BySeason;
 import devmobile.tvshow.activities.ByShow;
+import devmobile.tvshow.db.adapter.CastingEpisodeDataSource;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
+import devmobile.tvshow.db.object.CastingEpisode;
+import devmobile.tvshow.db.object.Episode;
+import devmobile.tvshow.db.object.Season;
 
 
 public class DeleteSeasonDialogAlert extends DialogFragment {
 
-    private int numSeasonId;
-    private SeasonDataSource seasonsds;
-    private EpisodeDataSource episodeDataSource;
+    private int SeasonId;
+    private int ShowId;
+    private EpisodeDataSource episodeds;
+    private ArrayList<Episode> listOfEpisodes;
+    private CastingEpisodeDataSource castingds;
+    private SeasonDataSource seasonds;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        numSeasonId = getArguments().getInt("numSeasonId");
+        SeasonId = getArguments().getInt("SEASONS_ID");
+        ShowId = getArguments().getInt("SHOW_ID");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
@@ -37,10 +49,29 @@ public class DeleteSeasonDialogAlert extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
 
+                        // DELETE CASTING FOR EACH EPISODES
+                        listOfEpisodes = new ArrayList<Episode>();
+                        episodeds = new EpisodeDataSource(getActivity());
+                        castingds = new CastingEpisodeDataSource(getActivity());
+                        listOfEpisodes = (ArrayList) episodeds.getAllEpisodes(SeasonId);
+                        if(listOfEpisodes != null && listOfEpisodes.size() > -1) {
+                            for (int i = 0; i < listOfEpisodes.size(); i++) {
+                                castingds.deleteAllCastingsForAnEpisode(listOfEpisodes.get(i).getEpisodeID());
+                            }
+                        }
+                        // DELETE EPISODES OF A SEASON
+                        episodeds.deleteAllEpisodesBySeasonId(SeasonId);
+
+                        // DELETE SEASON
+                        seasonds = new SeasonDataSource(getActivity());
+                        seasonds.deleteSeason(SeasonId);
+
+
                         //End activity and get back to the previous activity
-                        Intent intent = new Intent(getActivity(), ByShow.class);
-                        startActivity(intent);
                         getActivity().finish();
+                        Intent intent = new Intent(getActivity(), ByShow.class);
+                        intent.putExtra("SHOW_ID", String.valueOf(ShowId));
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

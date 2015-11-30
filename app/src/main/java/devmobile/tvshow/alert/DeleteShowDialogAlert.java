@@ -55,6 +55,17 @@ public class DeleteShowDialogAlert extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         show = new Show();
 
+                        // DELETE CASTING FROM EPISODES OF SEASONS
+
+
+                        // DELETE EPISODES OF SEASONS
+
+
+                        // DELETE SEASONS
+
+
+                        // DELETE SHOW
+
                         listOfSeasons = new ArrayList<Season>();
                         listOfEpisodes = new ArrayList<Episode>();
                         listOfCastingEpisode = new ArrayList<CastingEpisode>();
