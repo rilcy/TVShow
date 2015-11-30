@@ -61,5 +61,6 @@
     <string name="no_more_episodes">Pas d\'autres épisodes</string>
     <string name="title_too_short">Titre trop court !</string>
     <string name="no_episode_added">Aucun épisode ajouté !</string>
+    <string name="only_last_season">Vous pouvez seulement supprimer la dernière saison</string>
 
 </resources>

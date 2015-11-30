@@ -61,4 +61,5 @@
     <string name="no_more_episodes">No more episode left</string>
     <string name="title_too_short">\Title too short !</string>
     <string name="no_episode_added">No episode added yet !</string>
+    <string name="only_last_season">Only the last season can be deleted</string>
 </resources>

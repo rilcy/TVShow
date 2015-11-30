@@ -175,8 +175,7 @@ public class ByEpisode extends AppCompatActivity {
                         newFragment.setArguments(args);
                         newFragment.show(getFragmentManager(), "delete");
                     } else {
-                        // todo traduction
-                        String text = "Only the last episode can be deleted";
+                        String text = getString(R.string.only_last_episode);
                         Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                         toast.show();
                     }

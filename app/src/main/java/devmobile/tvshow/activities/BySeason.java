@@ -217,7 +217,7 @@ public class BySeason extends AppCompatActivity {
                         newFragment.show(getFragmentManager(), "delete");
                     } else {
 
-                        String text = getString(R.string.only_last_episode);
+                        String text = getString(R.string.only_last_season);
                         Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                         toast.show();
                     }
