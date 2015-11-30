@@ -48,8 +48,8 @@ public class EditEpisodeDialogAlert extends DialogFragment {
                             refreshMyActivity();
                         }
                         else{
-                            //TODO TRANSLATE
-                            String toast = "Title too short !";
+                            //TODO TRANSLATE OK
+                            String toast = getString(R.string.title_too_short);
                             Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
                         }
                     }

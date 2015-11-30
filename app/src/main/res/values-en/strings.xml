@@ -59,4 +59,5 @@
     <string name="something_wrong">Something went wrong</string>
     <string name="only_last_episode">Only the last episode can be deleted</string>
     <string name="no_more_episodes">No more episode left</string>
+    <string name="title_too_short">\Title too short !</string>
 </resources>

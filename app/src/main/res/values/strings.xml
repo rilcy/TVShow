@@ -59,5 +59,6 @@
     <string name="something_wrong">Problème survenu</string>
     <string name="only_last_episode">Vous pouvez seulement supprimer le dernier épisode</string>
     <string name="no_more_episodes">Pas d\'autres épisodes</string>
+    <string name="title_too_short">Titre trop court !</string>
 
 </resources>
