@@ -53,11 +53,10 @@ public class CustomAdapterNextToWatch extends ArrayAdapter<Episode>{
             textViewTitle.setText(episode.getEpisodeTitle());
             SeasonDataSource seasonds = new SeasonDataSource(getContext());
             Season season = seasonds.getSeasonById(episode.getSeasonID());
-            textViewInfo.setText(R.string.Season + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
+            textViewInfo.setText("Season " + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
         }
         else{
             textViewTitle.setText(show.getShowTitle());
-            // TODO: Traduction OK ?
             textViewInfo.setText(R.string.no_more_episodes);
         }
 
