@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -41,7 +42,11 @@ public class ByShow extends AppCompatActivity {
     private long numberSeasons;
     private long show_Id;
     private Season season;
+    private ShowDataSource showds;
     private SeasonDataSource seasonds;
+    private EpisodeDataSource episodeds;
+
+    private Show show = new Show();
 
     private TextView beginYearByShow;
     private TextView endYearByShow;
@@ -56,10 +61,12 @@ public class ByShow extends AppCompatActivity {
         Intent intent = getIntent();
         String dataTransfered = intent.getStringExtra("SHOW_ID");
         show_Id = Long.parseLong(dataTransfered);
-        ShowDataSource sds = new ShowDataSource(this);
-        final Show show = sds.getShowById(show_Id);
-        seasonds = new SeasonDataSource(this);
 
+        showds = new ShowDataSource(this);
+        show = showds.getShowById(show_Id);
+        seasonds = new SeasonDataSource(this);
+        episodeds = new EpisodeDataSource(this);
+        showds = new ShowDataSource(this);
 
         SeasonDataSource seasons = new SeasonDataSource(this);
         listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons((int)show_Id);
@@ -83,6 +90,24 @@ public class ByShow extends AppCompatActivity {
 
         int numberleft = countNumberOfEpisodeLeft();
         cbNumberEpisodeToWatch.setText(" " + numberleft);
+
+        if(show.isShowCompleted() == 0)
+            cbNumberEpisodeToWatch.setChecked(false);
+        else
+            cbNumberEpisodeToWatch.setChecked(true);
+
+        cbNumberEpisodeToWatch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked)
+                    checkAllSeasonsAndEpisode();
+                else
+                    uncheckLastEpisode();
+
+                refreshMyActivity();
+            }
+        });
+
 
         // PARTIE INFERIEURE "LISTE DES SAISONS"
         numberSeasons = listOfSeasons.size();
@@ -146,6 +171,50 @@ public class ByShow extends AppCompatActivity {
         });
 
 
+    }
+
+    private void checkAllSeasonsAndEpisode() {
+        for (int i = 0; i < listOfSeasons.size(); i++) {
+            ArrayList<Episode> listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(listOfSeasons.get(i).getSeasonId());
+            for (int j = 0; j < listOfEpisodes.size(); j++) {
+                if (listOfEpisodes.get(j).isEpisodeCompleted() == 0) {
+                    listOfEpisodes.get(j).setEpisodeCompleted(1);
+                    episodeds.updateEpisodeIfWatched(listOfEpisodes.get(j));
+                }
+            }
+            if (listOfSeasons.get(i).isSeasonCompleted() == 0) {
+                listOfSeasons.get(i).setSeasonCompleted(1);
+                seasonds.updateSeason(listOfSeasons.get(i));
+            }
+        }
+        show.setShowCompleted(1);
+        showds.updateShow(show);
+    }
+
+    private void uncheckLastEpisode() {
+
+        // CHANGE STATUT OF THE SHOW AS NOT WATCHED
+        show.setShowCompleted(0);
+        showds.updateShow(show);
+
+        // CHANGE STATUT OF LAST SEASON AS NOT WATCHED
+        int i = listOfSeasons.size()-1;
+        listOfSeasons.get(i).setSeasonCompleted(0);
+        seasonds.updateSeason(listOfSeasons.get(i));
+
+        // CHANGE LAST EPISODE OF LAST SEASON AS NOT WATCHED
+        ArrayList<Episode> listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(listOfSeasons.get(i).getSeasonId());
+        int j = listOfEpisodes.size()-1;
+        listOfEpisodes.get(j).setEpisodeCompleted(0);
+        episodeds.updateEpisodeIfWatched(listOfEpisodes.get(j));
+    }
+
+    private void refreshMyActivity() {
+        finish();
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 
     private int countNumberOfEpisodeLeft() {
