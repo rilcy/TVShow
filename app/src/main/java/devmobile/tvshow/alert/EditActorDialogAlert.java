@@ -20,11 +20,15 @@ public class EditActorDialogAlert extends DialogFragment {
 
     EditText actorFirstName;
     EditText actorLastName;
-    Actor actor;
+    private String castingFirstName;
+    private String castingLastName;
+    private int actorId ;
+
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        actorId = getArguments().getInt("passedActorId");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
@@ -37,12 +41,18 @@ public class EditActorDialogAlert extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        /*
                         actorFirstName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextFirstName);
                         String stringFirstName = actorFirstName.getText().toString();
                         actorLastName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextLastName);
                         String stringLastName = actorLastName.getText().toString();
+                        */
                         CastingDataSource castingds = new CastingDataSource(getActivity());
-                        castingds.createCasting(stringFirstName, stringLastName);
+                        actorFirstName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextFirstName);
+                        actorLastName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextLastName);
+                        castingFirstName = actorFirstName.getText().toString();
+                        castingLastName = actorLastName.getText().toString();
+                        castingds.updateActor(actorId, castingFirstName, castingLastName);
 
                         Intent intent = getActivity().getIntent();
                         getActivity().finish();

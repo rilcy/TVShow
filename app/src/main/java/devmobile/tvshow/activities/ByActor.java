@@ -60,12 +60,12 @@ public class ByActor extends AppCompatActivity {
                                            int pos, long id) {
 
                 DialogFragment newFragment = new EditActorDialogAlert();
-                /*
+
+                Actor actor = (Actor) adapter.getItem(pos);
                 Bundle args = new Bundle();
-                int i = (int) num;
-                args.putInt("numEpisodeId", episode.getEpisodeID());
+                //int i = (int) num;
+                args.putInt("passedActorId", actor.getIdActor());
                 newFragment.setArguments(args);
-                */
                 newFragment.show(getFragmentManager(), "edit");
 
                 return true;
