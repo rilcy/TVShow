@@ -12,6 +12,7 @@ import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.ShowContract;
 import devmobile.tvshow.db.ShowContract.*;
 import devmobile.tvshow.db.object.Actor;
+import devmobile.tvshow.db.object.CastingEpisode;
 import devmobile.tvshow.db.object.Episode;
 import devmobile.tvshow.db.object.Season;
 
@@ -41,6 +42,7 @@ public class CastingEpisodeDataSource {
     /**
      * Get all the actors by episodeId
      */
+    /*
     public List<Actor> getActorsByEpisodeId(int id){
         List<Actor> actors = new ArrayList<Actor>();
         String sql = "SELECT * FROM " + CastingEpisodeEntry.TABLE_CASTING_EPISODE +
@@ -60,6 +62,28 @@ public class CastingEpisodeDataSource {
             } while (cursor.moveToNext()) ;
         }
         return actors;
+
+    }
+    */
+
+    public List<CastingEpisode> getActorsIdByEpisodeId(int id) {
+        List<CastingEpisode> castingEpisodes = new ArrayList<CastingEpisode>();
+        String sql = "SELECT * FROM " + CastingEpisodeEntry.TABLE_CASTING_EPISODE +
+                " WHERE " + CastingEpisodeEntry.KEY_EPISODE_ID + " = " + id;
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                CastingEpisode castingEpisode = new CastingEpisode();
+                castingEpisode.setId(cursor.getInt(cursor.getColumnIndex(CastingEpisodeEntry.KEY_ID)));
+                castingEpisode.setCastingId(cursor.getInt(cursor.getColumnIndex(CastingEpisodeEntry.KEY_CASTING_ID)));
+                castingEpisode.setEpisodeId(cursor.getInt(cursor.getColumnIndex(CastingEpisodeEntry.KEY_EPISODE_ID)));
+
+                castingEpisodes.add(castingEpisode);
+            } while (cursor.moveToNext()) ;
+        }
+        return castingEpisodes;
 
     }
 

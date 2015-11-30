@@ -50,9 +50,10 @@ public class ActorByEpisode extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
                         Actor actor = (Actor) adapter.getItem(position);
-                        castingEpisodeds.createActorEpisode(id, Episode_ID);
+                        castingEpisodeds.createActorEpisode(actor.getIdActor(), Episode_ID);
+                        Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
+                        appInfo.putExtra("EPISODE_ID", String.valueOf(Episode_ID));
                         startActivity(appInfo);
                     }
                 }

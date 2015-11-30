@@ -31,6 +31,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import devmobile.tvshow.db.adapter.CastingDataSource;
 import devmobile.tvshow.db.adapter.CastingEpisodeDataSource;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
@@ -40,6 +41,7 @@ import devmobile.tvshow.R;
 import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.alert.DeleteEpisodeDialogAlert;
 import devmobile.tvshow.alert.EditEpisodeDialogAlert;
+import devmobile.tvshow.db.object.CastingEpisode;
 import devmobile.tvshow.db.object.Episode;
 import devmobile.tvshow.db.object.Season;
 import devmobile.tvshow.db.object.Show;
@@ -52,8 +54,10 @@ public class ByEpisode extends AppCompatActivity {
     private ShowDataSource showds;
     private CastingEpisodeDataSource castingEpisodeds;
     private Episode episode;
+    private CastingDataSource castingds;
     private ArrayList<Episode> listOfEpisode;
     private ArrayList<Actor> listOfActors;
+    private ArrayList<CastingEpisode> listOfCastingEpisodes;
     private Season season;
     private Show show;
     private ImageView imgByEpisode;
@@ -80,9 +84,34 @@ public class ByEpisode extends AppCompatActivity {
         listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(episode.getSeasonID());
 
         // Get data from the actors
-        castingEpisodeds = new CastingEpisodeDataSource(this);
+        //castingEpisodeds = new CastingEpisodeDataSource(this);
         listOfActors = new ArrayList<Actor>();
-        listOfActors = (ArrayList<Actor>) castingEpisodeds.getActorsByEpisodeId(episode.getEpisodeID());
+        //listOfActors = (ArrayList<Actor>) castingEpisodeds.getActorsByEpisodeId(episode.getEpisodeID());
+
+        // Get data from casting+episodes
+        castingEpisodeds = new CastingEpisodeDataSource(this);
+        listOfCastingEpisodes = (ArrayList<CastingEpisode>) castingEpisodeds.getActorsIdByEpisodeId(episode.getEpisodeID());
+
+
+        //TODO : Corriger la boucle pour obtenir les acteurs de cet épisode
+        for (int i=0; i<listOfCastingEpisodes.size(); i++){
+            //listOfActors.add(listOfCastingEpisodes.get(i).getCastingId())
+
+            //int actorId = listOfCastingEpisodes.get(i).getCastingId();
+
+            //listOfActors.add(new Actor());
+
+            Actor actor = castingds.getActorById(listOfCastingEpisodes.get(i).getCastingId());
+
+            listOfActors.add(actor);
+        }
+
+        ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
+        ListView list = (ListView) findViewById(R.id.listOfActorsForEpisode);
+        list.setAdapter(adapter);
+        setListViewHeightBasedOnChildren(list);
+        // Retire le focus sur la liste afin que l'activité démarre en haut de la page
+        list.setFocusable(false);
 
 
         // Get data from the Season of the Episode
@@ -128,12 +157,11 @@ public class ByEpisode extends AppCompatActivity {
         cbByEpisode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     episode.setEpisodeCompleted(1);
                     episodeds.updateEpisodeIfWatched(episode);
                     checkIfSeasonHasToBeCompleted();
-                }
-                else{
+                } else {
                     episode.setEpisodeCompleted(0);
                     episodeds.updateEpisodeIfWatched(episode);
                     checkIfSeasonsHasToBeUnchecked();
@@ -141,17 +169,6 @@ public class ByEpisode extends AppCompatActivity {
             }
         });
 
-
-
-        final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
-
-        ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
-
-        ListView list = (ListView) findViewById(R.id.listOfActorsForEpisode);
-        list.setAdapter(adapter);
-        setListViewHeightBasedOnChildren(list);
-        // Retire le focus sur la liste afin que l'activité démarre en haut de la page
-        list.setFocusable(false);
 
         LinearLayout llayout_delete = (LinearLayout) findViewById (R.id.linearlayout_deleteEpisode);
         llayout_delete.setOnClickListener(new View.OnClickListener() {
