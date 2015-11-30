@@ -9,15 +9,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import java.util.ArrayList;
+
 import devmobile.tvshow.R;
 import devmobile.tvshow.activities.BySeason;
 import devmobile.tvshow.activities.ByShow;
+import devmobile.tvshow.db.adapter.CastingEpisodeDataSource;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
+import devmobile.tvshow.db.object.CastingEpisode;
 import devmobile.tvshow.db.object.Episode;
 
 public class DeleteEpisodeDialogAlert extends DialogFragment {
 
     private EpisodeDataSource episodeds;
+    private CastingEpisode casting;
+    private CastingEpisodeDataSource castingds;
     private Episode episode;
     private int numEpisodeId;
 
@@ -37,6 +43,14 @@ public class DeleteEpisodeDialogAlert extends DialogFragment {
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+
+                        castingds = new CastingEpisodeDataSource(getActivity());
+                        casting = new CastingEpisode();
+                        ArrayList<CastingEpisode> listOfCasting = new ArrayList<CastingEpisode>();
+                        listOfCasting = (ArrayList) castingds.getActorsIdByEpisodeId(numEpisodeId);
+
+                        casting.deleteAllCastings(listOfCasting, getActivity());
+
                         episodeds = new EpisodeDataSource(getActivity());
                         episode = episodeds.getEpisodeById(numEpisodeId);
 
