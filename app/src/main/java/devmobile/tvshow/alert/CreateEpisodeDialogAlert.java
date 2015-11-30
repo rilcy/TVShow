@@ -10,11 +10,7 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 
 import devmobile.tvshow.R;
-import devmobile.tvshow.activities.BySeason;
-import devmobile.tvshow.activities.ByShow;
-import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
-import devmobile.tvshow.db.adapter.SeasonDataSource;
 
 public class CreateEpisodeDialogAlert extends DialogFragment {
 

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 import devmobile.tvshow.adapters.CustomAdapterNextToWatch;
 import devmobile.tvshow.adapters.CustomAdapterShow;
-import devmobile.tvshow.db.SQLiteHelper;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
@@ -40,7 +39,7 @@ public class ByShow extends AppCompatActivity {
 
     private ArrayList<Season> listOfSeasons;
     private long numberSeasons;
-    private long num;
+    private long show_Id;
     private Season season;
     private SeasonDataSource seasonds;
 
@@ -56,39 +55,34 @@ public class ByShow extends AppCompatActivity {
 
         Intent intent = getIntent();
         String dataTransfered = intent.getStringExtra("SHOW_ID");
-        num = Long.parseLong(dataTransfered);
+        show_Id = Long.parseLong(dataTransfered);
         ShowDataSource sds = new ShowDataSource(this);
-        final Show show = sds.getShowById(num);
+        final Show show = sds.getShowById(show_Id);
         seasonds = new SeasonDataSource(this);
 
 
         SeasonDataSource seasons = new SeasonDataSource(this);
-        listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons((int)num);
+        listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons((int)show_Id);
 
 
         //PARTIE SUPERIEURE "A VOIR PROCHAINEMENT"
         Episode ep = findNextEpisodeToWatch(listOfSeasons);
+        final ArrayList<Episode> eplist = new ArrayList<Episode>();
+        eplist.add(ep);
+        ListAdapter adapterNextoWatch = new CustomAdapterNextToWatch(this, eplist, show.getShowImage(), show.getShowId());
 
-
-            final ArrayList<Episode> eplist = new ArrayList<Episode>();
-
-            eplist.add(ep);
-
-            ListAdapter adapterNextoWatch = new CustomAdapterNextToWatch(this, eplist, show.getShowImage(), show.getShowId());
-
-            ListView listNextToWatch = (ListView) findViewById(R.id.listeNextToWatch);
-            listNextToWatch.setAdapter(adapterNextoWatch);
-
-
-
+        ListView listNextToWatch = (ListView) findViewById(R.id.listeNextToWatch);
+        listNextToWatch.setAdapter(adapterNextoWatch);
 
         //PARTIE MEDIANE
         beginYearByShow = (TextView) findViewById(R.id.beginYearByShow);
         endYearByShow = (TextView) findViewById(R.id.endYearByShow);
         cbNumberEpisodeToWatch = (CheckBox) findViewById(R.id.cbNumberEpisodeToWatch);
-
         beginYearByShow.setText(show.getShowStart());
         endYearByShow.setText(show.getShowEnd());
+
+        int numberleft = countNumberOfEpisodeLeft();
+        cbNumberEpisodeToWatch.setText(" " + numberleft);
 
         // PARTIE INFERIEURE "LISTE DES SAISONS"
         numberSeasons = listOfSeasons.size();
@@ -152,6 +146,29 @@ public class ByShow extends AppCompatActivity {
         });
 
 
+    }
+
+    private int countNumberOfEpisodeLeft() {
+
+        int nbSeasons = listOfSeasons.size();
+        int seasonId;
+        EpisodeDataSource episodeds = new EpisodeDataSource(this);
+        ArrayList<Episode> listOfEpisode = new ArrayList<Episode>();
+        int nbEpisode = 0;
+        int cpt = 0;
+
+        for(int i = 0; i<nbSeasons; i++){
+            seasonId = listOfSeasons.get(i).getSeasonId();
+            listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(seasonId);
+            nbEpisode = listOfEpisode.size();
+
+            for(int j = 0; j<nbEpisode; j++){
+                if(listOfEpisode.get(j).isEpisodeCompleted() == 0)
+                    ++cpt;
+            }
+        }
+
+        return cpt;
     }
 
     private Episode findNextEpisodeToWatch(ArrayList<Season> listOfSeasons) {

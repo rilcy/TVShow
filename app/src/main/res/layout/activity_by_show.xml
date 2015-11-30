@@ -21,7 +21,7 @@
                 android:layout_gravity="center"
                 android:hint="@string/nextToWatch"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@android:color/background_light"
+                android:textColor="#000000"
                 android:textStyle="bold" />
 
 
@@ -49,11 +49,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/NCISLA_beginYear"
+                android:textColor="#000000"
                 android:textSize="23sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:text=" - "
                 android:textSize="23sp" />
 
@@ -62,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/NCISLA_endYear"
+                android:textColor="#000000"
                 android:textSize="23sp" />
         </LinearLayout>
 
@@ -77,12 +80,14 @@
                 android:id="@+id/cbNumberEpisodeToWatch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColor="#000000"
                 android:checked="false"
                 android:textSize="23sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColor="#000000"
                 android:text=" "/>
 
 
@@ -91,7 +96,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nextToWatchCount"
+                android:textColor="#000000"
                 android:textSize="23sp" />
+
         </LinearLayout>
 
         <LinearLayout
