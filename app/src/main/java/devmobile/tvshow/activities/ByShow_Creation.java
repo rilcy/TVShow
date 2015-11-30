@@ -58,6 +58,7 @@ public class ByShow_Creation extends AppCompatActivity {
         etShowStart = (EditText) findViewById(R.id.etShowStart);
         etShowEnd = (EditText) findViewById(R.id.etShowEnd);
         tvShowEnd = (TextView) findViewById(R.id.showEnd);
+
         // Button and imageView button
         imgView = (ImageView) findViewById(R.id.imgView);
         saveButton = (Button) findViewById(R.id.buttonOk);

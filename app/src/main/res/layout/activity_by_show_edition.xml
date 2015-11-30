@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context=".activities.ByShow_Edition">
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/scrollView">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
 
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -25,8 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:padding="1dp"
-            android:background="@color/colorPrimaryDark">
+            android:padding="1dp">
 
 
         <ImageView
@@ -34,35 +39,21 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxHeight="200dp"
-            android:maxWidth="200dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/e250250"
-            android:onClick="onClickSelectImg"
-            android:adjustViewBounds="true"/>
+            android:maxHeight="300px"
+            android:maxWidth="300px"
+            android:minHeight="300px"
+            android:minWidth="300px"
+            android:scaleType="centerCrop"/>
 
     </LinearLayout>
-
-        <Button
-            android:id="@+id/buttonLoadPicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="onClickSelectImg"
-            android:hint="@string/buttonLoadPicture"/>
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="30dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:hint="@string/ShowName"
+            android:textColor="#000000"
+            android:textSize="18dp"
             android:id="@+id/showName" />
 
         <EditText
@@ -74,7 +65,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="18dp"
             android:hint="@string/ShowStart"
             android:id="@+id/showStart" />
 
@@ -91,12 +83,15 @@
             android:layout_height="wrap_content"
             android:hint="@string/cbisFinished"
             android:id="@+id/cbiSFinished"
+            android:textColor="#000000"
+            android:textSize="18dp"
             android:onClick="onClickCheckbox" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="18dp"
             android:hint="@string/ShowEnd"
             android:id="@+id/showEnd" />
 
@@ -147,3 +142,4 @@
     </LinearLayout>
 
 </ScrollView>
+    </LinearLayout>
