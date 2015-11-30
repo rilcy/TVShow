@@ -56,6 +56,10 @@ public class CustomAdapterShow extends ArrayAdapter<Season>{
         else
             cbSeasonBySeason.setChecked(true);
 
+        if (position % 2 == 0)
+            customView.setBackgroundResource(R.drawable.listview_selector_even);
+        else
+            customView.setBackgroundResource(R.drawable.listview_selector_odd);
 
         return customView;
     }
