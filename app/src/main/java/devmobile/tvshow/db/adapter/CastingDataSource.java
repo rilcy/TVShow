@@ -101,16 +101,13 @@ public class CastingDataSource {
     /**
      *  Update the lastname and firstname of actor
      */
-    public int updateActor(Actor actor){
+    public int updateActor(int actorId, String firstName, String lastName){
         ContentValues values = new ContentValues();
-        values.put(CastingEntry.KEY_LASTNAME, actor.getFirstName());
-        values.put(CastingEntry.KEY_FIRSTNAME, actor.getLastName());
+        values.put(CastingEntry.KEY_FIRSTNAME, firstName);
+        values.put(CastingEntry.KEY_LASTNAME, lastName);
 
-        /** TODO: 07.11.15 Vérifier le "?" ci-dessous. S'assurer de la validité du return.
-         *  de
-         *  */
-        return this.db.update(SeasonEntry.TABLE_SEASON, values, SeasonEntry.KEY_ID + " = ?",
-                new String[] { String.valueOf(actor.getIdActor()) });
+        return this.db.update(CastingEntry.TABLE_CASTING, values, CastingEntry.KEY_ID + " = ?",
+                new String[] { String.valueOf(actorId) });
     }
 
 

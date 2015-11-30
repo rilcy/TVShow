@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -20,6 +21,8 @@ import devmobile.tvshow.R;
 import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.alert.CreateActorDialogAlert;
 import devmobile.tvshow.alert.CreateEpisodeDialogAlert;
+import devmobile.tvshow.alert.EditActorDialogAlert;
+import devmobile.tvshow.alert.EditEpisodeDialogAlert;
 import devmobile.tvshow.db.adapter.CastingDataSource;
 import devmobile.tvshow.db.object.Actor;
 import devmobile.tvshow.db.object.Episode;
@@ -51,6 +54,24 @@ public class ByActor extends AppCompatActivity {
             }
         });
 
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+
+                DialogFragment newFragment = new EditActorDialogAlert();
+
+                Actor actor = (Actor) adapter.getItem(pos);
+                Bundle args = new Bundle();
+                //int i = (int) num;
+                args.putInt("passedActorId", actor.getIdActor());
+                newFragment.setArguments(args);
+                newFragment.show(getFragmentManager(), "edit");
+
+                return true;
+            }
+        });
+
     }
 
     private void setupActionBar() {
@@ -62,6 +83,7 @@ public class ByActor extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_settings).setVisible(false);
         return true;
     }
 
