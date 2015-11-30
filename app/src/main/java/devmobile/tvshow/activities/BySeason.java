@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import devmobile.tvshow.adapters.CustomAdapterSeason;
+import devmobile.tvshow.alert.DeleteEpisodeDialogAlert;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
@@ -54,6 +56,7 @@ public class BySeason extends AppCompatActivity {
     private EpisodeDataSource episodeds;
     private Season season;
     private ArrayList<Episode> listOfEpisodes;
+    private ArrayList<Season> listOfSeasons ;
     private ListAdapter adapter;
     private Show show;
 
@@ -122,7 +125,7 @@ public class BySeason extends AppCompatActivity {
                             e.setEpisodeCompleted(1);
                             episodeds.updateEpisodeIfWatched(e);
                         }
-                        ArrayList<Season> listOfSeasons = new ArrayList<Season>();
+                        listOfSeasons = new ArrayList<Season>();
                         listOfSeasons = (ArrayList<Season>) seasonds.getAllSeasons(show.getShowId());
                         boolean isWatched = false;
                         int cpt = 0;
@@ -202,8 +205,21 @@ public class BySeason extends AppCompatActivity {
         llayout_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment newFragment = new DeleteSeasonDialogAlert();
-                newFragment.show(getFragmentManager(), "delete");
+
+                int lastSeason = listOfSeasons.size()-1;
+                if(season.getSeasonNumber() == listOfSeasons.get(lastSeason).getSeasonNumber()) {
+                    DialogFragment newFragment = new DeleteSeasonDialogAlert();
+                    Bundle args = new Bundle();
+                    args.putInt("numSeasonId", season.getSeasonId());
+                    newFragment.setArguments(args);
+                    newFragment.show(getFragmentManager(), "delete");
+                }
+                else{
+                    // todo traduction
+                    String text = "Only the last episode can be deleted";
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
 
             }
         });

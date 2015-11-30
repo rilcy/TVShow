@@ -11,12 +11,19 @@ import android.view.LayoutInflater;
 
 import devmobile.tvshow.R;
 import devmobile.tvshow.activities.ByShow;
-import devmobile.tvshow.activities.MainActivity;
+import devmobile.tvshow.db.adapter.EpisodeDataSource;
+import devmobile.tvshow.db.adapter.SeasonDataSource;
+
 
 public class DeleteSeasonDialogAlert extends DialogFragment {
 
+    private int numSeasonId;
+    private SeasonDataSource seasonsds;
+    private EpisodeDataSource episodeDataSource;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        numSeasonId = getArguments().getInt("numSeasonId");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
@@ -33,7 +40,8 @@ public class DeleteSeasonDialogAlert extends DialogFragment {
                         //End activity and get back to the previous activity
                         Intent intent = new Intent(getActivity(), ByShow.class);
                         startActivity(intent);
-                        getActivity().finish();                    }
+                        getActivity().finish();
+                    }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
