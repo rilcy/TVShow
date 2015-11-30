@@ -91,6 +91,8 @@ public class ByShow extends AppCompatActivity {
         int numberleft = countNumberOfEpisodeLeft();
         cbNumberEpisodeToWatch.setText(" " + numberleft);
 
+        checkIfShowIsCompleted();
+
         if(show.isShowCompleted() == 0)
             cbNumberEpisodeToWatch.setChecked(false);
         else
@@ -117,7 +119,6 @@ public class ByShow extends AppCompatActivity {
 
         ListView list = (ListView) findViewById(R.id.listOfSeasons);
         list.setAdapter(adapter);
-
 
 
         setListViewHeightBasedOnChildren(list);
@@ -171,6 +172,24 @@ public class ByShow extends AppCompatActivity {
         });
 
 
+    }
+
+    private void checkIfShowIsCompleted() {
+        int cpt = 0;
+        boolean isWatched = false;
+        while(cpt < listOfSeasons.size() && listOfSeasons.get(cpt).isSeasonCompleted() == 1){
+            ++cpt;
+            isWatched = true;
+        }
+
+        if(listOfSeasons.size() != cpt){
+            show.setShowCompleted(0);
+            showds.updateShow(show);
+        }
+        else{
+            show.setShowCompleted(1);
+            showds.updateShow(show);
+        }
     }
 
     private void checkAllSeasonsAndEpisode() {

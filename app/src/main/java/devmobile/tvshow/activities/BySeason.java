@@ -54,6 +54,7 @@ public class BySeason extends AppCompatActivity {
     private EpisodeDataSource episodeds;
     private Season season;
     private ListAdapter adapter;
+    private Show show;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class BySeason extends AppCompatActivity {
 
         // Get data from the Show
         showds = new ShowDataSource(this);
-        Show show = showds.getShowById(season.getShowId());
+        show = showds.getShowById(season.getShowId());
 
         // Get data from episodes of the Season
         ArrayList<Episode> listOfEpisodes = new ArrayList<Episode>();
@@ -120,6 +121,26 @@ public class BySeason extends AppCompatActivity {
                             e.setEpisodeCompleted(1);
                             episodeds.updateEpisodeIfWatched(e);
                         }
+                        ArrayList<Season> listOfSeasons = new ArrayList<Season>();
+                        listOfSeasons = (ArrayList<Season>) seasonds.getAllSeasons(show.getShowId());
+                        boolean isWatched = false;
+                        int cpt = 0;
+                        while(listOfSeasons.get(cpt).isSeasonCompleted() == 1 && listOfSeasons.size()<cpt)
+                        {
+                            isWatched = true;
+                            ++cpt;
+                        }
+
+                        if(listOfSeasons.get(cpt).isSeasonCompleted() == 0)
+                            isWatched = false;
+
+                        if(isWatched){
+                            show.setShowCompleted(1);
+                            showds.updateShow(show);
+                        }
+
+
+
                         refreshMyActivity();
                     }
                     // SEASON IS NOT COMPLETED --> LAST EPISODES HAS TO BE UNCHECKED
