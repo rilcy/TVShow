@@ -48,6 +48,7 @@ public class CustomAdapterShow extends ArrayAdapter<Season>{
         textSeason = (TextView) customView.findViewById(R.id.seasonNumber);
         cbSeasonBySeason = (CheckBox) customView.findViewById(R.id.cbSeasonBySeason);
 
+        // TODO TRANSLATE
         textSeason.setText("Season " + season.getSeasonNumber());
 
         if(season.isSeasonCompleted() == 0)
