@@ -39,7 +39,7 @@ public class CastingEpisodeDataSource {
     }
 
     /**
-     * Get actors by episodeId
+     * Get all the actors by episodeId
      */
     public List<Actor> getActorsByEpisodeId(int id){
         List<Actor> actors = new ArrayList<Actor>();

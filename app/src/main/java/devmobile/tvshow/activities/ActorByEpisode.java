@@ -1,7 +1,9 @@
 package devmobile.tvshow.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,9 +11,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import devmobile.tvshow.*;
 import devmobile.tvshow.adapters.CustomAdapterActor;
+import devmobile.tvshow.db.adapter.CastingDataSource;
 import devmobile.tvshow.db.object.Actor;
 
 public class ActorByEpisode extends AppCompatActivity {
@@ -21,6 +25,16 @@ public class ActorByEpisode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actor_by_episode);
 
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        changeLanguage(sharedPrefs.getString("pref_lang", "en"));
+
+        CastingDataSource cds = new CastingDataSource(this);
+        final ArrayList<Actor> listOfActors = (ArrayList<Actor>) cds.getAllActors();
+
+        ListView list = (ListView) findViewById(R.id.listOfActorsFromEpisode);
+        final ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
+        list.setAdapter(adapter);
+/*
         final ArrayList<Actor> listOfActors = new ArrayList<Actor>();
 
         Actor actor1 = new Actor("Jean", "Reno");
@@ -42,6 +56,7 @@ public class ActorByEpisode extends AppCompatActivity {
 
         ListView list = (ListView) findViewById(R.id.listOfActors);
         list.setAdapter(adapter);
+        */
     }
 
     private void setupActionBar() {
@@ -53,6 +68,7 @@ public class ActorByEpisode extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_settings).setVisible(false);
         return true;
     }
 
@@ -72,13 +88,18 @@ public class ActorByEpisode extends AppCompatActivity {
                 ActorByEpisode.this.startActivity(intent);
                 break;
 
-            case R.id.action_settings:
-
-                intent = new Intent(ActorByEpisode.this, Settings.class);
-                ActorByEpisode.this.startActivity(intent);
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void changeLanguage(String lang){
+        Locale myLocale = new Locale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+    }
+
 
 }

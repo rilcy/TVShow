@@ -31,6 +31,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import devmobile.tvshow.db.adapter.CastingEpisodeDataSource;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
@@ -49,8 +50,10 @@ public class ByEpisode extends AppCompatActivity {
     private EpisodeDataSource episodeds;
     private SeasonDataSource seasonds;
     private ShowDataSource showds;
+    private CastingEpisodeDataSource castingEpisodeds;
     private Episode episode;
     private ArrayList<Episode> listOfEpisode;
+    private ArrayList<Actor> listOfActors;
     private Season season;
     private Show show;
     private ImageView imgByEpisode;
@@ -74,6 +77,12 @@ public class ByEpisode extends AppCompatActivity {
         episode = (Episode) episodeds.getEpisodeById(num);
         listOfEpisode = new ArrayList<Episode>();
         listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(episode.getSeasonID());
+
+        // Get data from the actors
+        castingEpisodeds = new CastingEpisodeDataSource(this);
+        listOfActors = new ArrayList<Actor>();
+        listOfActors = (ArrayList<Actor>) castingEpisodeds.getActorsByEpisodeId(episode.getEpisodeID());
+
 
         // Get data from the Season of the Episode
         seasonds = new SeasonDataSource(this);
@@ -184,6 +193,8 @@ public class ByEpisode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent appInfo = new Intent(ByEpisode.this, ActorByEpisode.class);
+                Episode goToEpisode = episode.getEpisodeID();
+                appInfo.putExtra("EPISODE_ID", String.valueOf(goToEpisode.getEpisodeID()));
                 startActivity(appInfo);
             }
         });
@@ -224,6 +235,7 @@ public class ByEpisode extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_settings).setVisible(false);
         return true;
     }
 
@@ -239,7 +251,7 @@ public class ByEpisode extends AppCompatActivity {
 
             case R.id.action_byActor:
 
-                intent = new Intent(ByEpisode.this, ActorByEpisode.class);
+                intent = new Intent(ByEpisode.this, ByActor.class);
                 ByEpisode.this.startActivity(intent);
                 break;
 
