@@ -1,105 +1,102 @@
 package devmobile.tvshow.activities;
 
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Calendar;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import java.util.Locale;
 
 import devmobile.tvshow.R;
+import devmobile.tvshow.db.SQLiteHelper;
+import devmobile.tvshow.db.adapter.ShowDataSource;
+import devmobile.tvshow.db.object.Show;
 
 public class ByShow_Edition extends AppCompatActivity {
-
     private ImageView imgView;
-
-    private String current = "";
-    private String yyyy = "YYYY";
-    private Calendar cal = Calendar.getInstance();
-
-    private static final int RESULT_LOAD_IMG = 1;
-
     private EditText etShowName;
     private EditText etShowStart;
-    private EditText etShowEnd ;
-    private CheckBox cbIsFinished ;
+    private EditText etShowEnd;
+    private CheckBox cbIsFinished;
     private TextView tvShowEnd;
-    private GridLayout glShowEditCreat;
+    private Button saveButton;
+    private Button cancelButton;
+    private Button loadButton;
+    private ShowDataSource showds;
+    private Show show;
+    long Show_Id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show_edition);
+        //SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //changeLanguage(sharedPrefs.getString("pref_lang", "en"));
+
+        Intent intent = getIntent();
+        String dataTransfered = intent.getStringExtra("SHOWID");
+        Show_Id = Long.parseLong(dataTransfered);
 
         cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
         etShowName = (EditText) findViewById(R.id.etShowName);
         etShowStart = (EditText) findViewById(R.id.etShowStart);
         etShowEnd = (EditText) findViewById(R.id.etShowEnd);
         tvShowEnd = (TextView) findViewById(R.id.showEnd);
-        glShowEditCreat = (GridLayout) findViewById(R.id.glShowEditCreat);
+
+        // Button and imageView button
+        imgView = (ImageView) findViewById(R.id.imgView);
+        saveButton = (Button) findViewById(R.id.buttonOk);
+        cancelButton = (Button) findViewById(R.id.buttonCancel);
 
         etShowEnd.setVisibility(View.GONE);
         tvShowEnd.setVisibility(View.GONE);
 
-        //etShowEnd.setFocusable(false);
 
-    }
+        showds = new ShowDataSource(this);
+        show = showds.getShowById(Show_Id);
 
+        etShowName.setText(show.getShowTitle());
+        etShowStart.setText(show.getShowStart());
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Pick up a picture from the picture's gallery
-        //http://programmerguru.com/android-tutorial/how-to-pick-image-from-gallery/
-        try {
-            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
-                    && null != data) {
-
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String imgDecodableString = cursor.getString(columnIndex);
-                cursor.close();
-                imgView = (ImageView) findViewById(R.id.imgView);
-
-                imgView.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
-
-            } else {
-                Toast.makeText(this, "You haven't picked Image",
-                        Toast.LENGTH_LONG).show();
-            }
-        } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
-                    .show();
+        if (show.getShowEnd().equals("En production")){
+            etShowEnd.setText("");
         }
-    }
+        else{
+            etShowEnd.setText(show.getShowEnd());
+            cbIsFinished.setChecked(true);
+            etShowEnd.setVisibility(View.VISIBLE);
+            tvShowEnd.setVisibility(View.VISIBLE);
+        }
 
+        File imgFile = new File(show.getShowImage());
 
-
-            public void onClickSelectImg(View view) {
-        // Create intent to Open Image applications like Gallery, Google Photos
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        // Start the Intent
-        startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+        if (imgFile.exists()) {
+            try {
+                File f = new File(imgFile.getPath());
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                Uri uri = Uri.fromFile(imgFile);
+                imgView.setImageURI(uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
@@ -139,63 +136,94 @@ public class ByShow_Edition extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickCancel(View view) {
-        Intent intent = new Intent(ByShow_Edition.this, ByShow.class);
-        ByShow_Edition.this.startActivity(intent);
-        finish();
-    }
 
-    public void onClickOk(View view) {
-        /*
-        Enregistrer l'image et les modifications
-        TESTE SI DES VALEURS ONT ETE ENTREES
-        L'IMAGE N'EST PAS TESTEE
-        */
-
-        if(etShowName.length() > 0 && etShowStart.length() > 3  && !cbIsFinished.isChecked())
+    // NEXT METHODS HELP US TO SAVE INTO THE APP THE IMAGE AND INTO THE DB THE SHOW
+    private void saveUpdatedShow() {
+        // Create show if we have enter all the required information
+        if (cbIsFinished.isChecked() && etShowEnd.length() > 3) {
+            show = new Show();
+            show.setShowTitle(etShowName.getText().toString());
+            show.setShowStart(etShowStart.getText().toString());
+            show.setShowEnd(etShowEnd.getText().toString());
+            show.setShowId((int) Show_Id);
+            updateIntoDB(show);
             backToPreviousActivity();
-
-        if(etShowName.length() > 0 && etShowStart.length() > 3 && cbIsFinished.isChecked() && etShowEnd.length() > 3)
-            backToPreviousActivity();
-        else{
-            sendToast();
         }
 
-
-
-
-
+        // Create show if we only set Image, name of the show and starts date
+        else {
+            show = new Show();
+            Show showToUpdate = show;
+            showToUpdate.setShowTitle(etShowName.getText().toString());
+            showToUpdate.setShowStart(etShowStart.getText().toString());
+            showToUpdate.setShowEnd("En production");
+            showToUpdate.setShowId((int) Show_Id);
+            updateIntoDB(showToUpdate);
+            backToPreviousActivity();
+        }
     }
 
-    private void sendToast() {
-        String toast = "Qqch est manquant !";
-
-
-        Toast.makeText(ByShow_Edition.this, toast, Toast.LENGTH_SHORT).show();
+    private void updateIntoDB(Show showToUpdate) {
+        if (showToUpdate != null) {
+            ShowDataSource sds = new ShowDataSource(this);
+            sds.updateInfoShow(showToUpdate);
+        }
+        return;
     }
 
-    private void backToPreviousActivity() {
-        Intent intent = new Intent(ByShow_Edition.this, ByShow.class);
-        ByShow_Edition.this.startActivity(intent);
-        finish();
+
+    // NEXT METHODS ARE THE onClick METHODS
+    public void onClickSave(View v) {
+        if (etShowName.length() > 0 && etShowStart.length() > 3) {
+            saveButton.setFocusableInTouchMode(false);
+            saveUpdatedShow();
+        }
+    }
+
+    public void onClickCancel(View v) {
+        backToPreviousActivity();
     }
 
     public void onClickCheckbox(View view) {
-
         if (cbIsFinished.isChecked()) {
-            //
             etShowEnd.setVisibility(View.VISIBLE);
             tvShowEnd.setVisibility(View.VISIBLE);
         } else {
-            //
             etShowEnd.setVisibility(View.GONE);
             tvShowEnd.setVisibility(View.GONE);
             etShowEnd.setText("");
         }
+    }
+
+    private void backToPreviousActivity() {
+        Intent intent = new Intent(ByShow_Edition.this, MainActivity.class);
+        ByShow_Edition.this.startActivity(intent);
+        finish();
 
     }
 
-
-
-
+    /**
+     * Méthode permettant la localisation du texte de l'activité
+     */
+    public void changeLanguage(String lang) {
+        Locale myLocale = new Locale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
+        buttonLoadPicture.setText(R.string.buttonLoadPicture);
+        TextView showName = (TextView) findViewById(R.id.showName);
+        showName.setText(R.string.ShowName);
+        TextView showStart = (TextView) findViewById(R.id.showStart);
+        showStart.setText(R.string.ShowStart);
+        CheckBox cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
+        cbIsFinished.setText(R.string.cbisFinished);
+        TextView showEnd = (TextView) findViewById(R.id.showEnd);
+        showEnd.setText(R.string.ShowEnd);
+        Button buttonOk = (Button) findViewById(R.id.buttonOk);
+        buttonOk.setText(R.string.buttonOk);
+        Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
+        buttonCancel.setText(R.string.buttonCancel);
+    }
 }

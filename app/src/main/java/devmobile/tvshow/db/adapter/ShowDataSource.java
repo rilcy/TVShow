@@ -92,7 +92,7 @@ public class ShowDataSource {
     }
 
     /**
-     * Update one show
+     * Update a whole show
      */
     public int updateShow(Show show) {
         ContentValues values = new ContentValues();
@@ -101,6 +101,17 @@ public class ShowDataSource {
         values.put(ShowEntry.KEY_END, show.getShowEnd());
         values.put(ShowEntry.KEY_COMPLETED, show.isShowCompleted());
         values.put(ShowEntry.KEY_IMAGE, show.getShowImage());
+
+        return this.db.update(ShowEntry.TABLE_SHOW, values, ShowEntry.KEY_ID + " = ?",
+                new String[] { String.valueOf(show.getShowId()) });
+    }
+
+
+    public int updateInfoShow(Show show) {
+        ContentValues values = new ContentValues();
+        values.put(ShowEntry.KEY_TITLE, show.getShowTitle());
+        values.put(ShowEntry.KEY_START, show.getShowStart());
+        values.put(ShowEntry.KEY_END, show.getShowEnd());
 
         return this.db.update(ShowEntry.TABLE_SHOW, values, ShowEntry.KEY_ID + " = ?",
                 new String[] { String.valueOf(show.getShowId()) });

@@ -147,8 +147,8 @@ public class ByShow extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent appInfo = new Intent(ByShow.this, ByShow_Edition.class);
+                appInfo.putExtra("SHOWID", String.valueOf(show_Id));
                 startActivity(appInfo);
-                finish();
             }
         });
 

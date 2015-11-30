@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
                         appInfo.putExtra("SHOW_ID", String.valueOf(show.getShowId()));
 
-
                         startActivity(appInfo);
 
                     }
