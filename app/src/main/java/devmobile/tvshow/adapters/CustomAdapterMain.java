@@ -54,19 +54,8 @@ public class CustomAdapterMain extends ArrayAdapter<Show>{
 
 
         final Show show = this.getItem(position);
-        EpisodeDataSource eds = new EpisodeDataSource(context.getApplicationContext());
-        ArrayList<Episode> ep = (ArrayList) eds.getAllEpisodes(1);
-
-        if(ep.isEmpty())
-            text.setText(R.string.no_episode_added);
-        else {
-            text.setText("Pouet pouet camion");
-        }
-
-
 
         textView.setText(show.getShowTitle());
-
 
         File imgFile = new  File(show.getShowImage());
 
