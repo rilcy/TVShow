@@ -53,6 +53,7 @@ public class BySeason extends AppCompatActivity {
     private SeasonDataSource seasonds;
     private EpisodeDataSource episodeds;
     private Season season;
+    private ArrayList<Episode> listOfEpisodes;
     private ListAdapter adapter;
     private Show show;
 
@@ -76,7 +77,7 @@ public class BySeason extends AppCompatActivity {
         show = showds.getShowById(season.getShowId());
 
         // Get data from episodes of the Season
-        ArrayList<Episode> listOfEpisodes = new ArrayList<Episode>();
+        listOfEpisodes = new ArrayList<Episode>();
         episodeds = new EpisodeDataSource(this);
         listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(season.getSeasonId());
 
@@ -221,6 +222,13 @@ public class BySeason extends AppCompatActivity {
                 newFragment.show(getFragmentManager(), "create");
             }
         });
+
+    }
+
+    protected void onResume(){
+        super.onResume();
+        boolean watched = true;
+        checkIfAllEpisodesAreWatched(listOfEpisodes, watched);
 
     }
 

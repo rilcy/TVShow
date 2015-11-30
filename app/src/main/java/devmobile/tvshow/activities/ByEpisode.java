@@ -191,11 +191,13 @@ public class ByEpisode extends AppCompatActivity {
 
 
     private void checkIfSeasonHasToBeCompleted() {
-        int cpt = 0;
+        int cpt = 1;
         while (cpt < listOfEpisode.size() && listOfEpisode.get(cpt).isEpisodeCompleted() == 1){
             cpt++;
         }
 
+        if (cpt == 0)
+            cpt = 1;
         if(listOfEpisode.get(cpt-1).isEpisodeCompleted() == 1){
             season.setSeasonCompleted(1);
             seasonds.updateSeason(season);
