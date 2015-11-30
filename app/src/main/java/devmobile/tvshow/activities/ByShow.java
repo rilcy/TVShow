@@ -3,6 +3,8 @@ package devmobile.tvshow.activities;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import devmobile.tvshow.adapters.CustomAdapterNextToWatch;
 import devmobile.tvshow.adapters.CustomAdapterShow;
@@ -57,6 +60,9 @@ public class ByShow extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
         Intent intent = getIntent();
         String dataTransfered = intent.getStringExtra("SHOW_ID");
@@ -289,6 +295,7 @@ public class ByShow extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_settings).setVisible(false);
         return true;
     }
 
@@ -338,4 +345,12 @@ public class ByShow extends AppCompatActivity {
         listView.setLayoutParams(params);
     }
 
+    public void changeLanguage(String lang) {
+        Locale myLocale = new Locale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        getSupportActionBar().setTitle(R.string.byShow_pageTitle);
+    }
 }

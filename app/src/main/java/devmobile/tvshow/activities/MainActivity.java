@@ -105,13 +105,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //TODO : Tester si ok
-    private void refreshMyActivity() {
-        finish();
-        Intent intent = getIntent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(getIntent());
-    }
 
     //TODO : tester si ok
     public void changeLanguage(String lang){

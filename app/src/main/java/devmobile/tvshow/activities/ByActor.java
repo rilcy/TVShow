@@ -18,6 +18,7 @@ import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.alert.CreateActorDialogAlert;
 import devmobile.tvshow.alert.CreateEpisodeDialogAlert;
 import devmobile.tvshow.db.object.Actor;
+import devmobile.tvshow.db.object.Episode;
 
 public class ByActor extends AppCompatActivity {
 
@@ -57,6 +58,7 @@ public class ByActor extends AppCompatActivity {
 
         ListView list = (ListView) findViewById(R.id.listOfActors);
         list.setAdapter(adapter);
+        
     }
 
     private void setupActionBar() {
