@@ -91,8 +91,6 @@ public class ByEpisode extends AppCompatActivity {
         castingds = new CastingDataSource(this);
         listOfCastingEpisodes = (ArrayList<CastingEpisode>) castingEpisodeds.getActorsIdByEpisodeId(episode.getEpisodeID());
 
-
-        //TODO : Corriger la boucle pour obtenir les acteurs de cet épisode
         for (int i=0; i<listOfCastingEpisodes.size(); i++){
 
             Actor actor = new Actor();
@@ -126,9 +124,8 @@ public class ByEpisode extends AppCompatActivity {
         cbByEpisode = (CheckBox) findViewById(R.id.cbByEpisode);
 
         titleByEpisode.setText(episode.getEpisodeTitle());
-
-        // TODO TRADUCTION
-        infoByEpisode.setText(" Season " + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
+        
+        infoByEpisode.setText(getString(R.string.Season) + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
 
         File imgFile = new  File(show.getShowImage());
 
@@ -180,8 +177,7 @@ public class ByEpisode extends AppCompatActivity {
                     newFragment.show(getFragmentManager(), "delete");
                 }
                 else{
-                    // todo traduction
-                    String text = "Only the last episode can be deleted";
+                    String text = getString(R.string.only_last_episode);// "Only the last episode can be deleted";
                     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                     toast.show();
                 }

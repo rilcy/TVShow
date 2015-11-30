@@ -58,7 +58,7 @@ public class CustomAdapterMain extends ArrayAdapter<Show>{
         ArrayList<Episode> ep = (ArrayList) eds.getAllEpisodes(1);
 
         if(ep.isEmpty())
-            text.setText("No episode added yet !");
+            text.setText(R.string.no_episode_added);
 
 
 

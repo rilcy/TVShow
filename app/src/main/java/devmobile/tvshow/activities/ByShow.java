@@ -92,7 +92,14 @@ public class ByShow extends AppCompatActivity {
         endYearByShow = (TextView) findViewById(R.id.endYearByShow);
         cbNumberEpisodeToWatch = (CheckBox) findViewById(R.id.cbNumberEpisodeToWatch);
         beginYearByShow.setText(show.getShowStart());
-        endYearByShow.setText(show.getShowEnd());
+        
+        if (show.getShowEnd().startsWith("En")) {
+            endYearByShow.setText(getString(R.string.on_production));
+        }
+        else {
+            endYearByShow.setText(show.getShowEnd());
+        }
+
 
         int numberleft = countNumberOfEpisodeLeft();
         cbNumberEpisodeToWatch.setText(" " + numberleft);
