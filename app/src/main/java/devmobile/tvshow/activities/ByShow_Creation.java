@@ -230,7 +230,6 @@ public class ByShow_Creation extends AppCompatActivity {
         Intent intent = new Intent(ByShow_Creation.this, MainActivity.class);
         ByShow_Creation.this.startActivity(intent);
         finish();
-
     }
 
     /**
