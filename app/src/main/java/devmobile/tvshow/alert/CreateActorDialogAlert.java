@@ -45,14 +45,17 @@ public class CreateActorDialogAlert extends DialogFragment {
                         actorLastName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextLastName);
                         String stringLastName = actorLastName.getText().toString();
                         CastingDataSource castingds = new CastingDataSource(getActivity());
+                        castingds.createCasting(stringLastName, stringFirstName);
+                        /*
                         actor.setFirstName(stringFirstName);
                         actor.setLastName(stringLastName);
                         actor.setIdActor((int) castingds.createCasting(actor));
+                        */
 
-
-                        Intent intent = new Intent(getActivity(), ByActor.class);
-                        startActivity(intent);
+                        Intent intent = getActivity().getIntent();
                         getActivity().finish();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
