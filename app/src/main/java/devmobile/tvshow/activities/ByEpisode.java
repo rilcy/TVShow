@@ -84,24 +84,19 @@ public class ByEpisode extends AppCompatActivity {
         listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(episode.getSeasonID());
 
         // Get data from the actors
-        //castingEpisodeds = new CastingEpisodeDataSource(this);
         listOfActors = new ArrayList<Actor>();
-        //listOfActors = (ArrayList<Actor>) castingEpisodeds.getActorsByEpisodeId(episode.getEpisodeID());
 
         // Get data from casting+episodes
         castingEpisodeds = new CastingEpisodeDataSource(this);
+        castingds = new CastingDataSource(this);
         listOfCastingEpisodes = (ArrayList<CastingEpisode>) castingEpisodeds.getActorsIdByEpisodeId(episode.getEpisodeID());
 
 
         //TODO : Corriger la boucle pour obtenir les acteurs de cet épisode
         for (int i=0; i<listOfCastingEpisodes.size(); i++){
-            //listOfActors.add(listOfCastingEpisodes.get(i).getCastingId())
 
-            //int actorId = listOfCastingEpisodes.get(i).getCastingId();
-
-            //listOfActors.add(new Actor());
-
-            Actor actor = castingds.getActorById(listOfCastingEpisodes.get(i).getCastingId());
+            Actor actor = new Actor();
+            actor = castingds.getActorById(listOfCastingEpisodes.get(i).getCastingId());
 
             listOfActors.add(actor);
         }
@@ -110,6 +105,7 @@ public class ByEpisode extends AppCompatActivity {
         ListView list = (ListView) findViewById(R.id.listOfActorsForEpisode);
         list.setAdapter(adapter);
         setListViewHeightBasedOnChildren(list);
+
         // Retire le focus sur la liste afin que l'activité démarre en haut de la page
         list.setFocusable(false);
 
@@ -213,6 +209,7 @@ public class ByEpisode extends AppCompatActivity {
                 Intent appInfo = new Intent(ByEpisode.this, ActorByEpisode.class);
                 appInfo.putExtra("EPISODE_ID", String.valueOf(episode.getEpisodeID()));
                 startActivity(appInfo);
+                finish();
             }
         });
     }
