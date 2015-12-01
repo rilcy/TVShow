@@ -32,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Préférence de langue
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
+        // Obtention de la liste des séries et affichage
         ShowDataSource sds = new ShowDataSource(this);
 
         ArrayList<Show> listOfSeries = (ArrayList<Show>) sds.getAllShows();
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         list.setAdapter(adapter);
 
+        // en cas de click sur une série on l'affiche dans une autre activié
         list.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
 
