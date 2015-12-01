@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-    
+
+    // Localisation
     public void changeLanguage(String lang){
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);

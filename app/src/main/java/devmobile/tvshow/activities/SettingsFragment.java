@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 import devmobile.tvshow.R;
 
-
+// Fragment s'ouvrant depuis l'activité settings afin de permettre le changement de langue
 public class SettingsFragment extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Load the preferences from an XML resource
+        // Charge les préférences depuis le fichier xml/preferences.xml
         addPreferencesFromResource(R.xml.preferences);
     }
 }

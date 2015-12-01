@@ -27,20 +27,7 @@ public class CastingDataSource {
         this.context = context;
     }
 
-    /*
-    // Add a new actor
-    public long createCasting(Actor actor){
-        long id;
-        ContentValues values = new ContentValues();
-        values.put(CastingEntry.KEY_LASTNAME, actor.getLastName());
-        values.put(CastingEntry.KEY_FIRSTNAME, actor.getFirstName());
-        id = this.db.insert(CastingEntry.TABLE_CASTING, null, values);
-
-        return id;
-    }
-    */
-
-    // Add a new actor
+    // Ajouter un nouvel acteur en entrant son prénom et son nom
     public long createCasting(String firstName, String lastName){
         long id;
 
@@ -52,10 +39,7 @@ public class CastingDataSource {
         return id;
     }
 
-
-    /**
-     * Get one actor
-     */
+    // Obtenir un acteur en indiquant son Id
     public Actor getActorById(int id){
         String sql = "SELECT * FROM " + CastingEntry.TABLE_CASTING +
                 " WHERE " + CastingEntry.KEY_ID + " = " + id;
@@ -75,9 +59,7 @@ public class CastingDataSource {
     }
 
 
-    /**
-     * Get all Actors
-     */
+    // Obtenir tous les acteurs de la table
     public List<Actor> getAllActors(){
         List<Actor> actors = new ArrayList<Actor>();
         String sql = "SELECT * FROM " + CastingEntry.TABLE_CASTING + " ORDER BY " + CastingEntry.KEY_LASTNAME + "," + CastingEntry.KEY_FIRSTNAME;
@@ -97,10 +79,7 @@ public class CastingDataSource {
         return actors;
     }
 
-
-    /**
-     *  Update the lastname and firstname of actor
-     */
+    // Mise à jour de l'acteur en entrant son Id, son prénom et son nom
     public int updateActor(int actorId, String firstName, String lastName){
         ContentValues values = new ContentValues();
         values.put(CastingEntry.KEY_FIRSTNAME, firstName);

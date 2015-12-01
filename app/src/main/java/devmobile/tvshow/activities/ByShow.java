@@ -88,7 +88,7 @@ public class ByShow extends AppCompatActivity {
 
 
         //PARTIE MEDIANE
-        // affichage des ifnos relatives au show
+        // affichage des infos relatives au show
         beginYearByShow = (TextView) findViewById(R.id.beginYearByShow);
         endYearByShow = (TextView) findViewById(R.id.endYearByShow);
         cbNumberEpisodeToWatch = (CheckBox) findViewById(R.id.cbNumberEpisodeToWatch);
@@ -220,7 +220,7 @@ public class ByShow extends AppCompatActivity {
         }
     }
 
-    // Si click sur la checkbox on vérifie que toutes les saisons soient vues ou églament les épisodes
+    // Si click sur la checkbox on vérifie que toutes les saisons soient vues ou égalament les épisodes
     private void checkAllSeasonsAndEpisode() {
         for (int i = 0; i < listOfSeasons.size(); i++) {
             ArrayList<Episode> listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(listOfSeasons.get(i).getSeasonId());
@@ -256,14 +256,14 @@ public class ByShow extends AppCompatActivity {
             listOfSeasons.get(i).setSeasonCompleted(0);
             seasonds.updateSeason(listOfSeasons.get(i));
 
-        // on change le statu du dernière épisode de la dernière saison
+        // on change le statut du dernier épisode de la dernière saison
             int j = listOfEpisodes.size()-1;
             listOfEpisodes.get(j).setEpisodeCompleted(0);
             episodeds.updateEpisodeIfWatched(listOfEpisodes.get(j));
         }
     }
 
-    // méthode pour raffraichir l'activité
+    // méthode pour rafraichir l'activité
     private void refreshMyActivity() {
         finish();
         Intent intent = getIntent();
@@ -319,10 +319,6 @@ public class ByShow extends AppCompatActivity {
     }
 
 
-    private void setupActionBar() {
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -330,6 +326,7 @@ public class ByShow extends AppCompatActivity {
         return true;
     }
 
+    // Configuration du menu de l'action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -354,6 +351,8 @@ public class ByShow extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Méthode permettant d'avoir le comportement souhaité de la listview dans une scroll view
+    // (Barre de défilement générale et pas uniquement dans la listview)
     // Source : http://stackoverflow.com/questions/18367522/android-list-view-inside-a-scroll-view
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
@@ -376,6 +375,7 @@ public class ByShow extends AppCompatActivity {
         listView.setLayoutParams(params);
     }
 
+    // Localisation + changement du titre de l'activité selon la langue
     public void changeLanguage(String lang) {
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);

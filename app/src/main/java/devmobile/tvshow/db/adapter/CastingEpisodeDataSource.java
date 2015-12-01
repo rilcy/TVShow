@@ -87,9 +87,8 @@ public class CastingEpisodeDataSource {
 
     }
 
-    /**
-     * delete all casting for an Episode
-     */
+    // Retire tous les acteurs liés à un épisode d'après l'Id de l'épisode (en cas de suppression d'un épisode)
+    // L'acteur reste tout de même dans la liste générale d'acteurs
     public void deleteAllCastingsForAnEpisode(long idEpisode){
         this.db.delete(CastingEpisodeEntry.TABLE_CASTING_EPISODE, CastingEpisodeEntry.KEY_EPISODE_ID + " = ?",
                 new String[]{String.valueOf(idEpisode)});

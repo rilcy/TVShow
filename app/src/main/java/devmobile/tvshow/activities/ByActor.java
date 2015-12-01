@@ -35,7 +35,7 @@ public class ByActor extends AppCompatActivity {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
-        // Obtenition de tous les acteurs via la DB
+        // Obtention de tous les acteurs via la DB
         CastingDataSource cds = new CastingDataSource(this);
         final ArrayList<Actor> listOfActors = (ArrayList<Actor>) cds.getAllActors();
 
@@ -78,12 +78,6 @@ public class ByActor extends AppCompatActivity {
 
     }
 
-    private void setupActionBar() {
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -92,6 +86,7 @@ public class ByActor extends AppCompatActivity {
         return true;
     }
 
+    // Configuration du menu de l'action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -111,12 +106,14 @@ public class ByActor extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Localisation + changement du titre de l'activité selon la langue
     public void changeLanguage(String lang){
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        getSupportActionBar().setTitle(R.string.byActor_pageTitle);
 
     }
 

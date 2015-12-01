@@ -16,17 +16,18 @@ import devmobile.tvshow.R;
 public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
+        // Fragment permettant de sélectionner la langue de l'application
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content,new SettingsFragment())
                 .commit();
     }
 
+    // Localisation + changement du titre de l'activité selon la langue
     public void changeLanguage(String lang){
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);

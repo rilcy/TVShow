@@ -291,20 +291,12 @@ public class BySeason extends AppCompatActivity {
         return watched;
     }
 
-    private void setupActionBar() {
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.action_settings).setVisible(false);
         return true;
     }
-
-    // TODO Problème avec l'ActionBar en cliquant sur Actor dans cette activité.
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -317,7 +309,7 @@ public class BySeason extends AppCompatActivity {
 
             case R.id.action_byActor:
 
-                intent = new Intent(BySeason.this, ActorByEpisode.class);
+                intent = new Intent(BySeason.this, ByActor.class);
                 BySeason.this.startActivity(intent);
                 break;
 
