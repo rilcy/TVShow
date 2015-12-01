@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import devmobile.tvshow.adapters.CustomAdapterSeason;
-import devmobile.tvshow.alert.DeleteEpisodeDialogAlert;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.adapter.SeasonDataSource;
 import devmobile.tvshow.db.adapter.ShowDataSource;
@@ -65,21 +64,23 @@ public class BySeason extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_season);
 
+        // Préférence de langage
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
+        // Obtenition des données transmis via l'Intent
         String dataTransfered = getIntent().getStringExtra("SEASON_ID");
         Season_ID = Long.parseLong(dataTransfered);
 
-        // Get data from the Season
+        // Obtention des données relatives à la saison
         seasonds = new SeasonDataSource(this);
         season = seasonds.getSeasonById((int)Season_ID);
 
-        // Get data from the Show
+        // Obtention des données relatives au show
         showds = new ShowDataSource(this);
         show = showds.getShowById(season.getShowId());
 
-        // Get data from episodes of the Season
+        // Obtention des données relatives aux épisodes de la saison
         listOfEpisodes = new ArrayList<Episode>();
         episodeds = new EpisodeDataSource(this);
         listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(season.getSeasonId());
@@ -90,63 +91,85 @@ public class BySeason extends AppCompatActivity {
         showInfoBySeason = (TextView) findViewById(R.id.showInfoBySeason);
         cbSeasonBySeason = (CheckBox) findViewById(R.id.cbSeasonBySeason);
 
-        // TOP OF THE ACTIVITY
+        // HAUT DE L'ACTIVITE
 
+        // On affiche les données
         showInfoBySeason.setText(getString(R.string.Season) + season.getSeasonNumber());
+
+       // Vérifie si tous les épisodes de la saison ont été vus...
         boolean watched = true;
+        // ... si la saison compte au moins un épisode...
+        if(listOfEpisodes.size() > 0) {
+            //... méthode vérifiant si les épisodes sont tous vu ou non
+            watched = checkIfAllEpisodesAreWatched(listOfEpisodes, watched);
 
-        watched = checkIfAllEpisodesAreWatched(listOfEpisodes, watched);
-
-        if(listOfEpisodes.size() != 0) {
             if (watched) {
+                // si c'est tout est vu on met à jour le statut de la saison
                 cbSeasonBySeason.setChecked(true);
-                season.setSeasonCompleted(1);
-                seasonds.updateSeason(season);
+                if(season.isSeasonCompleted() != 1) {
+                    season.setSeasonCompleted(1);
+                    seasonds.updateSeason(season);
+                }
             } else {
+                // si rien n'est vu on met à jour le statut de la saison
                 cbSeasonBySeason.setChecked(false);
-                season.setSeasonCompleted(0);
-                seasonds.updateSeason(season);
+                if(season.isSeasonCompleted() != 0) {
+                    season.setSeasonCompleted(0);
+                    seasonds.updateSeason(season);
+                }
             }
         }
 
+        // Création d'une liste des saisons
         listOfSeasons = (ArrayList<Season>) seasonds.getAllSeasons(show.getShowId());
 
-
+        // si la liste des épisode n'est pas égale à 0...
         if(listOfEpisodes.size() != 0) {
             final ArrayList<Episode> finalListOfEpisodes1 = listOfEpisodes;
+            //.. et que l'on clique sur la checkbox TV de la saison on met à jour la saison et tous
+            // ses épisodes enfants
             cbSeasonBySeason.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    // SEASON IS COMPLETED --> ALL EPISODES HAVE TO BE COMPLETED
+                    // Si la checkbox est checkée...
                     if (cbSeasonBySeason.isChecked()) {
+                        //... on met à jour la saison
                         season.setSeasonCompleted(1);
                         seasonds.updateSeason(season);
                         for (Episode e : finalListOfEpisodes1) {
-                            e.setEpisodeCompleted(1);
-                            episodeds.updateEpisodeIfWatched(e);
+                            // et les épisodes s'ils ne sont pas déjà checkés
+                            if(e.isEpisodeCompleted() != 1) {
+                                e.setEpisodeCompleted(1);
+                                episodeds.updateEpisodeIfWatched(e);
+                            }
                         }
+
+                        // on vérifie aussi s'il faut checker la série comme vue ou non vue
                         boolean isWatched = false;
                         int cpt = 0;
+
                         if(listOfSeasons.size() > 0) {
+                            // on tourne dans toutes les saisons et on vérifie que le statut soit vu
                             while (listOfSeasons.get(cpt).isSeasonCompleted() == 1 && listOfSeasons.size() < cpt) {
                                 isWatched = true;
                                 ++cpt;
                             }
                         }
 
+                        // ... si on sort à la dernière, on vérifie bien que la dernière saison soit vu
+                        // si ce n'est pas le cas on  met le boolean à false
                         if(listOfSeasons.get(cpt).isSeasonCompleted() == 0)
                             isWatched = false;
 
                         if(isWatched){
+                            // si le boolean est true, on met à jour le statut de la série
                             show.setShowCompleted(1);
                             showds.updateShow(show);
                         }
-
-
-
+                        // et on raffraichit l'activité
                         refreshMyActivity();
                     }
-                    // SEASON IS NOT COMPLETED --> LAST EPISODES HAS TO BE UNCHECKED
+                    // Si on uncheck la saison, on met le dernier épisode comme non-vu.
                     else {
                         season.setSeasonCompleted(0);
                         seasonds.updateSeason(season);
@@ -160,9 +183,11 @@ public class BySeason extends AppCompatActivity {
                 }
             });
         }
+        // s'il n'y a pas d'épisode on ne peut pas checker la checkbox
         else
             cbSeasonBySeason.setClickable(false);
 
+        // on affiche les infos relative à la série
         showTitleBySeason.setText(show.getShowTitle());
 
         File imgFile = new  File(show.getShowImage());
@@ -178,7 +203,7 @@ public class BySeason extends AppCompatActivity {
             }
         }
 
-
+        // on met en place la liste d'épisodes via l'adapter
         adapter = new CustomAdapterSeason(this, listOfEpisodes);
 
         ListView list = (ListView) findViewById(R.id.listOfEpisodes);
@@ -187,6 +212,7 @@ public class BySeason extends AppCompatActivity {
         // Retire le focus sur la liste afin que l'activité démarre en haut de la page
         list.setFocusable(false);
 
+        // en cas de click sur un épisode de la liste on ouvre une activité épisode
         list.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -199,15 +225,18 @@ public class BySeason extends AppCompatActivity {
                 }
         );
 
-
+        // en cas de click sur la bouton delete....
         LinearLayout llayout_delete = (LinearLayout) findViewById (R.id.linearlayout_deleteSeason);
         llayout_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Si la liste de TOUTES les saisons de la série n'est pas nule
                 if(listOfSeasons != null) {
                     int lastSeason = listOfSeasons.size() - 1;
                     if(lastSeason == -1)
                         lastSeason = 0;
+                    // si la saison en cours est la dernière saison créée pour la série...
+                    // on peut la supprimer pour ce faire on ouvre un dialog fragment
                     if (season.getSeasonNumber() == listOfSeasons.get(lastSeason).getSeasonNumber()) {
                         DialogFragment newFragment = new DeleteSeasonDialogAlert();
                         Bundle args = new Bundle();
@@ -216,7 +245,7 @@ public class BySeason extends AppCompatActivity {
                         newFragment.setArguments(args);
                         newFragment.show(getFragmentManager(), "delete");
                     } else {
-
+                        // si ce n'est pas la dernière on ne supprime pas la saison et on affiche un toast informatif
                         String text = getString(R.string.only_last_season);
                         Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                         toast.show();
@@ -226,6 +255,9 @@ public class BySeason extends AppCompatActivity {
             }
         });
 
+
+        // en cas de click on peut créer une nouvelle épisode pour cette série
+        // ouverture d'un dialog fragment permttant de saisir le nom de l'épisode.
         LinearLayout llayout_create = (LinearLayout) findViewById (R.id.linearlayout_createEpisode);
         final ArrayList<Episode> finalListOfEpisodes = listOfEpisodes;
         llayout_create.setOnClickListener(new View.OnClickListener() {
@@ -242,13 +274,7 @@ public class BySeason extends AppCompatActivity {
         });
 
     }
-
-    protected void onResume(){
-        super.onResume();
-        boolean watched = true;
-        checkIfAllEpisodesAreWatched(listOfEpisodes, watched);
-
-    }
+    
 
     private void refreshMyActivity() {
         finish();

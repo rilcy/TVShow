@@ -20,12 +20,9 @@ import java.util.Locale;
 import devmobile.tvshow.R;
 import devmobile.tvshow.adapters.CustomAdapterActor;
 import devmobile.tvshow.alert.CreateActorDialogAlert;
-import devmobile.tvshow.alert.CreateEpisodeDialogAlert;
 import devmobile.tvshow.alert.EditActorDialogAlert;
-import devmobile.tvshow.alert.EditEpisodeDialogAlert;
 import devmobile.tvshow.db.adapter.CastingDataSource;
 import devmobile.tvshow.db.object.Actor;
-import devmobile.tvshow.db.object.Episode;
 
 public class ByActor extends AppCompatActivity {
 
@@ -34,33 +31,40 @@ public class ByActor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_actor);
 
+        // Préférence de langage
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
+        // Obtenition de tous les acteurs via la DB
         CastingDataSource cds = new CastingDataSource(this);
         final ArrayList<Actor> listOfActors = (ArrayList<Actor>) cds.getAllActors();
 
+        // Création de la ListView des acteurs et de l'adapter de la ListView
         ListView list = (ListView) findViewById(R.id.listOfActors);
         final ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
         list.setAdapter(adapter);
 
+        // En cas de clic pour créer un acteur
         LinearLayout llayout_create = (LinearLayout) findViewById (R.id.linearLayout_createActor);
-
         llayout_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Appelle le DialogFragment
                 DialogFragment newFragment = new CreateActorDialogAlert();
                 newFragment.show(getFragmentManager(), "create");
             }
         });
 
+        // En cas de long click sur la row d'un acteur, on obtient un dialog fragment pour
+        // modifier l'acteur (nom, prénom)
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
-
+                // Appel le DialogFragment
                 DialogFragment newFragment = new EditActorDialogAlert();
 
+                // Obtient l'acteur "cliqué"
                 Actor actor = (Actor) adapter.getItem(pos);
                 Bundle args = new Bundle();
                 //int i = (int) num;

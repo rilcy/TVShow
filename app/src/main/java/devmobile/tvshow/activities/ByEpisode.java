@@ -69,28 +69,31 @@ public class ByEpisode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_episode);
 
+        // Préférence de langage
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
+        // Donnée transférées via l'intent
         String dataTransfered = getIntent().getStringExtra("EPISODE_ID");
         Episode_ID = Long.parseLong(dataTransfered);
 
-        // Get data from the Episode
+        // Obtention des données de l'épisode
         episodeds = new EpisodeDataSource(this);
         episode = episodeds.getEpisodeById(Episode_ID);
 
+        // Obtention de la liste des épisodes pour gérer ensuite la validation de la visualisation de la série
         listOfEpisode = new ArrayList<Episode>();
         listOfEpisode = (ArrayList<Episode>) episodeds.getAllEpisodes(episode.getSeasonID());
 
-        // Get data from the actors
+        // Création de la liste
         listOfActors = new ArrayList<Actor>();
 
-        // Get data from casting+episodes
+        // Obtention des données du casting pour l'épisode
         castingEpisodeds = new CastingEpisodeDataSource(this);
         castingds = new CastingDataSource(this);
         listOfCastingEpisodes = (ArrayList<CastingEpisode>) castingEpisodeds.getActorsIdByEpisodeId(episode.getEpisodeID());
 
-
+        // Création de la liste des catings via les données reçues de la list listOfCastingEpisodes
         for (int i=0; i<listOfCastingEpisodes.size(); i++){
 
             Actor actor = new Actor();
@@ -99,6 +102,7 @@ public class ByEpisode extends AppCompatActivity {
             listOfActors.add(actor);
         }
 
+        // Ajout de la liste des acteurs à la ListView
         final ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
         ListView list = (ListView) findViewById(R.id.listOfActorsForEpisode);
         list.setAdapter(adapter);
@@ -107,11 +111,13 @@ public class ByEpisode extends AppCompatActivity {
         // Retire le focus sur la liste afin que l'activité démarre en haut de la page
         list.setFocusable(false);
 
+        // En cas de long click, on supprime l'acteur de la l'épisode
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Actor actor = (Actor) adapter.getItem(position);
 
+                // Ouverture d'un dialog fragment pour supprimer l'acteur de l'épisode
                 DialogFragment newFragment = new DeleteActorEpisodeDialogAlert();
                 Bundle args = new Bundle();
                 int i = (int) Episode_ID;
@@ -128,16 +134,16 @@ public class ByEpisode extends AppCompatActivity {
         });
 
 
-        // Get data from the Season of the Episode
+        // Obtention des données de la saison
         seasonds = new SeasonDataSource(this);
         season = seasonds.getSeasonById(episode.getSeasonID());
 
-        // Get data from the Show of the Episode
+        // Obtentiond es données du show
         showds = new ShowDataSource(this);
         show = showds.getShowById(season.getShowId());
 
 
-        // TOP OF THE ACTIVITY
+        // HAUT DE L'ACTIVITE ON AFFICHE LES VALEURS RECUPERES
         imgByEpisode = (ImageView) findViewById(R.id.imgByEpisode);
         titleByEpisode = (TextView) findViewById(R.id.titleByEpisode);
         infoByEpisode = (TextView) findViewById(R.id.infoByEpisode);
@@ -166,29 +172,36 @@ public class ByEpisode extends AppCompatActivity {
             cbByEpisode.setChecked(true);
 
 
-        // IF EPISODE WAS WATCHED
+        // Si l'épisode a été vu et qu'il y a un click sur la CheckBox
         cbByEpisode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    // Mise à jour dans la db. L'épisode est considéré comme vu
                     episode.setEpisodeCompleted(1);
                     episodeds.updateEpisodeIfWatched(episode);
+                    // Vérification si la saison doit êter checkée
                     checkIfSeasonHasToBeCompleted();
                 } else {
+                    // Mise à jour dans la db. L'épisode est considéré comme NON-vu
                     episode.setEpisodeCompleted(0);
                     episodeds.updateEpisodeIfWatched(episode);
+                    // Vérification si la saison doit unchecker
                     checkIfSeasonsHasToBeUnchecked();
                 }
             }
         });
 
 
+        // En cas de click, on accède à une dialog fragment pour supprimer l'épisode
         LinearLayout llayout_delete = (LinearLayout) findViewById (R.id.linearlayout_deleteEpisode);
         llayout_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listOfEpisode != null) {
                     int lastEpisode = listOfEpisode.size() - 1;
+                    // On vérifie si l'épisode est le dernier épisode de la saison...
+                    // ... si c'est le cas on peut le supprimer
                     if (episode.getEpisodeNumber() == listOfEpisode.get(lastEpisode).getEpisodeNumber()) {
                         DialogFragment newFragment = new DeleteEpisodeDialogAlert();
                         Bundle args = new Bundle();
@@ -197,6 +210,8 @@ public class ByEpisode extends AppCompatActivity {
                         newFragment.setArguments(args);
                         newFragment.show(getFragmentManager(), "delete");
                     } else {
+                        // ... sinon on obtient un Toast qui spécifie qu'il faut d'abord supprimer le dernier
+                        // épisode
                         String text = getString(R.string.only_last_episode);
                         Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
                         toast.show();
@@ -205,6 +220,7 @@ public class ByEpisode extends AppCompatActivity {
             }
         });
 
+        // En cas de click, on accède à un dialog fragment qui permet de modifier le nom de l'épisode
         LinearLayout llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editEpisode);
         llayout_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,10 +235,12 @@ public class ByEpisode extends AppCompatActivity {
             }
         });
 
+        // En cas de click, on accède à la liste des acteurs que l'on peut ajouter à cet épisode
         LinearLayout llayout_addActor = (LinearLayout) findViewById (R.id.linearLayout_addActor);
         llayout_addActor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Ouverture d'une nouvelle activité
                 Intent appInfo = new Intent(ByEpisode.this, ActorByEpisode.class);
                 appInfo.putExtra("EPISODE_ID", String.valueOf(episode.getEpisodeID()));
                 startActivity(appInfo);
@@ -231,17 +249,13 @@ public class ByEpisode extends AppCompatActivity {
         });
     }
 
-    protected void onPause(){
-        super.onPause();
-    }
-
 
     private void checkIfSeasonHasToBeCompleted() {
+        // Contrôle si tous les épisode ont été vus. Si c'est le cas, la saison est mise à jour
         int cpt = 1;
         while (cpt < listOfEpisode.size() && listOfEpisode.get(cpt).isEpisodeCompleted() == 1){
             cpt++;
         }
-
         if (cpt == 0)
             cpt = 1;
         if(listOfEpisode.get(cpt-1).isEpisodeCompleted() == 0){
@@ -250,7 +264,7 @@ public class ByEpisode extends AppCompatActivity {
         }
     }
 
-
+    // Si l'épisode est non-vu, la saison est automatiquement marqué comme non-vue
     private void checkIfSeasonsHasToBeUnchecked() {
         season.setSeasonCompleted(0);
         seasonds.updateSeason(season);

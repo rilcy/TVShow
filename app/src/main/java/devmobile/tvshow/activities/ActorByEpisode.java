@@ -22,7 +22,7 @@ import devmobile.tvshow.db.adapter.CastingDataSource;
 import devmobile.tvshow.db.adapter.CastingEpisodeDataSource;
 import devmobile.tvshow.db.object.Actor;
 import devmobile.tvshow.db.object.CastingEpisode;
-import devmobile.tvshow.db.object.Episode;
+
 
 public class ActorByEpisode extends AppCompatActivity {
 
@@ -36,17 +36,21 @@ public class ActorByEpisode extends AppCompatActivity {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
+        // Réception des données insérées dans l'intent
         final String dataTransfered = getIntent().getStringExtra("EPISODE_ID");
         Episode_ID = Long.parseLong(dataTransfered);
 
+        // Création d'une liste d'acteurs via les acteurs de la DB
         CastingDataSource cds = new CastingDataSource(this);
         final ArrayList<Actor> listOfActors = (ArrayList<Actor>) cds.getAllActors();
 
 
+        // Création d'une liste d'acteur présent pour l'épisode sélectionné via la DB.
         final CastingEpisodeDataSource castingEpisodeds = new CastingEpisodeDataSource(this);
-
         ArrayList<CastingEpisode> listOfCasting = (ArrayList) castingEpisodeds.getActorsIdByEpisodeId((int) Episode_ID);
 
+        // On boucle dans les 2 listes afin de retirer les acteurs déjà présents dans l'épisode
+        // Cela permettra d'afficher uniquement les acteurs qui ne sont pas déjà présents dans l'épisode
         for (int i = 0; i < listOfCasting.size(); i++) {
             int idActor = listOfCasting.get(i).getCastingId();
             boolean is = true;
@@ -61,7 +65,7 @@ public class ActorByEpisode extends AppCompatActivity {
             }
         }
 
-        int i = listOfActors.size();
+        // Affiche la liste des acteurs disponibles
         if (listOfActors.size() > 0) {
             ListView list = (ListView) findViewById(R.id.listOfActorsFromEpisode);
             final ListAdapter adapter = new CustomAdapterActor(this, listOfActors);
@@ -71,31 +75,39 @@ public class ActorByEpisode extends AppCompatActivity {
                     new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            // Récupère l'acteur sélectionné
                             Actor actor = (Actor) adapter.getItem(position);
-                            String nom = actor.getFirstName();
+
+                            // Ajoute dans la Table CastingDataSource l'acteur à l'épisode
                             castingEpisodeds.createActorEpisode(actor.getIdActor(), Episode_ID);
 
-                            finish();
-                            Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
-                            appInfo.putExtra("EPISODE_ID", String.valueOf(Episode_ID));
-                            startActivity(appInfo);
-                            finish();
+                            // Met fin à l'activité en cours et accède à nouveau à l'épisode
+                            backToByEpisode();
+
                         }
                     }
             );
         }
         else{
-
+            // Si tous les acteurs de la DB jouent dans le film. On affiche un toast et on
+            // retourne immédiatemment à l'épisode.
             String text = getString(R.string.no_more_actor);
             Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
             toast.show();
-            finish();
-            Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
-            appInfo.putExtra("EPISODE_ID", String.valueOf(Episode_ID));
-            startActivity(appInfo);
-            finish();
-        }
 
+            // Met fin à l'activité en cours et accède à nouveau à l'épisode
+            backToByEpisode();
+        }
+    }
+
+    private void backToByEpisode() {
+
+        // Met fin à l'activité en cours et accède à nouveau à l'épisode
+        finish();
+        Intent appInfo = new Intent(ActorByEpisode.this, ByEpisode.class);
+        appInfo.putExtra("EPISODE_ID", String.valueOf(Episode_ID));
+        startActivity(appInfo);
+        finish();
     }
 
     private void setupActionBar() {
