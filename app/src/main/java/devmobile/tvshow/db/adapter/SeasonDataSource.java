@@ -27,7 +27,7 @@ public class SeasonDataSource {
         this.context = context;
     }
 
-    // Add a new season
+    // Permet d'ajouter une nouvelle saison à un show
     public long createSeason(int show_Id, int numSeasons){
         long id;
         ContentValues values = new ContentValues();
@@ -42,9 +42,7 @@ public class SeasonDataSource {
         return id;
     }
 
-    /**
-     * Get one season
-     */
+    // Permet d'obtenir une saison d'après son Id
     public Season getSeasonById(int id){
         String sql = "SELECT * FROM " + SeasonEntry.TABLE_SEASON +
                 " WHERE " + SeasonEntry.KEY_ID + " = " + id;
@@ -64,9 +62,7 @@ public class SeasonDataSource {
         return season;
     }
 
-    /**
-     * Get all seasons
-     */
+    // Obteniri toutes les saisons d'après l'Id du show
     public List<Season> getAllSeasons(int show_Id){
         List<Season> seasons = new ArrayList<Season>();
         String sql = "SELECT * FROM " + SeasonEntry.TABLE_SEASON + " WHERE " + SeasonEntry.KEY_SHOW_ID + " = " + show_Id
@@ -88,11 +84,8 @@ public class SeasonDataSource {
         return seasons;
     }
 
-    /**
-     *  For this table we do not need to update anything apart the boolean.
-     *
-     *  Update the status of a season. A seson may be completed or uncompleted.
-     */
+    // Pour cette table, le seul update nécessaire est le statut
+    // Une saison peut être complétée ou non
     public int updateSeason(Season season){
         ContentValues values = new ContentValues();
         values.put(SeasonEntry.KEY_COMPLETED, season.isSeasonCompleted());
@@ -101,19 +94,13 @@ public class SeasonDataSource {
                 new String[] { String.valueOf(season.getSeasonId()) });
     }
 
-
-    /**
-     * Delete a season
-     */
+    // Supprime une saison d'après son Id
     public void deleteSeason(long seasonId){
         this.db.delete(SeasonEntry.TABLE_SEASON, SeasonEntry.KEY_ID + " = ?",
                 new String[]{String.valueOf(seasonId)});
     }
 
-    /**
-     *
-     * Delete all seasons via the showId
-     */
+    //Supprime toutes les saisons d'un show d'après l'Id du show
     public void deleteAllSeasonsByShowId(long showId){
         this.db.delete(SeasonEntry.TABLE_SEASON, SeasonEntry.KEY_SHOW_ID + " = ?",
                 new String[]{String.valueOf(showId)});

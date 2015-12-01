@@ -28,10 +28,7 @@ public class EpisodeDataSource {
         this.context = context;
     }
 
-
-    /**
-     * Add a new episode
-     */
+    // Permet d'ajouter un épisode à la saison d'une série
     public long createEpisode(int seasonId, int numEpisodes, String episodeTitle){
         long id;
         ContentValues values = new ContentValues();
@@ -47,9 +44,7 @@ public class EpisodeDataSource {
         return id;
     }
 
-    /**
-     * Find one episode by Id
-     */
+    // Obtenir un épisode d'après son Id
     public Episode getEpisodeById(long id){
         String sql = "SELECT * FROM " + EpisodeEntry.TABLE_EPISODE +
                 " WHERE " + EpisodeEntry.KEY_ID + " = " + id;
@@ -71,9 +66,7 @@ public class EpisodeDataSource {
         return episode;
     }
 
-    /**
-     * Get last episode
-     */
+    // Permet d'obtenir le dernier épisode
     public Episode getNextEpisode(int showID, ArrayList<Season> seasons){
         String sql = "SELECT * FROM " + EpisodeEntry.TABLE_EPISODE + " INNER JOIN " + " WHERE " + EpisodeEntry.KEY_SEASON_ID + " = " + showID
                 + " ORDER BY " + EpisodeEntry.KEY_NUMBER + " ASC LIMIT 1";
@@ -95,10 +88,7 @@ public class EpisodeDataSource {
         return episode;
     }
 
-
-    /**
-     * Get all Episode
-     */
+    // Obtenir la liste de tous les épisodes liés à une saison d'après l'Id de la saison
     public List<Episode> getAllEpisodes(int seasonID){
         List<Episode> episodes = new ArrayList<Episode>();
         String sql = "SELECT * FROM " + EpisodeEntry.TABLE_EPISODE + " WHERE " + EpisodeEntry.KEY_SEASON_ID + " = " + seasonID
@@ -123,15 +113,9 @@ public class EpisodeDataSource {
     }
 
 
-    /**
-     *  For this table we have two kinds of update :
-     *   - if an episode has (not) been watched.
-     *   - if another data was modified
-     */
+    // Deux types d'updates pour cette table :
 
-    /**
-     *  Update the status of an episode. An episode may be watched or not be watched.
-     */
+    //...met à jour le statut d'un épisode. Un épisode peut être vu ou non vu
     public int updateEpisodeIfWatched(Episode episode){
         ContentValues values = new ContentValues();
         values.put(EpisodeEntry.KEY_COMPLETED, episode.isEpisodeCompleted());
@@ -141,9 +125,7 @@ public class EpisodeDataSource {
                 new String[] { String.valueOf(episode.getEpisodeID()) });
     }
 
-    /**
-     *  Update datas of an episode.
-     */
+    // ...met à jour les données d'un épisode existant
     public int updateEpisode(int episodeId, String episodeTitle){
         ContentValues values = new ContentValues();
         values.put(EpisodeEntry.KEY_TITLE, episodeTitle);
@@ -152,14 +134,13 @@ public class EpisodeDataSource {
                 new String[] { String.valueOf(episodeId) });
     }
 
-    /**
-     * Delete a episode
-     */
+    // Supprime un épisode d'après son Id
     public void deleteEpisode(long id){
         this.db.delete(EpisodeEntry.TABLE_EPISODE, EpisodeEntry.KEY_ID + " = ?",
                 new String[]{String.valueOf(id)});
     }
 
+    // Supprime tous les épisodes d'une saison d'après l'Id de la saison
     public void deleteAllEpisodesBySeasonId(long seasonId){
         this.db.delete(EpisodeEntry.TABLE_EPISODE, EpisodeEntry.KEY_SEASON_ID + " = ?",
                 new String[]{String.valueOf(seasonId)});

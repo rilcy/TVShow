@@ -18,12 +18,11 @@ public class Show {
     private String showImage;
     private Season[] seasons;
 
-    // Empty constructor
+    // Constructeur vide
     public Show(){}
 
 
-    //Setters & getters
-
+    // Getters et setters de Show
     public int getShowId() {
         return showId;
     }
@@ -72,6 +71,7 @@ public class Show {
         this.showCompleted = showCompleted;
     }
 
+    // Supprimer un show d'après son Id
     public void deleteShow(int show_Id, Activity activity){
         ShowDataSource showsds = new ShowDataSource(activity);
         showsds.deleteShow(show_Id);

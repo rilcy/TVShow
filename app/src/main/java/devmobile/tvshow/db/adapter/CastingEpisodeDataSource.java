@@ -28,9 +28,7 @@ public class CastingEpisodeDataSource {
         db = sqliteHelper.getWritableDatabase();
     }
 
-    /**
-     * inserts a reference between an actor and an episode
-     */
+    // Ajoute un acteur depuis la liste générale à un épisode
     public long createActorEpisode(long actor_id, long episode_id){
         ContentValues values = new ContentValues();
         values.put(CastingEpisodeEntry.KEY_CASTING_ID, actor_id);
@@ -39,33 +37,7 @@ public class CastingEpisodeDataSource {
         return this.db.insert(CastingEpisodeEntry.TABLE_CASTING_EPISODE, null, values);
     }
 
-    /**
-     * Get all the actors by episodeId
-     */
-    /*
-    public List<Actor> getActorsByEpisodeId(int id){
-        List<Actor> actors = new ArrayList<Actor>();
-        String sql = "SELECT * FROM " + CastingEpisodeEntry.TABLE_CASTING_EPISODE +
-                " WHERE " + CastingEpisodeEntry.KEY_EPISODE_ID + " = " + id;
-
-        Cursor cursor = this.db.rawQuery(sql, null);
-
-        if(cursor.moveToFirst()){
-            do {
-
-                Actor actor = new Actor();
-                actor.setIdActor(cursor.getInt(cursor.getColumnIndex(CastingEntry.KEY_ID)));
-                actor.setFirstName(cursor.getString(cursor.getColumnIndex(CastingEntry.KEY_FIRSTNAME)));
-                actor.setLastName(cursor.getString(cursor.getColumnIndex(CastingEntry.KEY_LASTNAME)));
-
-                actors.add(actor);
-            } while (cursor.moveToNext()) ;
-        }
-        return actors;
-
-    }
-    */
-
+    // Obtenir la liste de tous les acteurs liés au casting d'un épisode
     public List<CastingEpisode> getActorsIdByEpisodeId(int id) {
         List<CastingEpisode> castingEpisodes = new ArrayList<CastingEpisode>();
         String sql = "SELECT * FROM " + CastingEpisodeEntry.TABLE_CASTING_EPISODE +
@@ -94,6 +66,8 @@ public class CastingEpisodeDataSource {
                 new String[]{String.valueOf(idEpisode)});
     }
 
+    // Retire un acteur lié à un épisode
+    // L'acteur reste tout de même dans la liste générale d'acteurs
     public void deleteCastingForActor(int episode_id, int actor_id) {
         this.db.delete(CastingEpisodeEntry.TABLE_CASTING_EPISODE, CastingEpisodeEntry.KEY_EPISODE_ID + " = ?" + " AND " + CastingEpisodeEntry.KEY_CASTING_ID + " = ?",
                 new String[]{String.valueOf(episode_id), String.valueOf(actor_id)});
