@@ -76,19 +76,22 @@ public class ByShow_Edition extends AppCompatActivity {
         etShowName.setText(show.getShowTitle());
         etShowStart.setText(show.getShowStart());
 
-        // si le getShowEnd commence par "En" on suk
+        // si le getShowEnd commence par "En" on crée un textfield vide qui est caché à l'utilisateur
         if (show.getShowEnd().startsWith("En")){
             etShowEnd.setText("");
         }
         else{
+            // si le getShowEnd comporte une année on affiche le textfield
             etShowEnd.setText(show.getShowEnd());
             cbIsFinished.setChecked(true);
             etShowEnd.setVisibility(View.VISIBLE);
             tvShowEnd.setVisibility(View.VISIBLE);
         }
 
+        // on recherche l'image
         File imgFile = new File(show.getShowImage());
 
+        // si elle existe on l'ajoute à l'imageview
         if (imgFile.exists()) {
             try {
                 File f = new File(imgFile.getPath());
