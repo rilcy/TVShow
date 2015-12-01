@@ -66,4 +66,8 @@
     <string name="message_alert_delete_actor">Etes-vous sûr(e) de vouloir retirer cette personne ?</string>
     <string name="title_activity_by_show_edition">Modifier la série</string>
     <string name="name_or_lastname_missing">Il doit manquer quelque chose !</string>
+    <string name="image_missing">L\'image est manquante !</string>
+    <string name="title_missing">Titre manquant !</string>
+    <string name="showStart_missing">Année de début invalide !</string>
+    <string name="showEnd_missing">Année de fin invalide !</string>
 </resources>

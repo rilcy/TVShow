@@ -195,13 +195,26 @@ public class ByShow_Creation extends AppCompatActivity {
     // NEXT METHODS ARE THE onClick METHODS
     public void onClickSave(View v) {
         if (isPicture && etShowName.length() > 0 && etShowStart.length() > 3) {
-            saveButton.setFocusableInTouchMode(false);
+            saveButton.setEnabled(false);
             saveNewShow();
         }
+        else{
+            String toast = "\n";
+            if(!isPicture)
+                toast = toast + getString(R.string.image_missing) + "\n";
+            if(etShowName.length() == 0)
+                toast = toast + getString(R.string.title_missing) + "\n";
+            if(etShowStart.length() < 4)
+                toast = toast + getString(R.string.showStart_missing) + "\n";
+            if(etShowEnd.length() < 4 && cbIsFinished.isChecked())
+                toast = toast + getString(R.string.showEnd_missing) + "\n";
+
+            Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void onClickCancel(View v) {
-        //Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         backToPreviousActivity();
     }
 
