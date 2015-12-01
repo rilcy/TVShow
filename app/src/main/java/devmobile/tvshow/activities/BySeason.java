@@ -42,8 +42,6 @@ import devmobile.tvshow.db.object.Show;
 
 public class BySeason extends AppCompatActivity {
 
-    //public  final static String EPISODE_ID = "devemobile.tvshow.activities.BySeason.EPISODE_ID";
-
     // TOP OF THE ACTIVITY
     private ImageView imgBySeason;
     private TextView showTitleBySeason;
@@ -138,10 +136,8 @@ public class BySeason extends AppCompatActivity {
                         seasonds.updateSeason(season);
                         for (Episode e : finalListOfEpisodes1) {
                             // et les épisodes s'ils ne sont pas déjà checkés
-                            if(e.isEpisodeCompleted() != 1) {
-                                e.setEpisodeCompleted(1);
-                                episodeds.updateEpisodeIfWatched(e);
-                            }
+                            e.setEpisodeCompleted(1);
+                            episodeds.updateEpisodeIfWatched(e);
                         }
 
                         // on vérifie aussi s'il faut checker la série comme vue ou non vue
@@ -274,7 +270,7 @@ public class BySeason extends AppCompatActivity {
         });
 
     }
-    
+
 
     private void refreshMyActivity() {
         finish();

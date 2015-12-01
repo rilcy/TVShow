@@ -50,6 +50,7 @@ public class ByShow_Creation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show_creation);
 
+        // Préférence de langage
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
@@ -70,7 +71,8 @@ public class ByShow_Creation extends AppCompatActivity {
 
     }
 
-    // NEXT METHODS HELP US TO PICK AN IMAGE FROM THE DB
+    // Après sélection d'une image dans la gallery photo
+    // affiche cette image
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
@@ -79,7 +81,9 @@ public class ByShow_Creation extends AppCompatActivity {
                 imgView.setImageURI(selectedImage);
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                 isPicture = true;
-            } else {
+            }
+            // en cas d'erreur un message est affiché
+            else {
                 Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
@@ -92,39 +96,13 @@ public class ByShow_Creation extends AppCompatActivity {
         startActivityForResult(intent, RESULT_LOAD_IMG);
     }
 
-    private void setupActionBar() {
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        menu.findItem(R.id.action_settings).setVisible(false);
-        menu.findItem(R.id.action_addShow).setVisible(false);
-        menu.findItem(R.id.action_byActor).setVisible(false);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-
-                Intent intent = new Intent(ByShow_Creation.this, BySeason.class);
-                ByShow_Creation.this.startActivity(intent);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    // NEXT METHODS HELP US TO SAVE INTO THE APP THE IMAGE AND INTO THE DB THE SHOW
+    // Méthode permettant de récupérer les valeurs entrée et de vérifier leur exactitude
     private void saveNewShow() {
         Show show = null;
         String imagePath;
-        // Create show if we have enter all the required information
+        // Création d'un Show si les bonnes valeurs sont entrées
+        // avec date de fin
         if (cbIsFinished.isChecked() && etShowEnd.length() > 3) {
             imagePath = saveToInternalSorage(bitmap);
             show = new Show();
@@ -137,7 +115,7 @@ public class ByShow_Creation extends AppCompatActivity {
             backToPreviousActivity();
         }
 
-        // Create show if we only set Image, name of the show and starts date
+        // Création d'un Show sans la date de fin
         else {
             imagePath = saveToInternalSorage(bitmap);
             show = new Show();
@@ -149,9 +127,9 @@ public class ByShow_Creation extends AppCompatActivity {
             saveIntoDB(show);
             backToPreviousActivity();
         }
-
     }
 
+    // Méthode permettant de sauver dans la DB nos valeurs pour le Show
     private void saveIntoDB(Show show) {
         if (show != null) {
             ShowDataSource sds = new ShowDataSource(this);
@@ -192,12 +170,14 @@ public class ByShow_Creation extends AppCompatActivity {
     }
 
 
-    // NEXT METHODS ARE THE onClick METHODS
+    // En cas de click pour sauver la série
     public void onClickSave(View v) {
+        // s'il y a au moins une image, un titre et une date de début on peut créer le show
         if (isPicture && etShowName.length() > 0 && etShowStart.length() > 3) {
             saveButton.setEnabled(false);
             saveNewShow();
         }
+        // si une information est manquante on en informe l'utilisateur via un toast
         else{
             String toast = "\n";
             if(!isPicture)
@@ -218,21 +198,52 @@ public class ByShow_Creation extends AppCompatActivity {
         backToPreviousActivity();
     }
 
+    // Si on souhaite afficher ou non le champs de la date de fin en clickant sur la checkbox
     public void onClickCheckbox(View view) {
         if (cbIsFinished.isChecked()) {
             etShowEnd.setVisibility(View.VISIBLE);
             tvShowEnd.setVisibility(View.VISIBLE);
         } else {
+            // si on ne veut pas ajouter de date de fin on supprime la potentielle
+            // valeur entrée par l'utilisateur.
             etShowEnd.setVisibility(View.GONE);
             tvShowEnd.setVisibility(View.GONE);
             etShowEnd.setText("");
         }
     }
-
+    // en fin de processus on retourne au main.
     private void backToPreviousActivity() {
         Intent intent = new Intent(ByShow_Creation.this, MainActivity.class);
         ByShow_Creation.this.startActivity(intent);
         finish();
+    }
+
+
+    private void setupActionBar() {
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_addShow).setVisible(false);
+        menu.findItem(R.id.action_byActor).setVisible(false);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+                Intent intent = new Intent(ByShow_Creation.this, BySeason.class);
+                ByShow_Creation.this.startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**

@@ -47,9 +47,11 @@ public class ByShow_Edition extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show_edition);
 
+        // Préférence de langues
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
+        // données importées via l'intent
         Intent intent = getIntent();
         String dataTransfered = intent.getStringExtra("SHOWID");
         Show_Id = Long.parseLong(dataTransfered);
@@ -60,7 +62,6 @@ public class ByShow_Edition extends AppCompatActivity {
         etShowEnd = (EditText) findViewById(R.id.etShowEnd);
         tvShowEnd = (TextView) findViewById(R.id.showEnd);
 
-        // Button and imageView button
         imgView = (ImageView) findViewById(R.id.imgView);
         saveButton = (Button) findViewById(R.id.buttonOk);
         cancelButton = (Button) findViewById(R.id.buttonCancel);
@@ -75,6 +76,7 @@ public class ByShow_Edition extends AppCompatActivity {
         etShowName.setText(show.getShowTitle());
         etShowStart.setText(show.getShowStart());
 
+        // si le getShowEnd commence par "En" on suk
         if (show.getShowEnd().startsWith("En")){
             etShowEnd.setText("");
         }

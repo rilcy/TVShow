@@ -1,13 +1,11 @@
 package devmobile.tvshow.activities;
 
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -61,6 +56,7 @@ public class ByShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_by_show);
 
+        // Préférence de langage
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         changeLanguage(sharedPrefs.getString("pref_lang", "en"));
 
@@ -74,20 +70,25 @@ public class ByShow extends AppCompatActivity {
         episodeds = new EpisodeDataSource(this);
         showds = new ShowDataSource(this);
 
+        // Obtention de la liste des saisons pour cette série
         SeasonDataSource seasons = new SeasonDataSource(this);
         listOfSeasons = (ArrayList<Season>) seasons.getAllSeasons((int)show_Id);
 
 
         //PARTIE SUPERIEURE "A VOIR PROCHAINEMENT"
+        // Obtention du prochain épisode à voir
         Episode ep = findNextEpisodeToWatch(listOfSeasons);
         final ArrayList<Episode> eplist = new ArrayList<Episode>();
         eplist.add(ep);
+        // affichage de l'épisode dans l'adapter
         ListAdapter adapterNextoWatch = new CustomAdapterNextToWatch(this, eplist, show.getShowImage(), show.getShowId());
 
         ListView listNextToWatch = (ListView) findViewById(R.id.listeNextToWatch);
         listNextToWatch.setAdapter(adapterNextoWatch);
 
+
         //PARTIE MEDIANE
+        // affichage des ifnos relatives au show
         beginYearByShow = (TextView) findViewById(R.id.beginYearByShow);
         endYearByShow = (TextView) findViewById(R.id.endYearByShow);
         cbNumberEpisodeToWatch = (CheckBox) findViewById(R.id.cbNumberEpisodeToWatch);
@@ -125,19 +126,20 @@ public class ByShow extends AppCompatActivity {
 
 
         // PARTIE INFERIEURE "LISTE DES SAISONS"
+        // affichage des saisons
         numberSeasons = listOfSeasons.size();
 
         final ListAdapter adapter = new CustomAdapterShow(this, listOfSeasons);
 
-
         ListView list = (ListView) findViewById(R.id.listOfSeasons);
         list.setAdapter(adapter);
-
 
         setListViewHeightBasedOnChildren(list);
         // Retire le focus sur la liste afin que l'activité démarre en haut de la page
         list.setFocusable(false);
 
+
+        // en cas de click sur la liste des saisons on est redirigé vers l'activité de celle-ci
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -149,6 +151,8 @@ public class ByShow extends AppCompatActivity {
             }
         });
 
+        // en cas de click sur l'édition du show on est redirigé vers l'activité du modification du
+        // show
         LinearLayout llayout_edit = (LinearLayout) findViewById (R.id.linearlayout_editShow);
         llayout_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +163,7 @@ public class ByShow extends AppCompatActivity {
             }
         });
 
+        // en cas de click on ouvre un dialog fragment pour supprimer la série
         LinearLayout llayout_delete = (LinearLayout) findViewById (R.id.linearlayout_deleteShow);
         llayout_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,7 +177,7 @@ public class ByShow extends AppCompatActivity {
             }
         });
 
-
+        // en cas de click on crée une nouvelle saison via un dialog fragment
         LinearLayout llayout_create = (LinearLayout) findViewById (R.id.linearlayout_createSeason);
         llayout_create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,24 +195,32 @@ public class ByShow extends AppCompatActivity {
 
     }
 
+    // vérifiaction si le show est entièrement vu
     private void checkIfShowIsCompleted() {
         int cpt = 0;
         boolean isWatched = false;
+
+        // vérification uniquement si les saisons sont considérées comme vues
         while(cpt < listOfSeasons.size() && listOfSeasons.get(cpt).isSeasonCompleted() == 1){
             ++cpt;
             isWatched = true;
         }
-
+        // si les saisons sont considérées comme vues on met à jour le satut de la série ou non
         if(listOfSeasons.size() != cpt){
-            show.setShowCompleted(0);
-            showds.updateShow(show);
+            if(show.isShowCompleted() != 0) {
+                show.setShowCompleted(0);
+                showds.updateShow(show);
+            }
         }
         else{
-            show.setShowCompleted(1);
-            showds.updateShow(show);
+            if(show.isShowCompleted() != 1) {
+                show.setShowCompleted(1);
+                showds.updateShow(show);
+            }
         }
     }
 
+    // Si click sur la checkbox on vérifie que toutes les saisons soient vues ou églament les épisodes
     private void checkAllSeasonsAndEpisode() {
         for (int i = 0; i < listOfSeasons.size(); i++) {
             ArrayList<Episode> listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(listOfSeasons.get(i).getSeasonId());
@@ -228,27 +241,29 @@ public class ByShow extends AppCompatActivity {
         showds.updateShow(show);
     }
 
+    // si on uncheck la série
     private void uncheckLastEpisode() {
 
-        // CHANGE STATUT OF THE SHOW AS NOT WATCHED
+        // on change le statut du show
         show.setShowCompleted(0);
         showds.updateShow(show);
 
         int i = listOfSeasons.size()-1;
         ArrayList<Episode> listOfEpisodes = (ArrayList<Episode>) episodeds.getAllEpisodes(listOfSeasons.get(i).getSeasonId());
 
-        // CHANGE STATUT OF LAST SEASON AS NOT WATCHED
+        // on change le statut de la dernière saison
         if (listOfEpisodes.size() != 0){
             listOfSeasons.get(i).setSeasonCompleted(0);
             seasonds.updateSeason(listOfSeasons.get(i));
 
-        // CHANGE LAST EPISODE OF LAST SEASON AS NOT WATCHED
+        // on change le statu du dernière épisode de la dernière saison
             int j = listOfEpisodes.size()-1;
             listOfEpisodes.get(j).setEpisodeCompleted(0);
             episodeds.updateEpisodeIfWatched(listOfEpisodes.get(j));
         }
     }
 
+    // méthode pour raffraichir l'activité
     private void refreshMyActivity() {
         finish();
         Intent intent = getIntent();
@@ -257,6 +272,7 @@ public class ByShow extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
+    // méthode permettant de compter le nombre d'épisode encore à voir parmi toutes les saisons
     private int countNumberOfEpisodeLeft() {
 
         int nbSeasons = listOfSeasons.size();
@@ -276,10 +292,10 @@ public class ByShow extends AppCompatActivity {
                     ++cpt;
             }
         }
-
         return cpt;
     }
 
+    // méthode permettant de trouver le prochaine épisode
     private Episode findNextEpisodeToWatch(ArrayList<Season> listOfSeasons) {
         EpisodeDataSource episodeds = new EpisodeDataSource(this);
         Episode ep = null;
