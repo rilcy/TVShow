@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import devmobile.tvshow.R;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
@@ -42,14 +43,20 @@ public class CreateEpisodeDialogAlert extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         etNewEpisode = (EditText) getDialog().findViewById(R.id.etNewEpisode);
                         String text = etNewEpisode.getText().toString();
-                        EpisodeDataSource episodeds = new EpisodeDataSource(getActivity());
-                        episodeds.createEpisode((int) seasonId, (int) numEpisodes, text);
+                        if(text.length() > 0) {
+                            EpisodeDataSource episodeds = new EpisodeDataSource(getActivity());
+                            episodeds.createEpisode((int) seasonId, (int) numEpisodes, text);
 
 
-                        Intent intent = getActivity().getIntent();
-                        getActivity().finish();
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent);
+                            Intent intent = getActivity().getIntent();
+                            getActivity().finish();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                        }
+                        else{
+                            String toast = getString(R.string.title_too_short);
+                            Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

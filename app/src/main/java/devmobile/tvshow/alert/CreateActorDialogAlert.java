@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import devmobile.tvshow.R;
 import devmobile.tvshow.activities.ByActor;
@@ -44,13 +45,19 @@ public class CreateActorDialogAlert extends DialogFragment {
                         String stringFirstName = actorFirstName.getText().toString();
                         actorLastName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextLastName);
                         String stringLastName = actorLastName.getText().toString();
-                        CastingDataSource castingds = new CastingDataSource(getActivity());
-                        castingds.createCasting(stringFirstName, stringLastName);
+                        if(stringFirstName.length() > 0 && stringLastName.length() > 0) {
+                            CastingDataSource castingds = new CastingDataSource(getActivity());
+                            castingds.createCasting(stringFirstName, stringLastName);
 
-                        Intent intent = getActivity().getIntent();
-                        getActivity().finish();
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent);
+                            Intent intent = getActivity().getIntent();
+                            getActivity().finish();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                        }
+                        else{
+                            String toast = getString(R.string.name_or_lastname_missing);
+                            Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

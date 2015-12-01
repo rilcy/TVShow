@@ -125,13 +125,13 @@ public class BySeason extends AppCompatActivity {
                             e.setEpisodeCompleted(1);
                             episodeds.updateEpisodeIfWatched(e);
                         }
-                        listOfSeasons = new ArrayList<Season>();
                         boolean isWatched = false;
                         int cpt = 0;
-                        while(listOfSeasons.get(cpt).isSeasonCompleted() == 1 && listOfSeasons.size()<cpt)
-                        {
-                            isWatched = true;
-                            ++cpt;
+                        if(listOfSeasons.size() > 0) {
+                            while (listOfSeasons.get(cpt).isSeasonCompleted() == 1 && listOfSeasons.size() < cpt) {
+                                isWatched = true;
+                                ++cpt;
+                            }
                         }
 
                         if(listOfSeasons.get(cpt).isSeasonCompleted() == 0)
@@ -281,6 +281,8 @@ public class BySeason extends AppCompatActivity {
         menu.findItem(R.id.action_settings).setVisible(false);
         return true;
     }
+
+    // TODO Problème avec l'ActionBar en cliquant sur Actor dans cette activité.
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

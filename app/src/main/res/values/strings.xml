@@ -65,5 +65,5 @@
     <string name="no_more_actor">Pas d\'autre acteur à ajouter !</string>
     <string name="message_alert_delete_actor">Etes-vous sûr(e) de vouloir retirer cette personne ?</string>
     <string name="title_activity_by_show_edition">Modifier la série</string>
-
+    <string name="name_or_lastname_missing">Il doit manquer quelque chose !</string>
 </resources>
