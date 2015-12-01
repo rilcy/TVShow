@@ -8,17 +8,17 @@ public class Actor {
     private String firstName;
     private String lastName;
 
-    // Empty constructor
+    // Constructeur vide
     public Actor(){}
 
 
-    // *************************
+    // Constructeur avec paramètres firstName et lastName
     public Actor(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    // **************************
 
+    // Getters et setters d'Actor
     public String getFirstName() {
         return firstName;
     }

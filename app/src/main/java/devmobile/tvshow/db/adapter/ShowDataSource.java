@@ -26,9 +26,7 @@ public class ShowDataSource {
         this.context = context;
     }
 
-    /**
-     * Insert a new Show
-     */
+    // Permet de créer un nouveau show
     public long createShow(Show show) {
         long id;
         ContentValues values = new ContentValues();
@@ -43,9 +41,7 @@ public class ShowDataSource {
         return id;
     }
 
-    /**
-     *  Find one show by ID
-     */
+    // Permet d'obtenir un show d'après son Id
     public Show getShowById(long id) {
         String sql = "SELECT * FROM " + ShowEntry.TABLE_SHOW +
                 " WHERE " + ShowEntry.KEY_ID + " = " + id;
@@ -67,9 +63,7 @@ public class ShowDataSource {
         return show;
     }
 
-    /**
-     * Get all shows
-     */
+    // Obtenir la liste de tous les shows
     public List<Show> getAllShows() {
         List<Show> shows = new ArrayList<Show>();
         String sql = "SELECT * FROM " + ShowEntry.TABLE_SHOW + " ORDER BY " + ShowEntry.KEY_TITLE;
@@ -91,9 +85,7 @@ public class ShowDataSource {
         return shows;
     }
 
-    /**
-     * Update a whole show
-     */
+    // Permet de mettre à jour le show complet
     public int updateShow(Show show) {
         ContentValues values = new ContentValues();
         values.put(ShowEntry.KEY_TITLE, show.getShowTitle());
@@ -106,7 +98,7 @@ public class ShowDataSource {
                 new String[] { String.valueOf(show.getShowId()) });
     }
 
-
+    // Permet de mettre à jour les informations d'un show
     public int updateInfoShow(Show show) {
         ContentValues values = new ContentValues();
         values.put(ShowEntry.KEY_TITLE, show.getShowTitle());
@@ -117,9 +109,7 @@ public class ShowDataSource {
                 new String[] { String.valueOf(show.getShowId()) });
     }
 
-    /**
-     * Delete a show
-     */
+    // Permet de supprimer un show d'après son Id
     public void deleteShow(long id){
         this.db.delete(ShowEntry.TABLE_SHOW, ShowEntry.KEY_ID + " = ?",
                 new String[]{String.valueOf(id)});

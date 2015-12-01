@@ -17,9 +17,6 @@ import devmobile.tvshow.db.adapter.CastingDataSource;
 import devmobile.tvshow.db.adapter.EpisodeDataSource;
 import devmobile.tvshow.db.object.Actor;
 
-/**
- * Created by Elsio on 28.11.2015.
- */
 public class CreateActorDialogAlert extends DialogFragment {
 
     EditText actorFirstName;

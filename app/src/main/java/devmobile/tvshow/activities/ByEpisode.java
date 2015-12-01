@@ -143,7 +143,7 @@ public class ByEpisode extends AppCompatActivity {
         show = showds.getShowById(season.getShowId());
 
 
-        // HAUT DE L'ACTIVITE ON AFFICHE LES VALEURS RECUPERES
+        // HAUT DE L'ACTIVITE ON AFFICHE LES VALEURS RECUPERÉES
         imgByEpisode = (ImageView) findViewById(R.id.imgByEpisode);
         titleByEpisode = (TextView) findViewById(R.id.titleByEpisode);
         infoByEpisode = (TextView) findViewById(R.id.infoByEpisode);
@@ -271,12 +271,6 @@ public class ByEpisode extends AppCompatActivity {
     }
 
 
-    private void setupActionBar() {
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -285,6 +279,7 @@ public class ByEpisode extends AppCompatActivity {
     }
 
 
+    // Configuration du menu de l'action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -309,6 +304,8 @@ public class ByEpisode extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Méthode permettant d'avoir le comportement souhaité de la listview dans une scroll view
+    // (Barre de défilement générale et pas uniquement dans la listview)
     // Source : http://stackoverflow.com/questions/18367522/android-list-view-inside-a-scroll-view
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
@@ -331,6 +328,7 @@ public class ByEpisode extends AppCompatActivity {
         listView.setLayoutParams(params);
     }
 
+    // Localisation + changement du titre de l'activité selon la langue
     public void changeLanguage(String lang){
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);
@@ -339,28 +337,5 @@ public class ByEpisode extends AppCompatActivity {
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         getSupportActionBar().setTitle(R.string.byEpisode_pageTitle);
 
-        TextView editEpisode = (TextView) findViewById(R.id.editEpisodeText);
-        editEpisode.setText(R.string.edit_episode);
-        TextView deleteEpisode = (TextView) findViewById(R.id.deleteEpisodeText);
-        deleteEpisode.setText(R.string.delete_episode);
-        TextView addActor = (TextView) findViewById(R.id.addActorText);
-        addActor.setText(R.string.add_actor);
-
-        /*
-        Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
-        buttonLoadPicture.setText(R.string.buttonLoadPicture);
-        TextView showName = (TextView) findViewById(R.id.showName);
-        showName.setText(R.string.ShowName);
-        TextView showStart = (TextView) findViewById(R.id.showStart);
-        showStart.setText(R.string.ShowStart);
-        CheckBox cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
-        cbIsFinished.setText(R.string.cbisFinished);
-        TextView showEnd = (TextView) findViewById(R.id.showEnd);
-        showEnd.setText(R.string.ShowEnd);
-        Button buttonOk = (Button) findViewById(R.id.buttonOk);
-        buttonOk.setText(R.string.buttonOk);
-        Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
-        buttonCancel.setText(R.string.buttonCancel);
-        */
     }
 }

@@ -19,19 +19,14 @@ public class Season {
 
     private String type;
 
-    // Empty constructor
+    // Constructeur vide
     public Season(){}
 
-
-    // *******************
     public Season(String type){
         this.type = type;
     }
 
-    // *******************
-
-
-    //Getters & setters
+    //Getters et setters de Season
     public int isSeasonCompleted() {
         return seasonCompleted;
     }
@@ -64,11 +59,13 @@ public class Season {
         this.seasonNumber = seasonNumber;
     }
 
+    // Permet de supprimer une saison d'après son Id
     public void deleteASeason(int season_Id, Activity activity){
         SeasonDataSource seasonds = new SeasonDataSource(activity);
         seasonds.deleteSeason(season_Id);
     }
 
+    // Permet de supprimer une liste de saisons entrées en paramètres
     public void deleteAllSeasons(ArrayList<Season> list, Activity activity){
         ShowDataSource showsds = new ShowDataSource(activity);
         for(int i = 0; i<list.size(); i++){

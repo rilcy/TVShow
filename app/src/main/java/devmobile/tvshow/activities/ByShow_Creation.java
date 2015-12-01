@@ -219,12 +219,6 @@ public class ByShow_Creation extends AppCompatActivity {
     }
 
 
-    private void setupActionBar() {
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -234,6 +228,7 @@ public class ByShow_Creation extends AppCompatActivity {
         return true;
     }
 
+    // Configuration du menu de l'action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -246,9 +241,7 @@ public class ByShow_Creation extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Méthode permettant la localisation du texte de l'activité
-     */
+     // Méthode permettant la localisation du texte de l'activité
     public void changeLanguage(String lang){
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);
@@ -256,19 +249,6 @@ public class ByShow_Creation extends AppCompatActivity {
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         getSupportActionBar().setTitle(R.string.title_activity_by_show_creation);
-        Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
-        buttonLoadPicture.setText(R.string.buttonLoadPicture);
-        TextView showName = (TextView) findViewById(R.id.showName);
-        showName.setText(R.string.ShowName);
-        TextView showStart = (TextView) findViewById(R.id.showStart);
-        showStart.setText(R.string.ShowStart);
-        CheckBox cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
-        cbIsFinished.setText(R.string.cbisFinished);
-        TextView showEnd = (TextView) findViewById(R.id.showEnd);
-        showEnd.setText(R.string.ShowEnd);
-        Button buttonOk = (Button) findViewById(R.id.buttonOk);
-        buttonOk.setText(R.string.buttonOk);
-        Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
-        buttonCancel.setText(R.string.buttonCancel);
+
     }
 }

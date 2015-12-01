@@ -29,6 +29,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return instance;
     }
 
+    // Création des tables
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(ShowContract.ShowEntry.CREATE_TABLE_SHOW);
@@ -38,16 +39,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(ShowContract.CastingEpisodeEntry.CREATE_TABLE_CASTING_EPISODE);
     }
 
+    //"Drop" les anciennes tables si celles-ci existent déjà
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //drop old tables
         db.execSQL("DROP TABLE IF EXISTS " + ShowContract.ShowEntry.TABLE_SHOW);
         db.execSQL("DROP TABLE IF EXISTS " + ShowContract.SeasonEntry.TABLE_SEASON);
         db.execSQL("DROP TABLE IF EXISTS " + ShowContract.EpisodeEntry.TABLE_EPISODE);
         db.execSQL("DROP TABLE IF EXISTS " + ShowContract.CastingEntry.TABLE_CASTING);
         db.execSQL("DROP TABLE IF EXISTS " + ShowContract.CastingEpisodeEntry.TABLE_CASTING_EPISODE);
 
-        //create new tables
+        //Création des nouvelles tables
         onCreate(db);
     }
 }

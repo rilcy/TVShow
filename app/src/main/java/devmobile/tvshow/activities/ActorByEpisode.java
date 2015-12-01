@@ -123,6 +123,7 @@ public class ActorByEpisode extends AppCompatActivity {
         return true;
     }
 
+    // Configuration du menu de l'action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -143,13 +144,14 @@ public class ActorByEpisode extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Localisation + changement du titre de l'activité selon la langue
     public void changeLanguage(String lang){
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
+        getSupportActionBar().setTitle(R.string.byActor_pageTitle);
     }
 
 

@@ -120,6 +120,7 @@ public class ByShow_Edition extends AppCompatActivity {
         return true;
     }
 
+    // Configuration du menu de l'action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -132,10 +133,10 @@ public class ByShow_Edition extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    // NEXT METHODS HELP US TO SAVE INTO THE APP THE IMAGE AND INTO THE DB THE SHOW
+    // Méthode nous permettant d'enregistrer les données mises à jour de
+    // de la série selon les nouvelles informations entrées
     private void saveUpdatedShow() {
-        // Create show if we have enter all the required information
+        // ... s'il s'agit d'une série terminée
         if (cbIsFinished.isChecked() && etShowEnd.length() > 3) {
             show = new Show();
             show.setShowTitle(etShowName.getText().toString());
@@ -146,7 +147,7 @@ public class ByShow_Edition extends AppCompatActivity {
             backToPreviousActivity();
         }
 
-        // Create show if we only set Image, name of the show and starts date
+        // ... s'il s'agit d'une série "En production"
         else {
             show = new Show();
             Show showToUpdate = show;
@@ -159,6 +160,7 @@ public class ByShow_Edition extends AppCompatActivity {
         }
     }
 
+    // Méthode d'update de la BD selon les informations entrées
     private void updateIntoDB(Show showToUpdate) {
         if (showToUpdate != null) {
             ShowDataSource sds = new ShowDataSource(this);
@@ -168,7 +170,7 @@ public class ByShow_Edition extends AppCompatActivity {
     }
 
 
-    // En cas de click pour la sauvegarde des modifications
+    // Méthodes onclick pour le bouton save
     public void onClickSave(View v) {
         // Vérifie que les données minimums soient entrées...
         if (etShowName.length() > 0 && etShowStart.length() > 3) {
@@ -214,9 +216,8 @@ public class ByShow_Edition extends AppCompatActivity {
 
     }
 
-    /**
-     * Méthode permettant la localisation du texte de l'activité
-     */
+
+    // Localisation + changement du titre de l'activité selon la langue
     public void changeLanguage(String lang) {
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);
@@ -224,21 +225,5 @@ public class ByShow_Edition extends AppCompatActivity {
         config.locale = myLocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         getSupportActionBar().setTitle(R.string.title_activity_by_show_edition);
-        /*
-        Button buttonLoadPicture = (Button) findViewById(R.id.buttonLoadPicture);
-        buttonLoadPicture.setText(R.string.buttonLoadPicture);
-        TextView showName = (TextView) findViewById(R.id.showName);
-        showName.setText(R.string.ShowName);
-        TextView showStart = (TextView) findViewById(R.id.showStart);
-        showStart.setText(R.string.ShowStart);
-        CheckBox cbIsFinished = (CheckBox) findViewById(R.id.cbiSFinished);
-        cbIsFinished.setText(R.string.cbisFinished);
-        TextView showEnd = (TextView) findViewById(R.id.showEnd);
-        showEnd.setText(R.string.ShowEnd);
-        Button buttonOk = (Button) findViewById(R.id.buttonOk);
-        buttonOk.setText(R.string.buttonOk);
-        Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
-        buttonCancel.setText(R.string.buttonCancel);
-        */
     }
 }

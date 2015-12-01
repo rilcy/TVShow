@@ -19,29 +19,8 @@ public class Episode {
     private int seasonID;
     private int episodeCompleted;
 
-    // Supprimer ces deux attributs
-    private String episodeInfo;
-    private Integer img;
-
-    // Empty constructor
-    public Episode(){};
-
-
-    // ***********
-
-    // CONSTRUCTEUR A SUPPRIMER
-    public Episode(int episodeNumber, String episodeTitle){
-        this.episodeNumber = episodeNumber;
-        this.episodeTitle = episodeTitle;
-    }
-
-    // CONSTRUCTEUR A SUPPRIMER
-    public Episode(int episodeNumber, String episodeTitle, String episodeInfo, Integer img){
-        this.episodeNumber = episodeNumber;
-        this.episodeTitle = episodeTitle;
-        this.episodeInfo = episodeInfo;
-        this.img = img;
-    }
+    // Constructeur vide
+    public Episode(){}
 
     //Constructeur de l'objet Episode lors de la création initiale.
     //Le boolean n'est pas ajouté car il doit être "FALSE" de base et ceci n'est pas maitrisé par le user
@@ -62,11 +41,7 @@ public class Episode {
         this.episodeCompleted = 0;
     }
 
-    // ************
-
-
-    //Getters & setters
-
+    // Getters et setters d'Episode
     public int isEpisodeCompleted() {
         return episodeCompleted;
     }
@@ -81,14 +56,6 @@ public class Episode {
 
     public void setEpisodeID(int episodeID) {
         this.episodeID = episodeID;
-    }
-
-    public String getEpisodeInfo() {
-        return episodeInfo;
-    }
-
-    public void setEpisodeInfo(String episodeInfo) {
-        this.episodeInfo = episodeInfo;
     }
 
     public int getEpisodeNumber() {
@@ -107,14 +74,6 @@ public class Episode {
         this.episodeTitle = episodeTitle;
     }
 
-    public Integer getImg() {
-        return img;
-    }
-
-    public void setImg(Integer img) {
-        this.img = img;
-    }
-
     public int getSeasonID() {
         return seasonID;
     }
@@ -123,17 +82,17 @@ public class Episode {
         this.seasonID = seasonID;
     }
 
+    // Permet de supprimer un épisode d'après son Id
     public void deleteAnEpisode(int episode_Id, Activity activity){
         EpisodeDataSource episodeds = new EpisodeDataSource(activity);
         episodeds.deleteEpisode(episode_Id);
     }
 
+    // Permet de supprimer tous les épisodes d'une liste entrée en paramètres
     public void deleteAllEpisodes(ArrayList<Episode> list, Activity activity){
         EpisodeDataSource episodeds = new EpisodeDataSource(activity);
         for(int i = 0; i<list.size(); i++){
             episodeds.deleteEpisode(list.get(i).getEpisodeID());
         }
     }
-
-
 }
