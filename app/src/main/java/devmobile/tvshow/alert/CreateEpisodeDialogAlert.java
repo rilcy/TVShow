@@ -31,29 +31,29 @@ public class CreateEpisodeDialogAlert extends DialogFragment {
         numEpisodes = (long) mNumEpisodes;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.activity_alert_creation_episode, null))
-                // Add action buttons
+
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        // Création d'une nouvelle épisode dans BySeason
                         etNewEpisode = (EditText) getDialog().findViewById(R.id.etNewEpisode);
                         String text = etNewEpisode.getText().toString();
-                        if(text.length() > 0) {
+                        // Vérification que l'utilisateur est entrée au moins une valeur
+                        if (text.length() > 0) {
                             EpisodeDataSource episodeds = new EpisodeDataSource(getActivity());
+                            // enregistrement dans la DB
                             episodeds.createEpisode((int) seasonId, (int) numEpisodes, text);
 
-
+                            // retour à l'activité
                             Intent intent = getActivity().getIntent();
                             getActivity().finish();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivity(intent);
-                        }
-                        else{
+                        } else {
+                            // si aucune valeur n'est rentrée, on retourne à l'activité et on affiche un toast
                             String toast = getString(R.string.title_too_short);
                             Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
                         }
@@ -62,6 +62,7 @@ public class CreateEpisodeDialogAlert extends DialogFragment {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         CreateEpisodeDialogAlert.this.getDialog().cancel();
+                        // retour à l'activité
                     }
                 });
 

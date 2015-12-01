@@ -41,26 +41,30 @@ public class CustomAdapterNextToWatch extends ArrayAdapter<Episode>{
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View customView = inflater.inflate(R.layout.custom_row_main, parent, false);
 
+        // affiche le prochain épisode dans ByShow
         Episode episode = getItem(position);
         TextView textViewTitle = (TextView) customView.findViewById(R.id.serieTitle);
         TextView textViewInfo = (TextView) customView.findViewById(R.id.serieInfo);
         ImageView imageView = (ImageView) customView.findViewById(R.id.imageSerie);
 
+        // Récupération de l'épisode à afficher
         ShowDataSource showds = new ShowDataSource(getContext());
         Show show = showds.getShowById(ShowId);
 
+        // si l'épisode n'est pas null on l'affiche (donc s'il y a un épisode à afficher)
         if(episode != null) {
             textViewTitle.setText(episode.getEpisodeTitle());
             SeasonDataSource seasonds = new SeasonDataSource(getContext());
             Season season = seasonds.getSeasonById(episode.getSeasonID());
             textViewInfo.setText(getContext().getString(R.string.Season) + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
-            //textViewInfo.setText("" + getString(R.string.Season) + season.getSeasonNumber() + " Episode " + episode.getEpisodeNumber());
         }
         else{
+            // s'il n y a rien à afficher on met un message informatif
             textViewTitle.setText(show.getShowTitle());
             textViewInfo.setText(R.string.no_more_episodes);
         }
 
+        // on affiche la logo de la série
         File imgFile = new  File(show.getShowImage());
 
         if(imgFile.exists()) {

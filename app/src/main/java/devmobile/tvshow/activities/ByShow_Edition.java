@@ -168,13 +168,15 @@ public class ByShow_Edition extends AppCompatActivity {
     }
 
 
-    // NEXT METHODS ARE THE onClick METHODS
+    // En cas de click pour la sauvegarde des modifications
     public void onClickSave(View v) {
+        // Vérifie que les données minimums soient entrées...
         if (etShowName.length() > 0 && etShowStart.length() > 3) {
             saveButton.setEnabled(false);
             saveUpdatedShow();
         }
         else{
+            // ...si ce n'est pas le cas, on affiche un toast informant quelle donnée est manquante
             String toast = "\n";
             if(etShowName.length() == 0)
                 toast = toast + getString(R.string.title_missing) + "\n";
@@ -187,10 +189,12 @@ public class ByShow_Edition extends AppCompatActivity {
         }
     }
 
+    // en cas d'annulation retour à la main activity
     public void onClickCancel(View v) {
         backToPreviousActivity();
     }
 
+    // en cas de click sur la checkbox affiche ou non l'editext et le textfield de la date de fin
     public void onClickCheckbox(View view) {
         if (cbIsFinished.isChecked()) {
             etShowEnd.setVisibility(View.VISIBLE);
@@ -202,6 +206,7 @@ public class ByShow_Edition extends AppCompatActivity {
         }
     }
 
+    // retour à l'activité principale
     private void backToPreviousActivity() {
         Intent intent = new Intent(ByShow_Edition.this, MainActivity.class);
         ByShow_Edition.this.startActivity(intent);

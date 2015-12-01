@@ -44,21 +44,24 @@ public class DeleteEpisodeDialogAlert extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
 
+                        // En cas de suppression d'un épisode dans ByEpisode
+                        // On supprime en premier lieu le casting, puis le casting
+
                         castingds = new CastingEpisodeDataSource(getActivity());
                         casting = new CastingEpisode();
                         ArrayList<CastingEpisode> listOfCasting = new ArrayList<CastingEpisode>();
                         listOfCasting = (ArrayList) castingds.getActorsIdByEpisodeId(numEpisodeId);
 
-                        // DELETE CASTING
+                        // Suppression du CASTING
                         casting.deleteAllCastings(listOfCasting, getActivity());
 
                         episodeds = new EpisodeDataSource(getActivity());
                         episode = episodeds.getEpisodeById(numEpisodeId);
 
-                        // DELETE EPISODE
+                        // Suppression EPISODE
                         episodeds.deleteEpisode(episode.getEpisodeID());
 
-                        //End activity and get back to the previous activity
+                        // retour à l'activité BySeason
                         getActivity().finish();
                         Intent intent = new Intent(getActivity(), BySeason.class);
                         intent.putExtra("SEASON_ID", String.valueOf(episode.getSeasonID()));
@@ -68,6 +71,7 @@ public class DeleteEpisodeDialogAlert extends DialogFragment {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         DeleteEpisodeDialogAlert.this.getDialog().cancel();
+                        // retour à l'activité
                     }
                 });
 

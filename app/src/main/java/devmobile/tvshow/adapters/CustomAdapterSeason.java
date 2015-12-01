@@ -46,34 +46,23 @@ public class CustomAdapterSeason extends ArrayAdapter<Episode>{
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View customView = inflater.inflate(R.layout.custom_row_episode, parent, false);
 
+        // affiche des épisodes d'une saison dans BySeason
         episodeToShow = getItem(position);
         textView = (TextView) customView.findViewById(R.id.episodeTitle);
+
+        // affiche le numéro de l'épisode et le titre et la checkbox d'état
         textView.setText(episodeToShow.getEpisodeNumber() + " " + episodeToShow.getEpisodeTitle());
 
         cbEpisode = (CheckBox) customView.findViewById(R.id.episodeCheckBox);
         episodeds = new EpisodeDataSource(context);
 
+        // on affiche l'état de l'épisode
         if(episodeToShow.isEpisodeCompleted() == 0)
             cbEpisode.setChecked(false);
         else
             cbEpisode.setChecked(true);
 
-        cbEpisode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
-                    episodeToShow.setEpisodeCompleted(1);
-                    episodeds.updateEpisodeIfWatched(episodeToShow);
-                }
-                else
-                {
-                    episodeToShow.setEpisodeCompleted(0);
-                    episodeds.updateEpisodeIfWatched(episodeToShow);
-                }
-            }
-        });
-
+        // colore les rows une ligne sur deux
         if (position % 2 == 0)
             customView.setBackgroundResource(R.drawable.listview_selector_even);
         else

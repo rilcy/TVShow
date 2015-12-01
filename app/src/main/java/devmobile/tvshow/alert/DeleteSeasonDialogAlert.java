@@ -38,36 +38,35 @@ public class DeleteSeasonDialogAlert extends DialogFragment {
         ShowId = getArguments().getInt("SHOW_ID");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.activity_alert_delete_season, null))
-                // Add action buttons
+
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
 
-                        // DELETE CASTING FOR EACH EPISODES
+                        // En cas de suppression d'une saison
+                        // Suppression du casting pour chaque épisode
                         listOfEpisodes = new ArrayList<Episode>();
                         episodeds = new EpisodeDataSource(getActivity());
                         castingds = new CastingEpisodeDataSource(getActivity());
                         listOfEpisodes = (ArrayList) episodeds.getAllEpisodes(SeasonId);
-                        if(listOfEpisodes != null && listOfEpisodes.size() > -1) {
+                        if (listOfEpisodes != null && listOfEpisodes.size() > -1) {
                             for (int i = 0; i < listOfEpisodes.size(); i++) {
                                 castingds.deleteAllCastingsForAnEpisode(listOfEpisodes.get(i).getEpisodeID());
                             }
                         }
-                        // DELETE EPISODES OF A SEASON
+                        // Suppression de chaque Episode pour une saison donnée
                         episodeds.deleteAllEpisodesBySeasonId(SeasonId);
 
-                        // DELETE SEASON
+                        // Suppression de la saison
                         seasonds = new SeasonDataSource(getActivity());
                         seasonds.deleteSeason(SeasonId);
 
 
-                        //End activity and get back to the previous activity
+                        // retour à l'activité ByShow
                         getActivity().finish();
                         Intent intent = new Intent(getActivity(), ByShow.class);
                         intent.putExtra("SHOW_ID", String.valueOf(ShowId));
@@ -77,6 +76,7 @@ public class DeleteSeasonDialogAlert extends DialogFragment {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         DeleteSeasonDialogAlert.this.getDialog().cancel();
+                        // retour à l'activité précédente
                     }
                 });
 

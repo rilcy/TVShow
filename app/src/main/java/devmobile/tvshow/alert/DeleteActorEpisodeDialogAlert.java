@@ -41,13 +41,11 @@ public class DeleteActorEpisodeDialogAlert extends DialogFragment {
         actor_id = getArguments().getInt("ACTOR_ID");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.activity_alert_delete_actor, null))
-                // Add action buttons
+
                 .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
@@ -55,7 +53,7 @@ public class DeleteActorEpisodeDialogAlert extends DialogFragment {
 
                         ceds.deleteCastingForActor(episode_id, actor_id);
 
-                        //End activity and get back to the main activity
+                        // retour à l'activité
                         Intent intent = new Intent(getActivity(), ByEpisode.class);
                         intent.putExtra("EPISODE_ID", String.valueOf(episode_id));
 
@@ -66,7 +64,7 @@ public class DeleteActorEpisodeDialogAlert extends DialogFragment {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         DeleteActorEpisodeDialogAlert.this.getDialog().cancel();
-
+                        // retour à l'activité précédente
                     }
                 });
 

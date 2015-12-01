@@ -27,19 +27,21 @@ public class CreateSeasonDialogAlert extends DialogFragment {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.activity_alert_creation_season, null))
-                // Add action buttons
+
                 .setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+
+                        // Création d'une nouvelle saison
                         SeasonDataSource sds = new SeasonDataSource(getActivity());
+                        // sauvegarde dans la DB
                         sds.createSeason(mNum, mNumSeasons);
 
+                        // retour à l'activité
                         Intent intent = new Intent(getActivity(), ByShow.class);
                         intent.putExtra("SHOW_ID", String.valueOf(mNum));
                         startActivity(intent);
@@ -49,6 +51,7 @@ public class CreateSeasonDialogAlert extends DialogFragment {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         CreateSeasonDialogAlert.this.getDialog().cancel();
+                        // retour à l'activité précédente
                     }
                 });
 

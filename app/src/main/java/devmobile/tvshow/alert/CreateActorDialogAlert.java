@@ -31,30 +31,31 @@ public class CreateActorDialogAlert extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.activity_alert_creation_actor, null))
-                // Add action buttons
+
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        // Création d'un acteur via ByActor
                         actorFirstName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextFirstName);
                         String stringFirstName = actorFirstName.getText().toString();
                         actorLastName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextLastName);
                         String stringLastName = actorLastName.getText().toString();
-                        if(stringFirstName.length() > 0 && stringLastName.length() > 0) {
+                        // vérification que l'utilisateur ait bien entrée au moins une valeur pour
+                        // le nom et le prénom
+                        if (stringFirstName.length() > 0 && stringLastName.length() > 0) {
                             CastingDataSource castingds = new CastingDataSource(getActivity());
+                            // on sauve dans la DB.
                             castingds.createCasting(stringFirstName, stringLastName);
 
-                            Intent intent = getActivity().getIntent();
-                            getActivity().finish();
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                            startActivity(intent);
+                            // retour à l'activité
+                            refreshMyActivity();
                         }
-                        else{
+                        // si aucune valeur n'est rentrée, on retourne à l'activité et on affiche un toast
+                        else {
                             String toast = getString(R.string.name_or_lastname_missing);
                             Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
                         }
@@ -63,9 +64,19 @@ public class CreateActorDialogAlert extends DialogFragment {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         CreateActorDialogAlert.this.getDialog().cancel();
+                        // retour à l'activité précédente
                     }
                 });
 
         return builder.create();
+    }
+
+
+    private void refreshMyActivity() {
+        getActivity().finish();
+        Intent intent = getActivity().getIntent();
+        getActivity().overridePendingTransition(0, 0);
+        startActivity(getActivity().getIntent());
+        getActivity().overridePendingTransition(0, 0);
     }
 }

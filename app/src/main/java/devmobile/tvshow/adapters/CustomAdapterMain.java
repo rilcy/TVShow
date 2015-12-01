@@ -53,12 +53,15 @@ public class CustomAdapterMain extends ArrayAdapter<Show>{
         imageView = (ImageView) customView.findViewById(R.id.imageSerie);
 
 
+        // affiche les données de l'une dans le listview de la main activity ou de ByShow
         final Show show = this.getItem(position);
 
+        // affiche le titre
         textView.setText(show.getShowTitle());
 
         File imgFile = new  File(show.getShowImage());
 
+        // affiche l'image
         if(imgFile.exists()) {
             try {
                 File f = new File(imgFile.getPath());
@@ -70,9 +73,6 @@ public class CustomAdapterMain extends ArrayAdapter<Show>{
             }
 
         }
-
-        SQLiteHelper sqlHelper = SQLiteHelper.getInstance(context.getApplicationContext());
-        sqlHelper.getWritableDatabase().close();
 
         // SRC POUR AJOUTER L'IMAGE : http://www.androidinterview.com/android-custom-listview-with-image-and-text-using-arrayadapter/
         // https://youtu.be/U_Jvk4G28YE New Boston

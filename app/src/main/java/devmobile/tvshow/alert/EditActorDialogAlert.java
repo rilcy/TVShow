@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import devmobile.tvshow.R;
 import devmobile.tvshow.db.adapter.CastingDataSource;
@@ -31,41 +32,52 @@ public class EditActorDialogAlert extends DialogFragment {
         actorId = getArguments().getInt("passedActorId");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.activity_alert_edition_actor, null))
-                // Add action buttons
+
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        /*
-                        actorFirstName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextFirstName);
-                        String stringFirstName = actorFirstName.getText().toString();
-                        actorLastName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextLastName);
-                        String stringLastName = actorLastName.getText().toString();
-                        */
+
+
                         CastingDataSource castingds = new CastingDataSource(getActivity());
                         actorFirstName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextFirstName);
                         actorLastName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextLastName);
-                        castingFirstName = actorFirstName.getText().toString();
-                        castingLastName = actorLastName.getText().toString();
-                        castingds.updateActor(actorId, castingFirstName, castingLastName);
+                        String firstname = actorFirstName.getText().toString();
+                        String lastname = actorLastName.getText().toString();
+                        if (firstname.length() > 0 && lastname.length() > 0) {
+                            castingFirstName = firstname;
+                            castingLastName = lastname;
+                            castingds.updateActor(actorId, castingFirstName, castingLastName);
+                        }
+                        // si aucune valeur n'est rentrée, on retourne à l'activité et on affiche un toast
+                        else {
+                            String toast = getString(R.string.name_or_lastname_missing);
+                            Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
+                        }
 
-                        Intent intent = getActivity().getIntent();
-                        getActivity().finish();
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent);
+                        // retour à l'activité
+                        refreshMyActivity();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         EditActorDialogAlert.this.getDialog().cancel();
+                        // retour à l'activité
                     }
                 });
 
         return builder.create();
+    }
+
+
+    private void refreshMyActivity() {
+        getActivity().finish();
+        Intent intent = getActivity().getIntent();
+        getActivity().overridePendingTransition(0, 0);
+        startActivity(getActivity().getIntent());
+        getActivity().overridePendingTransition(0, 0);
     }
 }
