@@ -109,15 +109,4 @@ public class CastingDataSource {
         return this.db.update(CastingEntry.TABLE_CASTING, values, CastingEntry.KEY_ID + " = ?",
                 new String[] { String.valueOf(actorId) });
     }
-
-
-    /**
-     * Delete an actor
-     */
-    public void deleteActor(long id){
-        // TODO: 07.11.15 A vérifier avec Elsio.
-
-    }
-
-
 }
