@@ -41,7 +41,6 @@ public class EditActorDialogAlert extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
 
-
                         CastingDataSource castingds = new CastingDataSource(getActivity());
                         actorFirstName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextFirstName);
                         actorLastName = (EditText) getDialog().findViewById(R.id.alert_actorEditTextLastName);

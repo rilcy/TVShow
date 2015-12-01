@@ -54,6 +54,15 @@ public class ByShow extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myActivity();
+    }
+
+    protected void onRestart(){
+        super.onRestart();
+        myActivity();
+    }
+
+    private void myActivity() {
         setContentView(R.layout.activity_by_show);
 
         // Préférence de langage
@@ -256,7 +265,7 @@ public class ByShow extends AppCompatActivity {
             listOfSeasons.get(i).setSeasonCompleted(0);
             seasonds.updateSeason(listOfSeasons.get(i));
 
-        // on change le statut du dernier épisode de la dernière saison
+            // on change le statut du dernier épisode de la dernière saison
             int j = listOfEpisodes.size()-1;
             listOfEpisodes.get(j).setEpisodeCompleted(0);
             episodeds.updateEpisodeIfWatched(listOfEpisodes.get(j));
@@ -317,6 +326,7 @@ public class ByShow extends AppCompatActivity {
         }
         return ep;
     }
+
 
 
     @Override

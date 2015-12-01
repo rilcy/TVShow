@@ -60,6 +60,17 @@ public class BySeason extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myActivity();
+    }
+
+
+    protected void onRestart(){
+        super.onRestart();
+        myActivity();
+    }
+
+
+    private void myActivity() {
         setContentView(R.layout.activity_by_season);
 
         // Préférence de langage
@@ -94,7 +105,7 @@ public class BySeason extends AppCompatActivity {
         // On affiche les données
         showInfoBySeason.setText(getString(R.string.Season) + season.getSeasonNumber());
 
-       // Vérifie si tous les épisodes de la saison ont été vus...
+        // Vérifie si tous les épisodes de la saison ont été vus...
         boolean watched = true;
         // ... si la saison compte au moins un épisode...
         if(listOfEpisodes.size() > 0) {

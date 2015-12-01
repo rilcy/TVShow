@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -25,11 +24,19 @@ import devmobile.tvshow.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    public  final static String SHOW_ID = "devemobile.tvshow.activities.MainActivity.SHOW_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myActivity();
+    }
+
+    protected void onRestart(){
+        super.onRestart();
+        myActivity();
+    }
+
+    private void myActivity() {
         setContentView(R.layout.activity_main);
 
         // Préférence de langue
@@ -67,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         SQLiteHelper sqlHelper = SQLiteHelper.getInstance(this);
         sqlHelper.getWritableDatabase().close();
-
-
     }
 
     @Override
