@@ -214,7 +214,6 @@ public class ByShow_Creation extends AppCompatActivity {
     }
     // en fin de processus on retourne au main.
     private void backToPreviousActivity() {
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Cyril, how are you ?"));
         Intent intent = new Intent(ByShow_Creation.this, MainActivity.class);
         ByShow_Creation.this.startActivity(intent);
         finish();
