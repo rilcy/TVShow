@@ -8,14 +8,14 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
+        android:configChanges="locale"
         android:icon="@drawable/ic_action_tv"
         android:label="@string/app_name"
-        android:configChanges="locale"
         android:theme="@style/AppTheme" >
         <activity android:name=".activities.MainActivity" >
             <intent-filter>
@@ -24,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.ByShow"
             android:label="@string/byShow_pageTitle"
@@ -33,17 +32,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".activities.BySeason"
-            android:label="@string/bySeason_pageTitle"
             android:configChanges="locale"
+            android:label="@string/bySeason_pageTitle"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".activities.ByEpisode"
             android:label="@string/byEpisode_pageTitle"
@@ -52,7 +49,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".activities.ActorByEpisode"
             android:label="@string/byActor_pageTitle"
@@ -61,7 +57,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".activities.ByActor"
             android:label="@string/byActor_pageTitle"
@@ -70,7 +65,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-
         <activity
             android:name=".activities.Settings"
             android:label="@string/action_settings"
@@ -79,8 +73,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-
-        <activity android:name=".activities.ByShow_Edition"
+        <activity
+            android:name=".activities.ByShow_Edition"
             android:label="@string/title_activity_by_show_edition"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
@@ -100,7 +94,6 @@
         </activity>
         <activity android:name=".alert.EditEpisodeDialogAlert" >
         </activity>
-
         <activity
             android:name=".activities.ByShow_Creation"
             android:label="@string/title_activity_by_show_creation"
